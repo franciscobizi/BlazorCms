@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\BlazorCms\\Shared\\BlazorCms.Shared.csproj": {}
+    "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\Shared\\BlazorCms.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\BlazorCms\\Shared\\BlazorCms.Shared.csproj": {
+    "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\Shared\\BlazorCms.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\BlazorCms\\Shared\\BlazorCms.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\Shared\\BlazorCms.Shared.csproj",
         "projectName": "BlazorCms.Shared",
-        "projectPath": "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\BlazorCms\\Shared\\BlazorCms.Shared.csproj",
+        "projectPath": "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\Shared\\BlazorCms.Shared.csproj",
         "packagesPath": "C:\\Users\\Francisco Bizi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\BlazorCms\\Shared\\obj\\",
+        "outputPath": "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Francisco Bizi\\AppData\\Roaming\\NuGet\\NuGet.Config"

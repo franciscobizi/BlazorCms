@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jmjYmtf6zB09RvppzzTUiaNh95RY6pMJP7kww1C01YxiHM/oB5IX6j4BWNn/NuzFl7gxCI3QZsgX7zbMZ+dNww==",
+  "dgSpecHash": "XVCXMSrYe+kkMmL58+ps6EQ2LW01VR40uSCZ0hbuzdwgR7LiNRRRSTkMA9iQpTd0GI5nVjFQPjkExAqY3SLVkw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\BlazorCms\\Client\\BlazorCms.Client.csproj",
+  "projectFilePath": "C:\\Users\\Francisco Bizi\\Desktop\\Blazor\\MyAzure\\BlazorCms\\Client\\BlazorCms.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Francisco Bizi\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.0\\microsoft.aspnetcore.authorization.5.0.0.nupkg.sha512",
     "C:\\Users\\Francisco Bizi\\.nuget\\packages\\microsoft.aspnetcore.components\\5.0.0\\microsoft.aspnetcore.components.5.0.0.nupkg.sha512",
