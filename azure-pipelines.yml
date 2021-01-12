@@ -98,7 +98,7 @@ process:
         definitionType: task
       inputs:
         command: publish
-        publishWebProjects: 'false'
+        publishWebProjects: false
         projects: '**/BlazorCms.Server.csproj'
         arguments: --configuration $(BuildConfiguration) --output "$(build.artifactstagingdirectory)"
         zipAfterPublish: 'True'
