@@ -25,6 +25,13 @@ namespace BlazorCms.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            
+            // Add cors options
+            services.AddCors(options =>
+            {
+                options.AddPolicy("PolicyName", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
+
             services.AddSignalR().AddAzureSignalR();
         }
 
