@@ -1,0 +1,207 @@
+---
+options:
+- enabled: true
+  definition:
+    id: 5d58cc01-7c75-450c-be18-a388ddb129ec
+  inputs: {}
+triggers:
+- branchFilters:
+  - "+refs/heads/master"
+  pathFilters:
+  - "+/"
+  batchChanges: true
+  maxConcurrentBuildsPerBranch: 1
+  triggerType: 2
+variables:
+  system.debug:
+    value: 'false'
+    allowOverride: true
+  BuildConfiguration:
+    value: release
+    allowOverride: true
+  BuildPlatform:
+    value: any cpu
+    allowOverride: true
+properties: {}
+tags: []
+_links:
+  self:
+    href: https://dev.azure.com/taylorsoftlda/41cf8e14-a340-40e0-9440-02b5c995c725/_apis/build/Definitions/1?revision=1
+  web:
+    href: https://dev.azure.com/taylorsoftlda/41cf8e14-a340-40e0-9440-02b5c995c725/_build/definition?definitionId=1
+  editor:
+    href: https://dev.azure.com/taylorsoftlda/41cf8e14-a340-40e0-9440-02b5c995c725/_build/designer?id=1&_a=edit-build-definition
+  badge:
+    href: https://dev.azure.com/taylorsoftlda/41cf8e14-a340-40e0-9440-02b5c995c725/_apis/build/status/1
+buildNumberFormat: "$(date:yyyyMMdd)$(rev:.r)"
+jobAuthorizationScope: 1
+process:
+  phases:
+  - steps:
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Restore
+      timeoutInMinutes: 0
+      task:
+        id: 5541a522-603c-47ad-91fc-a4b1d163081b
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        command: restore
+        publishWebProjects: 'true'
+        projects: "$(Parameters.RestoreBuildProjects)"
+        arguments: ''
+        zipAfterPublish: 'true'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Build
+      timeoutInMinutes: 0
+      task:
+        id: 5541a522-603c-47ad-91fc-a4b1d163081b
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        command: build
+        publishWebProjects: 'true'
+        projects: "$(Parameters.RestoreBuildProjects)"
+        arguments: "--configuration $(BuildConfiguration)"
+        zipAfterPublish: 'true'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Test
+      timeoutInMinutes: 0
+      task:
+        id: 5541a522-603c-47ad-91fc-a4b1d163081b
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        command: test
+        publishWebProjects: 'true'
+        projects: "$(Parameters.UnitTestProjects)"
+        arguments: "--configuration $(BuildConfiguration)"
+        zipAfterPublish: 'true'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Publish
+      timeoutInMinutes: 0
+      task:
+        id: 5541a522-603c-47ad-91fc-a4b1d163081b
+        versionSpec: 2.*
+        definitionType: task
+      inputs:
+        command: publish
+        publishWebProjects: 'False'
+        projects: ''
+        arguments: --configuration $(BuildConfiguration) --output "$(build.artifactstagingdirectory)"
+        zipAfterPublish: 'True'
+    - environment: {}
+      enabled: true
+      continueOnError: false
+      alwaysRun: false
+      displayName: Publish Artifact
+      timeoutInMinutes: 0
+      task:
+        id: 2ff763a7-ce83-4e1f-bc89-0ae63477cebe
+        versionSpec: 1.*
+        definitionType: task
+      inputs:
+        PathtoPublish: "$(build.artifactstagingdirectory)"
+        ArtifactName: drop
+        ArtifactType: Container
+        TargetPath: "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)"
+        Parallel: 'false'
+        ParallelCount: '8'
+    name:
+    refName: Phase_1
+    target:
+      executionOptions:
+      allowScriptsAuthAccessOption: false
+      type: 1
+    jobAuthorizationScope: 0
+  target:
+    agentSpecification:
+      identifier: vs2017-win2016
+  type: 1
+repository:
+  properties:
+    fetchDepth: '0'
+  id: dba551d6-4dcc-4b66-b363-0f071a156cf1
+  type: TfsGit
+  name: BlazorCms
+  url: https://dev.azure.com/taylorsoftlda/BlazorCms/_git/BlazorCms
+  defaultBranch: refs/heads/master
+  clean: 'false'
+  checkoutSubmodules: false
+processParameters:
+  inputs:
+  - aliases: []
+    options: {}
+    properties: {}
+    name: RestoreBuildProjects
+    label: Project(s) to restore and build
+    defaultValue: "**/*.csproj"
+    type: multiline
+    helpMarkDown: Relative path of the .csproj file(s) from repo root. Wildcards can
+      be used. For example, **/*.csproj for all .csproj files in all the subfolders.
+    visibleRule: ''
+    groupName: ''
+  - aliases: []
+    options: {}
+    properties: {}
+    name: UnitTestProjects
+    label: Project(s) to test
+    defaultValue: "**/*UnitTests/*.csproj"
+    type: multiline
+    helpMarkDown: Relative path of the .csproj file(s) from repo root. Wildcards can
+      be used. For example, **/*.csproj for all .csproj files in all the subfolders.
+    visibleRule: ''
+    groupName: ''
+quality: 1
+authoredBy:
+  displayName: taylorsoft28@gmail.com
+  url: https://spsprodweu1.vssps.visualstudio.com/A2f23f251-8d48-43fb-94a3-2f9f22bdf220/_apis/Identities/a8094050-ae81-624b-90d2-53b8a3d7e29b
+  _links:
+    avatar:
+      href: https://dev.azure.com/taylorsoftlda/_apis/GraphProfile/MemberAvatars/msa.YTgwOTQwNTAtYWU4MS03MjRiLTkwZDItNTNiOGEzZDdlMjli
+  id: a8094050-ae81-624b-90d2-53b8a3d7e29b
+  uniqueName: taylorsoft28@gmail.com
+  imageUrl: https://dev.azure.com/taylorsoftlda/_apis/GraphProfile/MemberAvatars/msa.YTgwOTQwNTAtYWU4MS03MjRiLTkwZDItNTNiOGEzZDdlMjli
+  descriptor: msa.YTgwOTQwNTAtYWU4MS03MjRiLTkwZDItNTNiOGEzZDdlMjli
+drafts: []
+queue:
+  _links:
+    self:
+      href: https://dev.azure.com/taylorsoftlda/_apis/build/Queues/18
+  id: 18
+  name: Azure Pipelines
+  url: https://dev.azure.com/taylorsoftlda/_apis/build/Queues/18
+  pool:
+    id: 9
+    name: Azure Pipelines
+    isHosted: true
+id: 1
+name: blazorcms - 1 - CI
+url: https://dev.azure.com/taylorsoftlda/41cf8e14-a340-40e0-9440-02b5c995c725/_apis/build/Definitions/1?revision=1
+uri: vstfs:///Build/Definition/1
+path: "\\"
+type: 2
+queueStatus: 0
+revision: 1
+createdDate: '2021-01-12T08:44:42.003Z'
+project:
+  id: 41cf8e14-a340-40e0-9440-02b5c995c725
+  name: BlazorCms
+  description: A Blazor Application.
+  url: https://dev.azure.com/taylorsoftlda/_apis/projects/41cf8e14-a340-40e0-9440-02b5c995c725
+  state: 1
+  revision: 19
+  visibility: 0
+  lastUpdateTime: '2021-01-12T08:21:11.010Z'
