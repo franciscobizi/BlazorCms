@@ -181,3 +181,7 @@ C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Debug\net5.0
 C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Debug\net5.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Debug\net5.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Debug\net5.0\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Debug\net5.0\Syncfusion.Blazor.dll
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Debug\net5.0\Syncfusion.ExcelExport.Net.dll
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Debug\net5.0\Syncfusion.Licensing.dll
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Debug\net5.0\Syncfusion.PdfExport.Net.dll
