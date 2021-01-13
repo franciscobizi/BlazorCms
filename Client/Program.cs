@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Syncfusion.Blazor;
+using Microsoft.AspNetCore.Components.Authorization;
+using BlazorCms.ViewModels;
 
 namespace BlazorCms.Client
 {
@@ -17,7 +20,23 @@ namespace BlazorCms.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            // add authentication
+            builder.Services.AddOptions();
+            builder.Services.AddAuthorizationCore();
+
+            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+             // Adding httpClient Factory
+            builder.Services.AddHttpClient<IProfileViewModel,ProfileViewModel>
+                    ("BlazorCmsClient", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+            builder.Services.AddHttpClient<IPostViewModel,PostViewModel>
+                    ("BlazorCmsClient", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+            builder.Services.AddHttpClient<IAuthViewModel,AuthViewModel>
+                    ("BlazorCmsClient", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
+            builder.Services.AddSyncfusionBlazor();
 
             await builder.Build().RunAsync();
         }
