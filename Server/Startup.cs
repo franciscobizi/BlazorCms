@@ -6,6 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using MediatR;
+using BlazorCms.Server.Models;
+using BlazorCms.Server.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BlazorCms.Server
 {
@@ -25,14 +29,44 @@ namespace BlazorCms.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-            
+
             // Add cors options
             services.AddCors(options =>
             {
                 options.AddPolicy("PolicyName", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
-            services.AddSignalR().AddAzureSignalR();
+            services.AddMediatR(typeof(Startup));
+
+            // AddControllers options to increase maxdepth FB
+            services.AddControllers().AddJsonOptions(option => { option.JsonSerializerOptions.PropertyNamingPolicy = null; option.JsonSerializerOptions.MaxDepth = 256; });
+
+
+            // registering services
+            services.AddTransient<IUserServices, UserServices>();
+            services.AddTransient<IPostServices, PostServices>();
+            
+            // inject dbcontext
+            services.AddEntityFrameworkSqlite().AddDbContext<BlazorCmsContext>();
+
+            // authentications
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            } 
+            )
+            .AddCookie()
+            .AddGoogle(googleOptions => 
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            })
+            .AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +89,8 @@ namespace BlazorCms.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
