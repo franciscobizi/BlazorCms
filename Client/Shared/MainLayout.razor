@@ -7,9 +7,16 @@
 
     <div class="main">
         <div class="top-row px-4">
-            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+            <a href="bz-admin/profile" class="ml-md-auto">
+                <AuthorizeView>
+                    <Authorized>
+                        Hi, @context.User.Identity.Name
+                        <span class="oi oi-person avatar" aria-hidden="true"></span>
+                        </Authorized>
+                    <NotAuthorized>Login <span class="oi oi-account-login" aria-hidden="true"></span></NotAuthorized>
+                </AuthorizeView>
+            </a>
         </div>
-
         <div class="content px-4">
             @Body
         </div>

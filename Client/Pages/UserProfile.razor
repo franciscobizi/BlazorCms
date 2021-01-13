@@ -1,0 +1,55 @@
+@page "/bz-admin/profile"
+@using BlazorCms.ViewModels
+@using BlazorCms.Shared.Models
+@using System.Security.Claims
+@inject IProfileViewModel _profileVM
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>My profile</h1>
+                    <MessageNotify Alert="success" Title="@_profileVM.Message" Display="@_profileVM.Display" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <SfTextBox @bind-Value="_profileVM.UserFname" Placeholder="First name"></SfTextBox>
+                    <br><br>
+                    <SfTextBox @bind-Value="_profileVM.UserLname" Placeholder="Last name"></SfTextBox>
+                    <br><br>
+                    <SfTextBox  @bind-Value="_profileVM.UserEmail" Placeholder="E-mail"></SfTextBox>
+                    <br><br>
+                    <SfTextBox @bind-Value="_profileVM.UserPass" Type="InputType.Password" Placeholder="Password"></SfTextBox>
+                    <br><br>
+                    <SfButton @onclick="_profileVM.UpdateProfile">Update</SfButton>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <UserAuthForm></UserAuthForm>
+    </NotAuthorized>
+</AuthorizeView>
+@code{
+    [CascadingParameter]
+    private Task<AuthenticationState> _authenticationState { get; set; }
+    // loading user profile data
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await _authenticationState;
+        var user = authState.User;
+
+        if(user.Identity.IsAuthenticated)
+        {
+            var claim = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
+
+            _profileVM.UserId = Convert.ToInt64(claim?.Value);
+
+            await _profileVM.getProfile();
+
+        }
+    } 
+
+}

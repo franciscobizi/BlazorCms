@@ -1,0 +1,45 @@
+@page "/bz-admin/users"
+@using BlazorCms.ViewModels
+@inject IUserViewModel _users
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Users</h1>
+                    @if(_users.users != null && _users.users.Count() > 0)
+                    {
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Source</th>
+                                <th scope="col">Since</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var user in _users.users)
+                            {
+                                <tr>
+                                    <th scope="row">@user.UserId</th>
+                                    <td>@user.UserFname @user.UserLname</td>
+                                    <td>@user.UserSource</td>
+                                    <td>@user.UserRegistered</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <UserAuthForm></UserAuthForm>
+    </NotAuthorized>
+</AuthorizeView>
+@code{
+    protected override async Task OnInitializedAsync() => await _users.GetUsers();
+}

@@ -1,7 +1,70 @@
 ﻿@page "/"
+@using BlazorCms.Shared.Mapping
+@using BlazorCms.ViewModels
+@using Newtonsoft.Json
+@inject HttpClient _Http
+@inject IPostViewModel _postViewModel
+@inject NavigationManager _navigationManager
 
-<h1>Hello, world!</h1>
+<div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="row">
 
-Welcome to your new app.
+                @if(list != null && list.Count() > 0)
+                {
+                    @foreach (var item in list)
+                    {
+                        foreach (var post in item.Items)
+                        {
+                            <div class="col-sm-6" style="margin-bottom: 5px;">
+                                <a href="/blog/@post.PostPermalink" title="Read More">
+                                    <SfCard Orientation="CardOrientation.Vertical" ID="Trimmer">
+                                        <img class="card-thambnail" src="/uploads/images/@post.PostThumbnail">
+                                        <CardHeader Title="@post.PostTitle" />
+                                    </SfCard>
+                                </a>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <h3>There are not posts at the moment!</h3>
+                }
+                </div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+            </div>
+            <div class="col-sm-3">
+                <SfTextBox Placeholder="Search" Type="InputType.Search"></SfTextBox>
+                <hr>
+                <SfCalendar TValue="DateTime"></SfCalendar>
+            </div>
+        </div>
+    </div>
+
+
+@code{
+
+    public string items { get; set; }
+
+    private List<myItems> list = new List<myItems>();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        items = await _Http.GetStringAsync(_navigationManager.BaseUri + "posts");
+        items = "["+items+"]";
+        list = JsonConvert.DeserializeObject<List<myItems>>(items);
+    }
+
+    class myItems
+    {
+        public List<PostResponse> Items { get; set; }
+        public string Count { get; set; }
+    }
+
+}
+
+<style>
+    .card-thambnail{width:100%}
+</style>

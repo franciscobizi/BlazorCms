@@ -1,0 +1,108 @@
+@page "/bz-admin/post/edit/{postId}"
+@using BlazorCms.ViewModels
+@inject IPostViewModel _postViewModel
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Edit post</h1>
+                    <MessageNotify Alert="success" Title="@_postViewModel.Message" Display="@_postViewModel.Display" />
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <SfTextBox Placeholder='Post title' @bind-Value="@_postViewModel.PostTitle"></SfTextBox>
+                    <br><br>
+                    <SfRichTextEditor @bind-value="@_postViewModel.PostContent">
+                        <RichTextEditorToolbarSettings Items="@Tools" />
+                    </SfRichTextEditor>
+                    <br><br>
+                    <SfButton @onclick="_postViewModel.Update" CssClass="e-info">Update</SfButton>
+                </div>
+                <div class="col-sm-3">
+                    <h5>Thumbnail</h5>
+                    <div class="thumbnail">
+                        <img src="/uploads/images/@_postViewModel.PostThumbnail" alt="@_postViewModel.PostTitle">
+                    </div>
+                        <SfUploader ID="UploadFiles" AutoUpload="false">
+                            <UploaderEvents Success="_postViewModel.OnImageUploadedSuccess"></UploaderEvents>
+                            <UploaderAsyncSettings SaveUrl="posts/uploadimage" RemoveUrl="posts/removeimage"></UploaderAsyncSettings>
+                        </SfUploader>
+                    <hr>
+                    <h5>Author</h5>
+                    <p>Francisco Bizi</p>
+                    <h5>Published</h5>
+                    <p>@_postViewModel.PostCreated</p>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <UserAuthForm></UserAuthForm>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+    private List<ToolbarItemModel> Tools = new List<ToolbarItemModel>()
+    {
+        new ToolbarItemModel() { Command = ToolbarCommand.Bold },
+        new ToolbarItemModel() { Command = ToolbarCommand.Italic },
+        new ToolbarItemModel() { Command = ToolbarCommand.Underline },
+        new ToolbarItemModel() { Command = ToolbarCommand.StrikeThrough },
+        new ToolbarItemModel() { Command = ToolbarCommand.FontName },
+        new ToolbarItemModel() { Command = ToolbarCommand.FontSize },
+        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+        new ToolbarItemModel() { Command = ToolbarCommand.FontColor },
+        new ToolbarItemModel() { Command = ToolbarCommand.BackgroundColor },
+        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+        new ToolbarItemModel() { Command = ToolbarCommand.Formats },
+        new ToolbarItemModel() { Command = ToolbarCommand.Alignments },
+        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+        new ToolbarItemModel() { Command = ToolbarCommand.LowerCase },
+        new ToolbarItemModel() { Command = ToolbarCommand.UpperCase },
+        new ToolbarItemModel() { Command = ToolbarCommand.SuperScript },
+        new ToolbarItemModel() { Command = ToolbarCommand.SubScript },
+        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+        new ToolbarItemModel() { Command = ToolbarCommand.OrderedList },
+        new ToolbarItemModel() { Command = ToolbarCommand.UnorderedList },
+        new ToolbarItemModel() { Command = ToolbarCommand.Outdent },
+        new ToolbarItemModel() { Command = ToolbarCommand.Indent },
+        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+        new ToolbarItemModel() { Command = ToolbarCommand.CreateLink },
+        new ToolbarItemModel() { Command = ToolbarCommand.Image },
+        new ToolbarItemModel() { Command = ToolbarCommand.CreateTable },
+        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+        new ToolbarItemModel() { Command = ToolbarCommand.ClearFormat },
+        new ToolbarItemModel() { Command = ToolbarCommand.Print },
+        new ToolbarItemModel() { Command = ToolbarCommand.SourceCode },
+        new ToolbarItemModel() { Command = ToolbarCommand.FullScreen },
+        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+        new ToolbarItemModel() { Command = ToolbarCommand.Undo },
+        new ToolbarItemModel() { Command = ToolbarCommand.Redo }
+    };
+
+    [Parameter]
+    public string postId { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+
+        await _postViewModel.GetOne(this.postId);
+    } 
+
+
+}
+
+<style>
+
+.thumbnail img {
+        height: auto;
+        width: 100%;
+        box-shadow: inset 0 0 1px #e0e0e0, inset 0 0 14px rgba(0, 0, 0, 0.2);
+}
+</style>

@@ -1,0 +1,25 @@
+@inject NavigationManager _uri
+
+<div class="alert alert-@Alert alert-dismissible fade show" style="display:@Display" role="alert">
+  <strong>@Title</strong>
+  <button type="button" @onclick="closeAlert" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@code {
+    // Demonstrates how a parent component can supply parameters
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Alert { get; set; }
+
+    [Parameter]
+    public string Display { get; set; }
+
+    private void closeAlert()
+    {
+        Display = "none";
+        _uri.NavigateTo(_uri.Uri, forceLoad:true);
+    }
+}

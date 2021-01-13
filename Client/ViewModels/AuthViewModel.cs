@@ -2,6 +2,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using BlazorCms.Shared.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorCms.ViewModels
 {
@@ -14,28 +15,30 @@ namespace BlazorCms.ViewModels
 
         public string Display { get; set; } = "none";
 
-        private HttpClient _Http;
+        private readonly HttpClient _Http;
+        private readonly NavigationManager _navigationManager;
 
         public AuthViewModel()
         {
 
         }
         // injecting httpClient 
-        public AuthViewModel(HttpClient httpClient)
+        public AuthViewModel(HttpClient httpClient, NavigationManager navigationManager)
         {
             _Http = httpClient;
+            _navigationManager = navigationManager;
         }
 
         public async Task signIn()
         {
-            await _Http.PostAsJsonAsync<User>("user/signin", this);
+            await _Http.PostAsJsonAsync<User>(this._navigationManager.BaseUri +"signin", this);
             //LoadCurrentObject(user);
             
         }
 
         public async Task getCurrentUser()
         {
-            User user = await _Http.GetFromJsonAsync<User>("user/" + this.UserId);
+            User user = await _Http.GetFromJsonAsync<User>(this._navigationManager.BaseUri + "user/" + this.UserId);
             LoadCurrentObject(user);
             
         }

@@ -1,0 +1,96 @@
+﻿@page "/bz-admin/posts"
+@using BlazorCms.Shared.Mapping
+@using BlazorCms.ViewModels
+@inject IPostViewModel _postViewModel
+@inject NavigationManager _navigate
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Posts</h1>
+                    <MessageNotify Alert="success" Title="@_postViewModel.Message" Display="@_postViewModel.Display" />
+                    <SfButton @onclick="AddNewPost" class="btn-create">Add new post</SfButton>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <SfGrid TValue="PostResponse" AllowPaging="true">
+                        <GridEvents CommandClicked="OnCommandClicked" TValue="PostResponse"></GridEvents>
+                        <SfDataManager Url="/posts" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
+                        <GridPageSettings PageSize="2"></GridPageSettings>
+                        <GridEditSettings AllowEditing="true" AllowDeleting="true" Mode="EditMode.Normal"></GridEditSettings>
+                        <GridColumns>
+                            <GridColumn Field="@nameof(post.PostId)" IsPrimaryKey="true" HeaderText="ID" TextAlign="TextAlign.Left" Width="50"></GridColumn>
+                            <GridColumn Field="@nameof(post.PostTitle)" HeaderText="Title" TextAlign="TextAlign.Left" Width="120"></GridColumn>
+                            <GridColumn Field="@nameof(post.PostAuthorName)" HeaderText="Author" Width="150"></GridColumn>
+                            <GridColumn Field="@nameof(post.PostCreated)" HeaderText="Created" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Left" Width="130"></GridColumn>
+                            <GridColumn Field="@nameof(post.PostUpdated)" HeaderText="Updated" TextAlign="TextAlign.Left" Width="120"></GridColumn>
+                            <GridColumn HeaderText="Manage Records" Width="150">
+                                <GridCommandColumns>
+                                    <GridCommandColumn Title="View" Type="CommandButtonType.None" ButtonOption="@(new CommandButtonOptions() { IconCss = "fa fa-eye", CssClass = "e-flat" })"></GridCommandColumn>
+                                    <GridCommandColumn Title="Edit" Type="CommandButtonType.Edit" ButtonOption="@(new CommandButtonOptions() { IconCss = "e-icons e-edit", CssClass = "e-flat" })"></GridCommandColumn>
+                                    <GridCommandColumn Title="Delete" Type="CommandButtonType.None" ButtonOption="@(new CommandButtonOptions() { IconCss = "e-icons e-delete", CssClass = "e-flat" })"></GridCommandColumn>
+                                    <GridCommandColumn Title="Save" Type="CommandButtonType.Save" ButtonOption="@(new CommandButtonOptions() { IconCss = "e-icons e-update", CssClass = "e-flat" })"></GridCommandColumn>
+                                    <GridCommandColumn Title="Cancel" Type="CommandButtonType.Cancel" ButtonOption="@(new CommandButtonOptions() { IconCss = "e-icons e-cancel-icon", CssClass = "e-flat" })"></GridCommandColumn>
+                                </GridCommandColumns>
+                            </GridColumn>
+                        </GridColumns>
+                    </SfGrid>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <UserAuthForm></UserAuthForm>
+    </NotAuthorized>
+</AuthorizeView>
+@code{
+    private List<string> ToolbarItems = new List<string>(){ "Add","Edit","Delete","Update","Cancel"};
+
+    private void OnCommandClicked(CommandClickEventArgs<PostResponse> args)
+    {
+        var clicked = args.CommandColumn.Title;
+        //_postViewModel.ToUrlFriendly(args.RowData.PostTitle)
+        switch (clicked)
+        {
+            case "View":
+               _navigate.NavigateTo("/blog/" + args.RowData.PostPermalink);
+               break;
+            case "Edit":
+               _navigate.NavigateTo("/bz-admin/post/edit/" + args.RowData.PostId);
+               break;
+            case "Delete":
+               this._postViewModel.Remove(args.RowData.PostId);
+               break;
+            default:
+               break;
+        }
+
+    }
+    PostResponse post = new PostResponse();
+    public void AddNewPost()
+    {
+        _navigate.NavigateTo("/bz-admin/post/new/");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+
+        await _postViewModel.GetAll();
+    }
+
+}
+
+<style>
+    .post-actions a{
+        margin: 0 5px;
+    }
+    .fa-trash{
+        cursor: pointer;
+        color: red;
+    }
+    .btn-create{
+        margin: 5px 0;
+    }
+</style>

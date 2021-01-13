@@ -9,6 +9,7 @@ using BlazorCms.Shared.Models;
 using Syncfusion.Blazor.Inputs;
 using System.Text.RegularExpressions;
 using BlazorCms.Shared.Mapping;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorCms.ViewModels
 {
@@ -26,31 +27,32 @@ namespace BlazorCms.ViewModels
         public string Message { get; set; }
         public string Display  { get; set; } = "none";
         public List<PostResponse> Posts { get; set; }
-        private HttpClient _Http;
-        private string BaseAddress = "https://localhost:5001/posts/";
+        private readonly HttpClient _Http;
+        private readonly NavigationManager _navigationManager;
         public PostViewModel()
         {
 
         }
 
-        public PostViewModel(HttpClient httpClient)
+        public PostViewModel(HttpClient httpClient, NavigationManager navigationManager)
         {
             _Http = httpClient;
+            _navigationManager = navigationManager;
         }
         
         public async Task Create()
         {
             PostResponse post = this;
-            await _Http.PostAsJsonAsync(this.BaseAddress, post);
+            await _Http.PostAsJsonAsync(this._navigationManager.BaseUri, post);
             this.Message = "Post created successful!";
             this.Display = "block";
         }
 
         public async Task GetAll()
         {
-            /* var posts = await _Http.GetFromJsonAsync<List<PostResponse>>(this.BaseAddress);
+            /* var posts = await _Http.GetFromJsonAsync<List<PostResponse>>(this._navigationManager.BaseUri);
             LoadCurrentObject(posts); */
-            var items = await _Http.GetStringAsync(this.BaseAddress);
+            var items = await _Http.GetStringAsync(this._navigationManager.BaseUri + "posts");
         }
 
         public void Delete(int id)
@@ -81,7 +83,8 @@ namespace BlazorCms.ViewModels
 
         public async Task GetOne(string param)
         {
-            PostResponse post = await _Http.GetFromJsonAsync<PostResponse>(this.BaseAddress + param);
+            PostResponse post = await _Http.GetFromJsonAsync<PostResponse>(this._navigationManager.BaseUri +
+            "posts/" + param);
             LoadCurrentSingleObject(post);
         }
 
@@ -89,7 +92,7 @@ namespace BlazorCms.ViewModels
         {
 
             PostResponse post = this;
-            await _Http.PutAsJsonAsync(this.BaseAddress, post);
+            await _Http.PutAsJsonAsync(this._navigationManager.BaseUri + "posts", post);
             this.Message = "Post updated successful!";
             this.Display = "block";
         }
@@ -98,7 +101,7 @@ namespace BlazorCms.ViewModels
         {
             PostResponse post = this;
             post.PostId = Id;
-            await _Http.DeleteAsync(this.BaseAddress +"?id="+Id);
+            await _Http.DeleteAsync(this._navigationManager.BaseUri +"posts?id="+Id);
             this.Message = "Post removed successful!";
             this.Display = "block";
         }

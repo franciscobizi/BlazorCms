@@ -1,0 +1,61 @@
+@using BlazorCms.ViewModels
+@inject NavigationManager _navigationManager
+@inject IAuthViewModel _IAuthViewModel
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-6">
+            <h1>Sign in with any option below!</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <SfTextBox Placeholder="Your login" Type="InputType.Text" @bind-Value="@_IAuthViewModel.UserEmail" FloatLabelType='@FloatLabelType.Auto'></SfTextBox>
+            <br><br>
+            <SfTextBox Placeholder="Your password" Type="InputType.Password" @bind-Value="@_IAuthViewModel.UserPass" FloatLabelType='@FloatLabelType.Auto'></SfTextBox>
+            <br><br>
+            <SfButton @onclick="UserSignIn">Sign In</SfButton>
+            <hr>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <a class="btn btn-block btn-social btn-facebook" @onclick="FacebookSignIn">
+                <span class="fa fa-facebook"></span> <b>Sign in with Facebook</b>
+            </a>
+        </div>
+    </div>
+    <br>
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <a class="btn btn-block btn-social btn-google" @onclick="GoogleSignIn">
+                <span class="fa fa-google"></span> <b>Sign in with Google</b>
+            </a>
+        </div>
+    </div>
+</div>
+
+@code{
+
+    public async Task UserSignIn()
+    {
+        await _IAuthViewModel.signIn();
+        _navigationManager.NavigateTo("bz-admin/profile", true);
+    }
+    private void FacebookSignIn()
+    {
+        _navigationManager.NavigateTo(_navigationManager.BaseUri + "user/FacebookSignIn", true);
+    }
+
+    private void GoogleSignIn()
+    {
+        _navigationManager.NavigateTo(_navigationManager.BaseUri + "user/GoogleSignIn", true);
+    }
+}
+
+<style>
+    .btn-social{
+        cursor: pointer;
+    }
+</style>

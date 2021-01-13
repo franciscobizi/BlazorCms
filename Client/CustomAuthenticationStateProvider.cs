@@ -12,16 +12,17 @@ namespace BlazorCms.Client
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
         private readonly HttpClient _Http;
-        private string BaseAddress = "https://localhost:5001/user/";
+        private readonly NavigationManager _navigationManager;
 
-        public CustomAuthenticationStateProvider(HttpClient httpClient)
+        public CustomAuthenticationStateProvider(HttpClient httpClient, NavigationManager navigationManager)
         {
             _Http = httpClient;
+            _navigationManager = navigationManager;
         }
 
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            User currentUser = await _Http.GetFromJsonAsync<User>(this.BaseAddress + "getcurrentuser");
+            User currentUser = await _Http.GetFromJsonAsync<User>(_navigationManager.BaseUri + "user/" + "getcurrentuser");
 
             if(currentUser != null && currentUser.UserEmail != null)
             {

@@ -101,47 +101,6 @@
           "build/Microsoft.AspNetCore.Components.WebAssembly.DevServer.targets": {}
         }
       },
-      "Microsoft.AspNetCore.Http/2.2.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
-          "Microsoft.AspNetCore.WebUtilities": "2.2.0",
-          "Microsoft.Extensions.ObjectPool": "2.2.0",
-          "Microsoft.Extensions.Options": "2.2.0",
-          "Microsoft.Net.Http.Headers": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Features": "2.2.0",
-          "System.Text.Encodings.Web": "4.5.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Http.Features/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {}
-        }
-      },
       "Microsoft.AspNetCore.Metadata/5.0.1": {
         "type": "package",
         "compile": {
@@ -151,20 +110,7 @@
           "lib/net5.0/Microsoft.AspNetCore.Metadata.dll": {}
         }
       },
-      "Microsoft.AspNetCore.WebUtilities/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Net.Http.Headers": "2.2.0",
-          "System.Text.Encodings.Web": "4.5.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll": {}
-        }
-      },
-      "Microsoft.CSharp/4.5.0": {
+      "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -336,15 +282,6 @@
           "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.ObjectPool/2.2.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
-        }
-      },
       "Microsoft.Extensions.Options/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -388,19 +325,6 @@
           "lib/net5.0/Microsoft.JSInterop.WebAssembly.dll": {}
         }
       },
-      "Microsoft.Net.Http.Headers/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "2.2.0",
-          "System.Buffers": "4.5.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
-        }
-      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -434,16 +358,15 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "Syncfusion.Blazor/18.3.0.53": {
+      "Syncfusion.Blazor/18.4.0.34": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Components.WebAssembly": "5.0.0-rc.2.20475.17",
-          "Microsoft.AspNetCore.Http": "2.2.2",
-          "Microsoft.CSharp": "4.5.0",
-          "Newtonsoft.Json": "12.0.1",
-          "Syncfusion.ExcelExport.Net.Core": "18.3.0.53",
-          "Syncfusion.Licensing": "18.3.0.53",
-          "Syncfusion.PdfExport.Net.Core": "18.3.0.53"
+          "Microsoft.AspNetCore.Components.Web": "5.0.0",
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "12.0.3",
+          "Syncfusion.ExcelExport.Net.Core": "18.4.0.34",
+          "Syncfusion.Licensing": "18.4.0.34",
+          "Syncfusion.PdfExport.Net.Core": "18.4.0.34"
         },
         "compile": {
           "lib/net5.0/Syncfusion.Blazor.dll": {}
@@ -458,7 +381,7 @@
           "buildMultiTargeting/Syncfusion.Blazor.props": {}
         }
       },
-      "Syncfusion.ExcelExport.Net.Core/18.3.0.53": {
+      "Syncfusion.ExcelExport.Net.Core/18.4.0.34": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "2.0.0"
@@ -470,7 +393,7 @@
           "lib/netstandard2.0/Syncfusion.ExcelExport.Net.dll": {}
         }
       },
-      "Syncfusion.Licensing/18.3.0.53": {
+      "Syncfusion.Licensing/18.4.0.34": {
         "type": "package",
         "compile": {
           "lib/netcoreapp5.0/Syncfusion.Licensing.dll": {}
@@ -479,7 +402,7 @@
           "lib/netcoreapp5.0/Syncfusion.Licensing.dll": {}
         }
       },
-      "Syncfusion.PdfExport.Net.Core/18.3.0.53": {
+      "Syncfusion.PdfExport.Net.Core/18.4.0.34": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "2.0.0"
@@ -489,15 +412,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Syncfusion.PdfExport.Net.dll": {}
-        }
-      },
-      "System.Buffers/4.5.0": {
-        "type": "package",
-        "compile": {
-          "ref/netcoreapp2.0/_._": {}
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/_._": {}
         }
       },
       "System.IO.Pipelines/5.0.0": {
@@ -516,15 +430,6 @@
         },
         "runtime": {
           "lib/net5.0/System.Net.Http.Json.dll": {}
-        }
-      },
-      "System.Text.Encodings.Web/4.5.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
         }
       },
       "BlazorCms.Shared/1.0.0": {
@@ -638,47 +543,6 @@
           "build/Microsoft.AspNetCore.Components.WebAssembly.DevServer.targets": {}
         }
       },
-      "Microsoft.AspNetCore.Http/2.2.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
-          "Microsoft.AspNetCore.WebUtilities": "2.2.0",
-          "Microsoft.Extensions.ObjectPool": "2.2.0",
-          "Microsoft.Extensions.Options": "2.2.0",
-          "Microsoft.Net.Http.Headers": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Features": "2.2.0",
-          "System.Text.Encodings.Web": "4.5.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Http.Features/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "2.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll": {}
-        }
-      },
       "Microsoft.AspNetCore.Metadata/5.0.1": {
         "type": "package",
         "compile": {
@@ -688,20 +552,7 @@
           "lib/net5.0/Microsoft.AspNetCore.Metadata.dll": {}
         }
       },
-      "Microsoft.AspNetCore.WebUtilities/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Net.Http.Headers": "2.2.0",
-          "System.Text.Encodings.Web": "4.5.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll": {}
-        }
-      },
-      "Microsoft.CSharp/4.5.0": {
+      "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -873,15 +724,6 @@
           "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.ObjectPool/2.2.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
-        }
-      },
       "Microsoft.Extensions.Options/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -925,19 +767,6 @@
           "lib/net5.0/Microsoft.JSInterop.WebAssembly.dll": {}
         }
       },
-      "Microsoft.Net.Http.Headers/2.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.Primitives": "2.2.0",
-          "System.Buffers": "4.5.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
-        }
-      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -971,16 +800,15 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "Syncfusion.Blazor/18.3.0.53": {
+      "Syncfusion.Blazor/18.4.0.34": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Components.WebAssembly": "5.0.0-rc.2.20475.17",
-          "Microsoft.AspNetCore.Http": "2.2.2",
-          "Microsoft.CSharp": "4.5.0",
-          "Newtonsoft.Json": "12.0.1",
-          "Syncfusion.ExcelExport.Net.Core": "18.3.0.53",
-          "Syncfusion.Licensing": "18.3.0.53",
-          "Syncfusion.PdfExport.Net.Core": "18.3.0.53"
+          "Microsoft.AspNetCore.Components.Web": "5.0.0",
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "12.0.3",
+          "Syncfusion.ExcelExport.Net.Core": "18.4.0.34",
+          "Syncfusion.Licensing": "18.4.0.34",
+          "Syncfusion.PdfExport.Net.Core": "18.4.0.34"
         },
         "compile": {
           "lib/net5.0/Syncfusion.Blazor.dll": {}
@@ -995,7 +823,7 @@
           "buildMultiTargeting/Syncfusion.Blazor.props": {}
         }
       },
-      "Syncfusion.ExcelExport.Net.Core/18.3.0.53": {
+      "Syncfusion.ExcelExport.Net.Core/18.4.0.34": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "2.0.0"
@@ -1007,7 +835,7 @@
           "lib/netstandard2.0/Syncfusion.ExcelExport.Net.dll": {}
         }
       },
-      "Syncfusion.Licensing/18.3.0.53": {
+      "Syncfusion.Licensing/18.4.0.34": {
         "type": "package",
         "compile": {
           "lib/netcoreapp5.0/Syncfusion.Licensing.dll": {}
@@ -1016,7 +844,7 @@
           "lib/netcoreapp5.0/Syncfusion.Licensing.dll": {}
         }
       },
-      "Syncfusion.PdfExport.Net.Core/18.3.0.53": {
+      "Syncfusion.PdfExport.Net.Core/18.4.0.34": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "2.0.0"
@@ -1026,15 +854,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Syncfusion.PdfExport.Net.dll": {}
-        }
-      },
-      "System.Buffers/4.5.0": {
-        "type": "package",
-        "compile": {
-          "ref/netcoreapp2.0/_._": {}
-        },
-        "runtime": {
-          "lib/netcoreapp2.0/_._": {}
         }
       },
       "System.IO.Pipelines/5.0.0": {
@@ -1053,15 +872,6 @@
         },
         "runtime": {
           "lib/net5.0/System.Net.Http.Json.dll": {}
-        }
-      },
-      "System.Text.Encodings.Web/4.5.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
         }
       },
       "BlazorCms.Shared/1.0.0": {
@@ -1230,45 +1040,6 @@
         "tools/x86/aspnetcorev2_inprocess.dll"
       ]
     },
-    "Microsoft.AspNetCore.Http/2.2.2": {
-      "sha512": "BAibpoItxI5puk7YJbIGj95arZueM8B8M5xT1fXBn3hb3L2G3ucrZcYXv1gXdaroLbntUs8qeV8iuBrpjQsrKw==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.http/2.2.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Http.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Http.xml",
-        "microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
-        "microsoft.aspnetcore.http.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
-      "sha512": "Nxs7Z1q3f1STfLYKJSVXCs1iBl+Ya6E8o4Oy1bCxJ/rNI44E/0f6tbsrVqAWfB7jlnJfyaAtIalBVxPKUPQb4Q==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.http.abstractions/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Abstractions.xml",
-        "microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
-        "microsoft.aspnetcore.http.abstractions.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Http.Features/2.2.0": {
-      "sha512": "ziFz5zH8f33En4dX81LW84I6XrYXKf9jg6aM39cM+LffN9KJahViKZ61dGMSO2gd3e+qe5yBRwsesvyqlZaSMg==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.http.features/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Features.xml",
-        "microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
-        "microsoft.aspnetcore.http.features.nuspec"
-      ]
-    },
     "Microsoft.AspNetCore.Metadata/5.0.1": {
       "sha512": "7IQHvkskzVn3S7kzboT0CMptRuSep49+sWbvYcZ3u4fiVFvrZEsOxQPCCZ8Tt6RZqHQmtoS77h9GY76j3hkjCw==",
       "type": "package",
@@ -1288,23 +1059,10 @@
         "microsoft.aspnetcore.metadata.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.WebUtilities/2.2.0": {
-      "sha512": "9ErxAAKaDzxXASB/b5uLEkLgUWv1QbeVxyJYEHQwMaxXOeFFVkQxiq8RyfVcifLU7NR0QY0p3acqx4ZpYfhHDg==",
+    "Microsoft.CSharp/4.7.0": {
+      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
       "type": "package",
-      "path": "microsoft.aspnetcore.webutilities/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.xml",
-        "microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
-        "microsoft.aspnetcore.webutilities.nuspec"
-      ]
-    },
-    "Microsoft.CSharp/4.5.0": {
-      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
-      "type": "package",
-      "path": "microsoft.csharp/4.5.0",
+      "path": "microsoft.csharp/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1317,6 +1075,7 @@
         "lib/netcoreapp2.0/_._",
         "lib/netstandard1.3/Microsoft.CSharp.dll",
         "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.xml",
         "lib/portable-net45+win8+wp8+wpa81/_._",
         "lib/uap10.0.16299/_._",
         "lib/win8/_._",
@@ -1326,7 +1085,7 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "microsoft.csharp.4.5.0.nupkg.sha512",
+        "microsoft.csharp.4.7.0.nupkg.sha512",
         "microsoft.csharp.nuspec",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
@@ -1637,19 +1396,6 @@
         "version.txt"
       ]
     },
-    "Microsoft.Extensions.ObjectPool/2.2.0": {
-      "sha512": "gA8H7uQOnM5gb+L0uTNjViHYr+hRDqCdfugheGo/MxQnuHzmhhzCBTIPm19qL1z1Xe0NEMabfcOBGv9QghlZ8g==",
-      "type": "package",
-      "path": "microsoft.extensions.objectpool/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.xml",
-        "microsoft.extensions.objectpool.2.2.0.nupkg.sha512",
-        "microsoft.extensions.objectpool.nuspec"
-      ]
-    },
     "Microsoft.Extensions.Options/5.0.0": {
       "sha512": "CBvR92TCJ5uBIdd9/HzDSrxYak+0W/3+yxrNg8Qm6Bmrkh5L+nu6m3WeazQehcZ5q1/6dDA7J5YdQjim0165zg==",
       "type": "package",
@@ -1722,19 +1468,6 @@
         "lib/net5.0/Microsoft.JSInterop.WebAssembly.xml",
         "microsoft.jsinterop.webassembly.5.0.0.nupkg.sha512",
         "microsoft.jsinterop.webassembly.nuspec"
-      ]
-    },
-    "Microsoft.Net.Http.Headers/2.2.0": {
-      "sha512": "iZNkjYqlo8sIOI0bQfpsSoMTmB/kyvmV2h225ihyZT33aTp48ZpF6qYnXxzSXmHt8DpBAwBTX+1s1UFLbYfZKg==",
-      "type": "package",
-      "path": "microsoft.net.http.headers/2.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll",
-        "lib/netstandard2.0/Microsoft.Net.Http.Headers.xml",
-        "microsoft.net.http.headers.2.2.0.nupkg.sha512",
-        "microsoft.net.http.headers.nuspec"
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
@@ -1913,10 +1646,10 @@
         "packageIcon.png"
       ]
     },
-    "Syncfusion.Blazor/18.3.0.53": {
-      "sha512": "C95CbGet2cqVJ0RgTbSEB0ANLZznY/JH8f2WWpEDi6C4kwSP8QYgbNtIWp+UgsWkCzuMYTQXQSClaFpOUkjpag==",
+    "Syncfusion.Blazor/18.4.0.34": {
+      "sha512": "hDdy5yIfg6PYFBR/u6fvLjn3jPV9P8TxdeRIRHuflxR3o9CnjC6TaefpRZaPZn4Qujq1Lq6nm6RbOEg+304WcA==",
       "type": "package",
-      "path": "syncfusion.blazor/18.3.0.53",
+      "path": "syncfusion.blazor/18.4.0.34",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1926,123 +1659,144 @@
         "buildTransitive/Syncfusion.Blazor.props",
         "lib/net5.0/Syncfusion.Blazor.dll",
         "lib/net5.0/Syncfusion.Blazor.xml",
-        "lib/netcoreapp3.1/Syncfusion.Blazor.dll",
-        "lib/netcoreapp3.1/Syncfusion.Blazor.xml",
         "lib/netstandard2.1/Syncfusion.Blazor.dll",
         "lib/netstandard2.1/Syncfusion.Blazor.xml",
-        "staticwebassets/scripts/accordion-aa60e9.min.js",
-        "staticwebassets/scripts/accumulationchart-aa60e9.min.js",
-        "staticwebassets/scripts/autocomplete-aa60e9.min.js",
-        "staticwebassets/scripts/bulletchart-aa60e9.min.js",
-        "staticwebassets/scripts/button-aa60e9.min.js",
-        "staticwebassets/scripts/buttonsbase-aa60e9.min.js",
-        "staticwebassets/scripts/calendar-aa60e9.min.js",
-        "staticwebassets/scripts/chart-aa60e9.min.js",
-        "staticwebassets/scripts/charts-aa60e9.min.js",
-        "staticwebassets/scripts/chartsbase-aa60e9.min.js",
-        "staticwebassets/scripts/checkbox-aa60e9.min.js",
-        "staticwebassets/scripts/colorpicker-aa60e9.min.js",
-        "staticwebassets/scripts/combobox-aa60e9.min.js",
-        "staticwebassets/scripts/compression-aa60e9.min.js",
-        "staticwebassets/scripts/contextmenu-aa60e9.min.js",
-        "staticwebassets/scripts/dashboardlayout-aa60e9.min.js",
-        "staticwebassets/scripts/data-aa60e9.min.js",
-        "staticwebassets/scripts/datepicker-aa60e9.min.js",
-        "staticwebassets/scripts/daterangepicker-aa60e9.min.js",
-        "staticwebassets/scripts/datetimepicker-aa60e9.min.js",
-        "staticwebassets/scripts/diagrams-aa60e9.min.js",
-        "staticwebassets/scripts/dialog-aa60e9.min.js",
-        "staticwebassets/scripts/documenteditor-aa60e9.min.js",
-        "staticwebassets/scripts/documenteditorbase-aa60e9.min.js",
-        "staticwebassets/scripts/documenteditorcontainer-aa60e9.min.js",
-        "staticwebassets/scripts/drawings-aa60e9.min.js",
-        "staticwebassets/scripts/dropdownbutton-aa60e9.min.js",
-        "staticwebassets/scripts/dropdownlist-aa60e9.min.js",
-        "staticwebassets/scripts/dropdownsbase-aa60e9.min.js",
-        "staticwebassets/scripts/dropdowntree-aa60e9.min.js",
-        "staticwebassets/scripts/excelexport-aa60e9.min.js",
-        "staticwebassets/scripts/filemanager-aa60e9.min.js",
-        "staticwebassets/scripts/fileutils-aa60e9.min.js",
-        "staticwebassets/scripts/formvalidator-aa60e9.min.js",
-        "staticwebassets/scripts/gantt-aa60e9.min.js",
-        "staticwebassets/scripts/grid-aa60e9.min.js",
-        "staticwebassets/scripts/heatmap-aa60e9.min.js",
-        "staticwebassets/scripts/inplaceeditor-aa60e9.min.js",
-        "staticwebassets/scripts/inputsbase-aa60e9.min.js",
-        "staticwebassets/scripts/kanban-aa60e9.min.js",
-        "staticwebassets/scripts/listsbase-aa60e9.min.js",
-        "staticwebassets/scripts/listview-aa60e9.min.js",
-        "staticwebassets/scripts/maps-aa60e9.min.js",
-        "staticwebassets/scripts/maskedtextbox-aa60e9.min.js",
-        "staticwebassets/scripts/menu-aa60e9.min.js",
-        "staticwebassets/scripts/multiselect-aa60e9.min.js",
-        "staticwebassets/scripts/navigationsbase-aa60e9.min.js",
-        "staticwebassets/scripts/numerictextbox-aa60e9.min.js",
-        "staticwebassets/scripts/officechart-aa60e9.min.js",
-        "staticwebassets/scripts/pager-aa60e9.min.js",
-        "staticwebassets/scripts/pdfexport-aa60e9.min.js",
-        "staticwebassets/scripts/pdfviewer-aa60e9.min.js",
-        "staticwebassets/scripts/pivotview-aa60e9.min.js",
-        "staticwebassets/scripts/popup-aa60e9.min.js",
-        "staticwebassets/scripts/popupsbase-aa60e9.min.js",
-        "staticwebassets/scripts/progressbar-aa60e9.min.js",
-        "staticwebassets/scripts/radiobutton-aa60e9.min.js",
-        "staticwebassets/scripts/rangenavigator-aa60e9.min.js",
-        "staticwebassets/scripts/richtexteditor-aa60e9.min.js",
-        "staticwebassets/scripts/sf-accordion-aa60e9.min.js",
-        "staticwebassets/scripts/sf-barcode-aa60e9.min.js",
-        "staticwebassets/scripts/sf-calendarbase-aa60e9.min.js",
-        "staticwebassets/scripts/sf-circulargauge-aa60e9.min.js",
-        "staticwebassets/scripts/sf-contextmenu-aa60e9.min.js",
-        "staticwebassets/scripts/sf-datepicker-aa60e9.min.js",
-        "staticwebassets/scripts/sf-dialog-aa60e9.min.js",
-        "staticwebassets/scripts/sf-drop-down-button-aa60e9.min.js",
-        "staticwebassets/scripts/sf-dropdownlist-aa60e9.min.js",
-        "staticwebassets/scripts/sf-grid-aa60e9.min.js",
-        "staticwebassets/scripts/sf-kanban-aa60e9.min.js",
-        "staticwebassets/scripts/sf-lineargauge-aa60e9.min.js",
-        "staticwebassets/scripts/sf-listbox-aa60e9.min.js",
-        "staticwebassets/scripts/sf-listview-aa60e9.min.js",
-        "staticwebassets/scripts/sf-menu-aa60e9.min.js",
-        "staticwebassets/scripts/sf-numerictextbox-aa60e9.min.js",
-        "staticwebassets/scripts/sf-richtexteditor-aa60e9.min.js",
-        "staticwebassets/scripts/sf-schedule-aa60e9.min.js",
-        "staticwebassets/scripts/sf-sidebar-aa60e9.min.js",
-        "staticwebassets/scripts/sf-spinner-aa60e9.min.js",
-        "staticwebassets/scripts/sf-splitter-aa60e9.min.js",
-        "staticwebassets/scripts/sf-spreadsheet-aa60e9.min.js",
-        "staticwebassets/scripts/sf-svg-export-aa60e9.min.js",
-        "staticwebassets/scripts/sf-tab-aa60e9.min.js",
-        "staticwebassets/scripts/sf-textbox-aa60e9.min.js",
-        "staticwebassets/scripts/sf-timepicker-aa60e9.min.js",
-        "staticwebassets/scripts/sf-toast-aa60e9.min.js",
-        "staticwebassets/scripts/sf-toolbar-aa60e9.min.js",
-        "staticwebassets/scripts/sf-tooltip-aa60e9.min.js",
-        "staticwebassets/scripts/sf-treegrid-aa60e9.min.js",
-        "staticwebassets/scripts/sf-treemap-aa60e9.min.js",
-        "staticwebassets/scripts/sf-treeview-aa60e9.min.js",
-        "staticwebassets/scripts/slider-aa60e9.min.js",
-        "staticwebassets/scripts/smithchart-aa60e9.min.js",
-        "staticwebassets/scripts/sortable-aa60e9.min.js",
-        "staticwebassets/scripts/sparkline-aa60e9.min.js",
-        "staticwebassets/scripts/spinner-aa60e9.min.js",
-        "staticwebassets/scripts/splitbutton-aa60e9.min.js",
-        "staticwebassets/scripts/splitbuttonsbase-aa60e9.min.js",
-        "staticwebassets/scripts/splitter-aa60e9.min.js",
-        "staticwebassets/scripts/spreadsheet-aa60e9.min.js",
-        "staticwebassets/scripts/stockchart-aa60e9.min.js",
-        "staticwebassets/scripts/svgbase-aa60e9.min.js",
-        "staticwebassets/scripts/syncfusion-blazor-ie.min.js",
+        "staticwebassets/scripts/0.js",
+        "staticwebassets/scripts/1.js",
+        "staticwebassets/scripts/accordion-e8d3a5.min.js",
+        "staticwebassets/scripts/accumulationchart-e8d3a5.min.js",
+        "staticwebassets/scripts/autocomplete-e8d3a5.min.js",
+        "staticwebassets/scripts/bulletchart-e8d3a5.min.js",
+        "staticwebassets/scripts/button-e8d3a5.min.js",
+        "staticwebassets/scripts/buttonsbase-e8d3a5.min.js",
+        "staticwebassets/scripts/calendar-e8d3a5.min.js",
+        "staticwebassets/scripts/chart-e8d3a5.min.js",
+        "staticwebassets/scripts/chartsbase-e8d3a5.min.js",
+        "staticwebassets/scripts/checkbox-e8d3a5.min.js",
+        "staticwebassets/scripts/chiplist-e8d3a5.min.js",
+        "staticwebassets/scripts/colorpicker-e8d3a5.min.js",
+        "staticwebassets/scripts/combobox-e8d3a5.min.js",
+        "staticwebassets/scripts/compression-e8d3a5.min.js",
+        "staticwebassets/scripts/contextmenu-e8d3a5.min.js",
+        "staticwebassets/scripts/dashboardlayout-e8d3a5.min.js",
+        "staticwebassets/scripts/data-e8d3a5.min.js",
+        "staticwebassets/scripts/datepicker-e8d3a5.min.js",
+        "staticwebassets/scripts/daterangepicker-e8d3a5.min.js",
+        "staticwebassets/scripts/datetimepicker-e8d3a5.min.js",
+        "staticwebassets/scripts/diagrams-e8d3a5.min.js",
+        "staticwebassets/scripts/dialog-e8d3a5.min.js",
+        "staticwebassets/scripts/documenteditor-e8d3a5.min.js",
+        "staticwebassets/scripts/documenteditorcontainer-e8d3a5.min.js",
+        "staticwebassets/scripts/drawings-e8d3a5.min.js",
+        "staticwebassets/scripts/dropdownbutton-e8d3a5.min.js",
+        "staticwebassets/scripts/dropdownlist-e8d3a5.min.js",
+        "staticwebassets/scripts/dropdownsbase-e8d3a5.min.js",
+        "staticwebassets/scripts/dropdowntree-e8d3a5.min.js",
+        "staticwebassets/scripts/excelexport-e8d3a5.min.js",
+        "staticwebassets/scripts/filemanager-e8d3a5.min.js",
+        "staticwebassets/scripts/fileutils-e8d3a5.min.js",
+        "staticwebassets/scripts/formvalidator-e8d3a5.min.js",
+        "staticwebassets/scripts/gantt-e8d3a5.min.js",
+        "staticwebassets/scripts/grid-e8d3a5.min.js",
+        "staticwebassets/scripts/heatmap-e8d3a5.min.js",
+        "staticwebassets/scripts/inplaceeditor-e8d3a5.min.js",
+        "staticwebassets/scripts/inputsbase-e8d3a5.min.js",
+        "staticwebassets/scripts/listbox-e8d3a5.min.js",
+        "staticwebassets/scripts/listsbase-e8d3a5.min.js",
+        "staticwebassets/scripts/listview-e8d3a5.min.js",
+        "staticwebassets/scripts/maps-e8d3a5.min.js",
+        "staticwebassets/scripts/maskedtextbox-e8d3a5.min.js",
+        "staticwebassets/scripts/menu-e8d3a5.min.js",
+        "staticwebassets/scripts/multiselect-e8d3a5.min.js",
+        "staticwebassets/scripts/navigationsbase-e8d3a5.min.js",
+        "staticwebassets/scripts/numerictextbox-e8d3a5.min.js",
+        "staticwebassets/scripts/officechart-e8d3a5.min.js",
+        "staticwebassets/scripts/pager-e8d3a5.min.js",
+        "staticwebassets/scripts/pdfexport-e8d3a5.min.js",
+        "staticwebassets/scripts/pdfviewer-e8d3a5.min.js",
+        "staticwebassets/scripts/pivotview-e8d3a5.min.js",
+        "staticwebassets/scripts/popup-e8d3a5.min.js",
+        "staticwebassets/scripts/popupsbase-e8d3a5.min.js",
+        "staticwebassets/scripts/progressbar-e8d3a5.min.js",
+        "staticwebassets/scripts/progressbutton-e8d3a5.min.js",
+        "staticwebassets/scripts/querybuilder-e8d3a5.min.js",
+        "staticwebassets/scripts/radiobutton-e8d3a5.min.js",
+        "staticwebassets/scripts/rangenavigator-e8d3a5.min.js",
+        "staticwebassets/scripts/richtexteditor-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-accordion-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-accumulation-chart-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-barcode-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-calendarbase-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-chart-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-circulargauge-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-colorpicker-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-contextmenu-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-dashboard-layout-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-datepicker-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-daterangepicker-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-dialog-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-drop-down-button-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-dropdownlist-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-filemanager-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-grid-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-import-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-import-ie-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-import-script-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-inplaceeditor-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-kanban-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-lineargauge-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-listbox-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-listview-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-maps-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-maskedtextbox-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-menu-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-multiselect-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-numerictextbox-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-pivotview-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-progressbar-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-range-navigator-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-richtexteditor-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-schedule-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-sidebar-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-slider-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-spinner-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-splitter-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-spreadsheet-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-svg-export-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-tab-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-textbox-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-timepicker-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-toast-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-toolbar-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-tooltip-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-treegrid-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-treemap-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-treeview-e8d3a5.min.js",
+        "staticwebassets/scripts/sf-uploader-e8d3a5.min.js",
+        "staticwebassets/scripts/sidebar-e8d3a5.min.js",
+        "staticwebassets/scripts/slider-e8d3a5.min.js",
+        "staticwebassets/scripts/smithchart-e8d3a5.min.js",
+        "staticwebassets/scripts/sortable-e8d3a5.min.js",
+        "staticwebassets/scripts/sparkline-e8d3a5.min.js",
+        "staticwebassets/scripts/spinner-e8d3a5.min.js",
+        "staticwebassets/scripts/splitbutton-e8d3a5.min.js",
+        "staticwebassets/scripts/splitbuttonsbase-e8d3a5.min.js",
+        "staticwebassets/scripts/splitter-e8d3a5.min.js",
+        "staticwebassets/scripts/spreadsheet-e8d3a5.min.js",
+        "staticwebassets/scripts/stockchart-e8d3a5.min.js",
+        "staticwebassets/scripts/svgbase-e8d3a5.min.js",
+        "staticwebassets/scripts/switch-e8d3a5.min.js",
+        "staticwebassets/scripts/syncfusion-blazor-extended-e8d3a5.min.js",
         "staticwebassets/scripts/syncfusion-blazor.min.js",
-        "staticwebassets/scripts/tab-aa60e9.min.js",
-        "staticwebassets/scripts/textbox-aa60e9.min.js",
-        "staticwebassets/scripts/timepicker-aa60e9.min.js",
-        "staticwebassets/scripts/toast-aa60e9.min.js",
-        "staticwebassets/scripts/toolbar-aa60e9.min.js",
-        "staticwebassets/scripts/tooltip-aa60e9.min.js",
-        "staticwebassets/scripts/treegrid-aa60e9.min.js",
-        "staticwebassets/scripts/treeview-aa60e9.min.js",
-        "staticwebassets/scripts/uploader-aa60e9.min.js",
+        "staticwebassets/scripts/tab-e8d3a5.min.js",
+        "staticwebassets/scripts/textbox-e8d3a5.min.js",
+        "staticwebassets/scripts/timepicker-e8d3a5.min.js",
+        "staticwebassets/scripts/toast-e8d3a5.min.js",
+        "staticwebassets/scripts/toolbar-e8d3a5.min.js",
+        "staticwebassets/scripts/tooltip-e8d3a5.min.js",
+        "staticwebassets/scripts/treegrid-e8d3a5.min.js",
+        "staticwebassets/scripts/treeview-e8d3a5.min.js",
+        "staticwebassets/scripts/uploader-e8d3a5.min.js",
         "staticwebassets/styles/bootstrap-dark.css",
         "staticwebassets/styles/bootstrap.css",
         "staticwebassets/styles/bootstrap4.css",
@@ -2051,27 +1805,27 @@
         "staticwebassets/styles/highcontrast.css",
         "staticwebassets/styles/material-dark.css",
         "staticwebassets/styles/material.css",
-        "syncfusion.blazor.18.3.0.53.nupkg.sha512",
+        "syncfusion.blazor.18.4.0.34.nupkg.sha512",
         "syncfusion.blazor.nuspec"
       ]
     },
-    "Syncfusion.ExcelExport.Net.Core/18.3.0.53": {
-      "sha512": "LGU35VtrUQlrHA8ICpPApHl2+WTxT696f8/uL0/ab8VNDpq4YNAzcgEvatu4WPt+YkBqZB2sLJjhvFnulqFNRw==",
+    "Syncfusion.ExcelExport.Net.Core/18.4.0.34": {
+      "sha512": "PNHzJDsv/ge8EPhDPZwP//I2hvv6MMGINpokuP/GLKL353Ss3xXbBHoh7JBfUnVDSYuZ/XhMvspjqPa6h2Zmrw==",
       "type": "package",
-      "path": "syncfusion.excelexport.net.core/18.3.0.53",
+      "path": "syncfusion.excelexport.net.core/18.4.0.34",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Syncfusion.ExcelExport.Net.dll",
         "lib/netstandard2.0/Syncfusion.ExcelExport.Net.xml",
-        "syncfusion.excelexport.net.core.18.3.0.53.nupkg.sha512",
+        "syncfusion.excelexport.net.core.18.4.0.34.nupkg.sha512",
         "syncfusion.excelexport.net.core.nuspec"
       ]
     },
-    "Syncfusion.Licensing/18.3.0.53": {
-      "sha512": "ZbVF5VoHEf9a2Onp5wfxdp0hidRh2kJLOZ6UTLSE+x/9ugMejilFsgG+588Zp42JMKTRxVifqai+LZFlSMZuIw==",
+    "Syncfusion.Licensing/18.4.0.34": {
+      "sha512": "a8BuTU3KGTAMs2h0j3TCTazYLh9tWLfiFH0BWOmtqnJSwIJu1hR9yhNtblT9/4QgWFFTzyJ/yp4udWVtj/QL+g==",
       "type": "package",
-      "path": "syncfusion.licensing/18.3.0.53",
+      "path": "syncfusion.licensing/18.4.0.34",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2093,50 +1847,21 @@
         "lib/netstandard2.0/Syncfusion.Licensing.dll",
         "lib/portable-win+net45+wp80+win81+wpa81/Syncfusion.Licensing.dll",
         "lib/uap10.0/Syncfusion.Licensing.dll",
-        "syncfusion.licensing.18.3.0.53.nupkg.sha512",
+        "syncfusion.licensing.18.4.0.34.nupkg.sha512",
         "syncfusion.licensing.nuspec"
       ]
     },
-    "Syncfusion.PdfExport.Net.Core/18.3.0.53": {
-      "sha512": "bwOuQM2J+G4yn+z9BwsvooBhQdN0xS8EjsipqQ0f3qDgX9TM+2E4JPQ92wx6FGlxI4reLCayJodGLB2F4kGGaQ==",
+    "Syncfusion.PdfExport.Net.Core/18.4.0.34": {
+      "sha512": "nlHcf9SJ02Ioir6jhTcJiQIZCVn1zGRiXrZucjcbCguY7rFN0/x4EzqeVbJS1By7J0Yv2XIKyvUVcXvFyXa+1w==",
       "type": "package",
-      "path": "syncfusion.pdfexport.net.core/18.3.0.53",
+      "path": "syncfusion.pdfexport.net.core/18.4.0.34",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Syncfusion.PdfExport.Net.dll",
         "lib/netstandard2.0/Syncfusion.PdfExport.Net.xml",
-        "syncfusion.pdfexport.net.core.18.3.0.53.nupkg.sha512",
+        "syncfusion.pdfexport.net.core.18.4.0.34.nupkg.sha512",
         "syncfusion.pdfexport.net.core.nuspec"
-      ]
-    },
-    "System.Buffers/4.5.0": {
-      "sha512": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A==",
-      "type": "package",
-      "path": "system.buffers/4.5.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/netcoreapp2.0/_._",
-        "lib/netstandard1.1/System.Buffers.dll",
-        "lib/netstandard1.1/System.Buffers.xml",
-        "lib/netstandard2.0/System.Buffers.dll",
-        "lib/netstandard2.0/System.Buffers.xml",
-        "lib/uap10.0.16299/_._",
-        "ref/net45/System.Buffers.dll",
-        "ref/net45/System.Buffers.xml",
-        "ref/netcoreapp2.0/_._",
-        "ref/netstandard1.1/System.Buffers.dll",
-        "ref/netstandard1.1/System.Buffers.xml",
-        "ref/netstandard2.0/System.Buffers.dll",
-        "ref/netstandard2.0/System.Buffers.xml",
-        "ref/uap10.0.16299/_._",
-        "system.buffers.4.5.0.nupkg.sha512",
-        "system.buffers.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
       ]
     },
     "System.IO.Pipelines/5.0.0": {
@@ -2187,25 +1912,6 @@
         "version.txt"
       ]
     },
-    "System.Text.Encodings.Web/4.5.0": {
-      "sha512": "Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
-      "type": "package",
-      "path": "system.text.encodings.web/4.5.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/netstandard1.0/System.Text.Encodings.Web.dll",
-        "lib/netstandard1.0/System.Text.Encodings.Web.xml",
-        "lib/netstandard2.0/System.Text.Encodings.Web.dll",
-        "lib/netstandard2.0/System.Text.Encodings.Web.xml",
-        "system.text.encodings.web.4.5.0.nupkg.sha512",
-        "system.text.encodings.web.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
-      ]
-    },
     "BlazorCms.Shared/1.0.0": {
       "type": "project",
       "path": "../Shared/BlazorCms.Shared.csproj",
@@ -2220,7 +1926,7 @@
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 5.0.0",
       "Microsoft.Extensions.Http >= 5.0.0",
       "Newtonsoft.Json >= 12.0.3",
-      "Syncfusion.Blazor >= 18.3.0.53",
+      "Syncfusion.Blazor >= 18.4.0.34",
       "System.Net.Http.Json >= 5.0.0"
     ]
   },
@@ -2288,7 +1994,7 @@
           },
           "Syncfusion.Blazor": {
             "target": "Package",
-            "version": "[18.3.0.53, )"
+            "version": "[18.4.0.34, )"
           },
           "System.Net.Http.Json": {
             "target": "Package",
