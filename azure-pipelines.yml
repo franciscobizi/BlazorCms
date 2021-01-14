@@ -66,7 +66,7 @@ process:
         definitionType: task
       inputs:
         command: build
-        publishWebProjects: 'true'
+        publishWebProjects: false
         projects: "$(Parameters.RestoreBuildProjects)"
         arguments: "--configuration $(BuildConfiguration)"
         zipAfterPublish: 'true'
@@ -82,7 +82,7 @@ process:
         definitionType: task
       inputs:
         command: test
-        publishWebProjects: 'true'
+        publishWebProjects: false
         projects: "$(Parameters.UnitTestProjects)"
         arguments: "--configuration $(BuildConfiguration)"
         zipAfterPublish: 'true'
@@ -99,7 +99,7 @@ process:
       inputs:
         command: publish
         publishWebProjects: false
-        projects: '**/BlazorCms.Server.csproj'
+        projects: '**/*.csproj'
         arguments: --configuration $(BuildConfiguration) --output "$(build.artifactstagingdirectory)"
         zipAfterPublish: 'True'
     - environment: {}
