@@ -16,18 +16,18 @@ namespace BlazorCms.Server.Services
                                     string PostPermalink, 
                                     string PostContent, 
                                     string PostThumbnail, 
-                                    long PostAuthor, 
+                                    int PostAuthor, 
                                     string PostCreated, 
                                     string PostUpdated
                                 );
         
         Task<Post> UpdatePostAsync(
-                                    long PostId,
+                                    int PostId,
                                     string PostTitle, 
                                     string PostPermalink, 
                                     string PostContent, 
                                     string PostThumbnail, 
-                                    long PostAuthor, 
+                                    int PostAuthor, 
                                     string PostCreated, 
                                     string PostUpdated
                                 );

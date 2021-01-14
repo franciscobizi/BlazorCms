@@ -6,7 +6,7 @@ namespace BlazorCms.Shared.Mapping
     public class UserResponse
     {
 
-        public long UserId { get; set; }
+        public int UserId { get; set; }
         public string UserEmail { get; set; }
         public string UserPass { get; set; }
         public string UserSource { get; set; }

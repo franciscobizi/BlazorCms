@@ -18,7 +18,7 @@ namespace BlazorCms.Server.Services
             _context = context;
         }
 
-        public async Task<Post> CreatePostAsync(string PostTitle, string PostPermalink, string PostContent, string PostThumbnail, long PostAuthor, string PostCreated, string PostUpdated)
+        public async Task<Post> CreatePostAsync(string PostTitle, string PostPermalink, string PostContent, string PostThumbnail, int PostAuthor, string PostCreated, string PostUpdated)
         {
             DateTime today = DateTime.Now;
 
@@ -53,7 +53,7 @@ namespace BlazorCms.Server.Services
             return posts.ToList();
         }
 
-        public async Task<Post> UpdatePostAsync(long PostId, string PostTitle, string PostPermalink, string PostContent, string PostThumbnail, long PostAuthor, string PostCreated, string PostUpdated)
+        public async Task<Post> UpdatePostAsync(int PostId, string PostTitle, string PostPermalink, string PostContent, string PostThumbnail, int PostAuthor, string PostCreated, string PostUpdated)
         {
             DateTime today = DateTime.Now;
 
