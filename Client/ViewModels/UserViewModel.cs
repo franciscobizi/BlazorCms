@@ -10,7 +10,7 @@ namespace BlazorCms.ViewModels
 {
     class UserViewModel : IUserViewModel
     {
-        public long UserId { get; set; }
+        public int UserId { get; set; }
         public string UserEmail { get; set; }
         public string UserPass { get; set; }
         public string UserSource { get; set; }
@@ -48,6 +48,14 @@ namespace BlazorCms.ViewModels
             //add more fields
         }
 
+        public async Task UpdateProfile()
+        {
+            User user = this;
+            await _Http.PutAsJsonAsync(this._navigationManager.BaseUri + "user", user);
+            this.Message = "User updated successful!";
+            this.Display = "block";
+        }
+
         public Task GetUser()
         {
             throw new System.NotImplementedException();
@@ -56,7 +64,6 @@ namespace BlazorCms.ViewModels
         public async Task GetUsers()
         {
             var items = await _Http.GetStringAsync(_navigationManager.BaseUri + "user");
-            //items = "["+items+"]";
             this.users = JsonConvert.DeserializeObject<List<User>>(items);
         }
 

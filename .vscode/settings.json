@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/0b0a2d36-8457-417b-a973-296e6438d22b/resourceGroups/TaylorApps/providers/Microsoft.Web/sites/blazorcms",
+    "appService.deploySubpath": "Server\\publish"
+}

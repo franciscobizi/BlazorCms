@@ -19,9 +19,9 @@
                     <br><br>
                     <SfTextBox @bind-Value="_profileVM.UserLname" Placeholder="Last name"></SfTextBox>
                     <br><br>
-                    <SfTextBox  @bind-Value="_profileVM.UserEmail" Placeholder="E-mail"></SfTextBox>
+                    <SfTextBox  @bind-Value="_profileVM.UserEmail" Placeholder="E-mail" Readonly></SfTextBox>
                     <br><br>
-                    <SfTextBox @bind-Value="_profileVM.UserPass" Type="InputType.Password" Placeholder="Password"></SfTextBox>
+                    @* <SfTextBox @bind-Value="_profileVM.UserPass" Type="InputType.Password" Placeholder="Password"></SfTextBox> *@
                     <br><br>
                     <SfButton @onclick="_profileVM.UpdateProfile">Update</SfButton>
                 </div>
@@ -45,7 +45,7 @@
         {
             var claim = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
 
-            _profileVM.UserId = Convert.ToInt64(claim?.Value);
+            _profileVM.UserId = Convert.ToInt32(claim?.Value);
 
             await _profileVM.getProfile();
 

@@ -43,15 +43,13 @@ namespace BlazorCms.ViewModels
         public async Task Create()
         {
             PostResponse post = this;
-            await _Http.PostAsJsonAsync(this._navigationManager.BaseUri, post);
+            await _Http.PostAsJsonAsync(this._navigationManager.BaseUri + "posts", post);
             this.Message = "Post created successful!";
             this.Display = "block";
         }
 
         public async Task GetAll()
         {
-            /* var posts = await _Http.GetFromJsonAsync<List<PostResponse>>(this._navigationManager.BaseUri);
-            LoadCurrentObject(posts); */
             var items = await _Http.GetStringAsync(this._navigationManager.BaseUri + "posts");
         }
 

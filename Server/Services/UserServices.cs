@@ -55,6 +55,17 @@ namespace BlazorCms.Server.Services
             return await Task.FromResult(users);
         }
 
+        public async Task<User> UpdateUserAsync(int UserId, string UserFname, string UserLname)
+        {
+            User users = await _context.Users.Where(u => u.UserId == UserId).FirstOrDefaultAsync();
+            users.UserFname = UserFname;
+            users.UserLname = UserLname;
+
+            await _context.SaveChangesAsync();
+
+            return await Task.FromResult(users);
+        }
+
         public async Task<User> GetCurrentUserAsync(bool IsAuthenticated, string UserEmail)
         {
             User currentUser = new User();
@@ -65,11 +76,13 @@ namespace BlazorCms.Server.Services
 
                 if (currentUser == null)
                 {
+                    DateTime today = DateTime.Now;
                     currentUser = new User();
-                    currentUser.UserId = _context.Users.Max(user => user.UserId) + 1;
+                    //currentUser.UserId = _context.Users.Max(user => user.UserId) + 1;
                     currentUser.UserEmail = UserEmail;
                     currentUser.UserPass = Utility.Encrypt(currentUser.UserEmail);
                     currentUser.UserSource = "EXTL";
+                    currentUser.UserRegistered = today.ToString("yyyy-MM-dd");
 
                     _context.Users.Add(currentUser);
                     await _context.SaveChangesAsync();

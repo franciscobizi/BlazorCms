@@ -35,6 +35,13 @@ namespace BlazorCms.Server.Controllers
             return CreatedAtAction("GetUser", new {userId = result.UserId},result);
         }
 
+        [HttpPut("")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command)
+        {
+            var result = await _imediator.Send(command);
+            return CreatedAtAction("GetUser", new {userId = result.UserId},result);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {

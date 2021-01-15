@@ -15,26 +15,4 @@ namespace BlazorCms.Shared.Mapping
         public string PostUpdated { get; set; }
     }
 
-    /* public void mappItems(posts)
-    {
-            List<this> Items = new List<this>();
-
-            foreach(var post in posts)
-            {
-                var author = post.PostAuthorNavigation.UserFname + " " + post.PostAuthorNavigation.UserLname;
-                Items.Add(new PostResponse()
-                {
-                    PostId = post.PostId,
-                    PostTitle = post.PostTitle,
-                    PostContent = post.PostContent,
-                    PostThumbnail = post.PostThumbnail,
-                    PostAuthor =  post.PostAuthor,
-                    PostAuthorName = author,
-                    PostCreated = post.PostCreated,
-                    PostUpdated = post.PostUpdated
-                });
-            }
-
-            return Items;
-    } */
 }

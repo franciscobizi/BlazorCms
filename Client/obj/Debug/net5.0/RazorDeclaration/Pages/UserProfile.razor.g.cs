@@ -210,7 +210,7 @@ using System.Security.Claims;
         {
             var claim = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
 
-            _profileVM.UserId = Convert.ToInt64(claim?.Value);
+            _profileVM.UserId = Convert.ToInt32(claim?.Value);
 
             await _profileVM.getProfile();
 

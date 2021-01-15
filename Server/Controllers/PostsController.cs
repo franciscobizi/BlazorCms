@@ -98,7 +98,7 @@ namespace BlazorCms.Server.Controllers
         }
 
         [HttpPut("")]
-        public async Task<IActionResult> CreatePost([FromBody] UpdatePostCommand command)
+        public async Task<IActionResult> UpdatePost([FromBody] UpdatePostCommand command)
         {
             var result = await _imediator.Send(command);
             return CreatedAtAction("GetPost", new {PostId = result.PostId},result);

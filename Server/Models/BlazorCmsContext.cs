@@ -68,7 +68,7 @@ namespace BlazorCms.Server.Models
                 entity.HasOne(d => d.PostAuthorNavigation)
                     .WithMany(p => p.Posts)
                     .HasForeignKey(d => d.PostAuthor)
-                    .HasConstraintName("FK__Post__post_autho__619B8048");
+                    .HasConstraintName("FK__Post__post_autho__5EBF139D");
             });
 
             modelBuilder.Entity<User>(entity =>

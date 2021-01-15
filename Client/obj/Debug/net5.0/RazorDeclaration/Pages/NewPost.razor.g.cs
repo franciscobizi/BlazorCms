@@ -249,6 +249,7 @@ using System.Security.Claims;
             var claim = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
 
             _postViewModel.PostAuthor = Convert.ToInt32(claim?.Value);
+            Console.WriteLine("User id" + _postViewModel.PostAuthor);
 
         }
     }    
