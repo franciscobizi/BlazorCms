@@ -52,8 +52,8 @@ namespace Tests.IntegrationTests
             var resp = await testClient.GetAsync(BaseUrl + "user/" + id);
             //Assert
             resp.StatusCode.Should().Be(HttpStatusCode.OK);
-            var post = await resp.Content.ReadAsAsync<User>();
-            post.PostId.Should().Be(id);
+            var user = await resp.Content.ReadAsAsync<User>();
+            user.UserId.Should().Be(id);
 
         }
     }

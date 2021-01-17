@@ -41,5 +41,22 @@ namespace Tests.UnitTests
             resp.StatusCode.Should().Be(HttpStatusCode.OK);
 
         }
+
+        [Fact]
+        public async Task SignInUser_WithAuthData_ReturnsUserData()
+        {
+            //Given
+            User user = new User();
+            user.UserEmail = "admin@blazorcms.com";
+            user.UserPass = "1111";
+            
+            //Act
+            var resp = await testClient.PostAsJsonAsync(BaseUrl + "user/signin",user);
+            //Assert
+            resp.StatusCode.Should().Be(HttpStatusCode.OK);
+            var authUser = await resp.Content.ReadAsAsync<User>();
+            authUser.UserEmail.Should().Be(user.UserEmail);
+
+        }
     }
 }
