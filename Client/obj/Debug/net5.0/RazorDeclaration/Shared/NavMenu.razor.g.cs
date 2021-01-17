@@ -174,7 +174,7 @@ using Syncfusion.Blazor.Cards;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 46 "C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Client\Shared\NavMenu.razor"
+#line 47 "C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Client\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
@@ -187,13 +187,14 @@ using Syncfusion.Blazor.Cards;
 
     private async Task SignOut()
     {
-        await _Http.GetAsync("https://localhost:5001/user/signout");
+        await _Http.GetAsync(_navigationManager.BaseUri + "/user/signout");
         _navigation.NavigateTo("/",true);
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient _Http { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navigation { get; set; }
     }

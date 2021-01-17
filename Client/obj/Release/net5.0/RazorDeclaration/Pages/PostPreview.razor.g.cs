@@ -191,7 +191,6 @@ using BlazorCms.ViewModels;
     protected override async Task OnInitializedAsync()
     {
         await _postViewModel.GetOne(this.postPermalink);
-        //Console.WriteLine("Could not invoke interop during OnInit " + postTitle);
     }
 
 #line default
