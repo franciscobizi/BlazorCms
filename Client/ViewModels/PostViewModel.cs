@@ -134,10 +134,11 @@ namespace BlazorCms.ViewModels
         
         public void OnImageUploadedSuccess(SuccessEventArgs args) 
         { 
-            var customHeader = args.Response.Headers.Split(new Char[] { '\n' })[2]; 
+            
+            var customHeader = args.Response.Headers.Split(new Char[] { '\n' })[3];
             var ImageId = customHeader.Split(new Char[] { ':' })[1].Trim();
             this.PostThumbnail = ImageId;
-        } 
+        }
 
         public void OnImageRemovedSuccess(SuccessEventArgs args)
         {

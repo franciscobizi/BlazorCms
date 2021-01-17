@@ -1,5 +1,6 @@
 ﻿@inject NavigationManager _navigation
 @inject HttpClient _Http
+@inject NavigationManager _navigationManager
 
 <div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">BLAZOR CMS</a>
@@ -55,7 +56,7 @@
 
     private async Task SignOut()
     {
-        await _Http.GetAsync("https://localhost:5001/user/signout");
+        await _Http.GetAsync(_navigationManager.BaseUri + "/user/signout");
         _navigation.NavigateTo("/",true);
     }
 }
