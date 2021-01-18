@@ -203,12 +203,12 @@
       "netstandard.dll": "sha256-4QNBIB4DMwj82CYd96oFrTh3fcrmyaDjtQ2dBTyWz7Q=",
       "System.Private.CoreLib.dll": "sha256-5Zk+rN+j5FbFEQJdT8YR2O0i6KWpvrERsaPZCv69DmI=",
       "BlazorCms.Shared.dll": "sha256-BYcvd\/wDtb0ctvMqbzM6Fy8p4q07rlnGi3CG3yPfuJs=",
-      "BlazorCms.Client.dll": "sha256-0c3stzpEbWY37B2CoUmQqUmhOtcR7W+HoaauuC\/2+us="
+      "BlazorCms.Client.dll": "sha256-nBbs4gB6CrEIodLIWr1ss701hSEjPu3M\/NefUyHKFFY="
     },
     "lazyAssembly": null,
     "pdb": {
       "BlazorCms.Shared.pdb": "sha256-T984dKz9O45lUZgRVlre7L+mx42OcnZBRH7s9Jmv+dk=",
-      "BlazorCms.Client.pdb": "sha256-SCVsbaCPSfSDREdWVNzCd\/93+YU+wvQOEHVfdisv408="
+      "BlazorCms.Client.pdb": "sha256-PP8nc7ZlcgoM5qpt5zzff2uLRQ1Bj0K71KZudth5cVw="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-2ldEe2K8ARFKSIBsv+Hr3iNQzq9qh1H\/dwdu2r+AIyY=",

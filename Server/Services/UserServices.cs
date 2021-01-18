@@ -60,6 +60,7 @@ namespace BlazorCms.Server.Services
             User users = await _context.Users.Where(u => u.UserId == UserId).FirstOrDefaultAsync();
             users.UserFname = UserFname;
             users.UserLname = UserLname;
+            //users.UserPass = Utility.Encrypt("1111");
 
             await _context.SaveChangesAsync();
 

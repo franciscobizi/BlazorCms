@@ -10,9 +10,14 @@ namespace BlazorCms.ViewModels
         public int UserId { get; set; }
         public string UserEmail { get; set; }
         public string UserPass { get; set; }
+        public string Message { get; set; } 
+        public string Display { get; set; }
 
         public Task getCurrentUser();
         public Task signIn();
+        public void FacebookSignIn();
+
+        public void GoogleSignIn();
 
     }
 }

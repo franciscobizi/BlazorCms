@@ -1,8 +1,10 @@
+using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using BlazorCms.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json;
 
 namespace BlazorCms.ViewModels
 {
@@ -31,9 +33,17 @@ namespace BlazorCms.ViewModels
 
         public async Task signIn()
         {
-            await _Http.PostAsJsonAsync<User>(this._navigationManager.BaseUri +"signin", this);
-            //LoadCurrentObject(user);
-            
+            var response = await _Http.PostAsJsonAsync<User>(this._navigationManager.BaseUri +"user/signin", this);
+            if(response.IsSuccessStatusCode)
+            {
+                _navigationManager.NavigateTo("bz-admin/profile", true);
+            }
+            else
+            {
+                this.Message = "Username or password is wrong. Try again";
+                this.Display = "block";
+            }
+
         }
 
         public async Task getCurrentUser()
@@ -71,6 +81,16 @@ namespace BlazorCms.ViewModels
                 UserEmail = AuthViewModel.UserEmail,
                 UserPass = AuthViewModel.UserPass
             };
+        }
+
+        public void FacebookSignIn()
+        {
+            _navigationManager.NavigateTo(_navigationManager.BaseUri + "user/FacebookSignIn", true);
+        }
+
+        public void GoogleSignIn()
+        {
+            _navigationManager.NavigateTo(_navigationManager.BaseUri + "user/GoogleSignIn", true);
         }
 
     }
