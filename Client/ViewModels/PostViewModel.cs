@@ -10,6 +10,9 @@ using Syncfusion.Blazor.Inputs;
 using System.Text.RegularExpressions;
 using BlazorCms.Shared.Mapping;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Shared.Mapping;
+using Newtonsoft.Json;
 
 namespace BlazorCms.ViewModels
 {
@@ -27,6 +30,8 @@ namespace BlazorCms.ViewModels
         public string Message { get; set; }
         public string Display  { get; set; } = "none";
         public List<PostResponse> Posts { get; set; }
+        private string items { get; set; }
+        private List<PostItems> list = new List<PostItems>();
         private readonly HttpClient _Http;
         private readonly NavigationManager _navigationManager;
         public PostViewModel()
@@ -50,7 +55,11 @@ namespace BlazorCms.ViewModels
 
         public async Task GetAll()
         {
-            var items = await _Http.GetStringAsync(this._navigationManager.BaseUri + "posts");
+            items = await _Http.GetStringAsync(_navigationManager.BaseUri + "posts");
+            items = "["+items+"]";
+            list = JsonConvert.DeserializeObject<List<PostItems>>(items);
+            LoadCurrentObject(list[0].Items);
+
         }
 
         public void Delete(int id)
@@ -144,6 +153,14 @@ namespace BlazorCms.ViewModels
         {
             PostResponse post = this;
             this.PostThumbnail = post.PostThumbnail;
+        }
+
+        public async Task Search(KeyboardEventArgs args)
+        {
+            items = await _Http.GetStringAsync(_navigationManager.BaseUri + "posts/" + args.Key);
+            items = "["+items+"]";
+            list = JsonConvert.DeserializeObject<List<PostItems>>(items);
+            LoadCurrentObject(list[0].Items);
         }
 
     }

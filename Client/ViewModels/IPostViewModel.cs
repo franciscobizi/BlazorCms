@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlazorCms.Shared.Mapping;
 using BlazorCms.Shared.Models;
+using Microsoft.AspNetCore.Components.Web;
 using Syncfusion.Blazor.Inputs;
 
 namespace BlazorCms.ViewModels
@@ -36,6 +37,7 @@ namespace BlazorCms.ViewModels
         public Task Remove(int Id);
         public void OnImageRemovedSuccess(SuccessEventArgs args);
         public void OnImageUploadedSuccess(SuccessEventArgs args);
+        public Task Search(KeyboardEventArgs args);
 
         
     }
