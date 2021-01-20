@@ -8,16 +8,17 @@
                 <div class="row">
                 @if(_postViewModel.Posts != null && _postViewModel.Posts.Count() > 0)
                 {
-                    <div class="col-sm-12" style="margin-bottom:20px;">
+                    <div class="col-sm-12 mb-5">
                         <h3 class="text-center">@_postViewModel.Posts.Count() post(s) found as <b>@term</b></h3>
                     </div>
                     foreach (var post in _postViewModel.Posts)
                     {
-                            <div class="col-sm-6" style="margin-bottom: 5px;">
-                                <a href="/blog/@post.PostPermalink" title="Read More">
+                            <div class="col-sm-4 mt-3">
+                                <a href="/blog/@post.PostPermalink" style="text-decoration: none;" title="Read More">
                                     <SfCard Orientation="CardOrientation.Vertical" ID="Trimmer">
                                         <img class="card-thambnail" src="/uploads/images/@post.PostThumbnail">
                                         <CardHeader Title="@post.PostTitle" />
+                                        <em class="ml-3"><span class="fa fa-calendar"></span> @post.PostUpdated</em>
                                     </SfCard>
                                 </a>
                             </div>

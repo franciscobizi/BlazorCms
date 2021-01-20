@@ -4,28 +4,41 @@
 <div class="container">
         <div class="row">
             <div class="col-sm-9">
-                <div class="row">
-                @if(@_postViewModel.Posts != null && @_postViewModel.Posts.Count() > 0)
-                {
-                    foreach (var post in _postViewModel.Posts)
+                    @if(@_postViewModel.Posts != null && @_postViewModel.Posts.Count() > 0)
                     {
-                            <div class="col-sm-6" style="margin-bottom: 5px;">
-                                <a href="/blog/@post.PostPermalink" title="Read More">
-                                    <SfCard Orientation="CardOrientation.Vertical" ID="Trimmer">
-                                        <img class="card-thambnail" src="/uploads/images/@post.PostThumbnail">
-                                        <CardHeader Title="@post.PostTitle" />
-                                    </SfCard>
-                                </a>
+                        var posts = _postViewModel.Posts.Take(Items);
+                        <div class="row mt-2">
+                        @foreach (var post in posts)
+                        {
+                                <div class="col-sm-4 mt-3">
+                                    <a href="/blog/@post.PostPermalink" style="text-decoration: none;" title="Read More">
+                                        <SfCard Orientation="CardOrientation.Vertical" ID="Trimmer">
+                                            <img class="card-thambnail" src="/uploads/images/@post.PostThumbnail">
+                                            <CardHeader Title="@post.PostTitle" />
+                                            <em class="ml-3"><span class="fa fa-calendar"></span> @post.PostUpdated</em>
+                                        </SfCard>
+                                    </a>
+                                </div>
+                            
+                        }
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-sm-12 text-center">
+                                @if(@Items < @_postViewModel.Posts.Count())
+                                {
+                                    <button class="btn btn-primary" @onclick="LoadMoreItems">Load more</button>
+                                }
                             </div>
-                        
+                        </div>
                     }
-                }
-                else
-                {
-                    <h3>There are not posts at the moment!</h3>
-                }
-                </div>
-
+                    else
+                    {
+                        <div class="row mt-5">
+                            <div class="col-sm-12 text-center">
+                                <h3>There are not posts at the moment!</h3>
+                            </div>
+                        </div>
+                    }
             </div>
             <div class="col-sm-3">
                 <SfTextBox Placeholder="Search" @bind-Value="_postViewModel.SearchTerm" @onkeyup="_postViewModel.OnSearchTermChange" Type="InputType.Search"></SfTextBox>
@@ -35,5 +48,7 @@
         </div>
 </div>
 @code{
+    protected int Items { get; set; } = 3;
     protected override async Task OnInitializedAsync() => await _postViewModel.GetAll();
+    private void LoadMoreItems() => Items += 3;
 }
