@@ -28,6 +28,7 @@ namespace BlazorCms.ViewModels
         public int PostAuthor { get; set; }
         public string PostAuthorName { get; set; }
         public string Message { get; set; }
+        public string SearchTerm { get; set; }
         public string Display  { get; set; } = "none";
         public List<PostResponse> Posts { get; set; }
         private string items { get; set; }
@@ -68,10 +69,13 @@ namespace BlazorCms.ViewModels
         }
         private void LoadCurrentObject(List<PostResponse> Posts)
         {
-            this.Posts = new List<PostResponse>();
-            foreach (PostResponse post in Posts)
+            if (Posts != null)
             {
-                this.Posts.Add(post);
+                this.Posts = new List<PostResponse>();
+                foreach (PostResponse post in Posts)
+                {
+                    this.Posts.Add(post);
+                }
             }
         }
 
@@ -155,12 +159,22 @@ namespace BlazorCms.ViewModels
             this.PostThumbnail = post.PostThumbnail;
         }
 
-        public async Task Search(KeyboardEventArgs args)
+
+        public void OnSearchTermChange(KeyboardEventArgs args)
         {
-            items = await _Http.GetStringAsync(_navigationManager.BaseUri + "posts/" + args.Key);
-            items = "["+items+"]";
-            list = JsonConvert.DeserializeObject<List<PostItems>>(items);
-            LoadCurrentObject(list[0].Items);
+            if (args.Key == "Enter")
+            {  
+                _navigationManager.NavigateTo($"/search/{this.SearchTerm}",true);
+            }
+        }
+
+        public async Task Search(string term)
+        {
+            if (term != null)
+            {
+                List<PostResponse> post = await _Http.GetFromJsonAsync<List<PostResponse>>(_navigationManager.BaseUri + "posts/search/" + term);
+                LoadCurrentObject(post);
+            }
         }
 
     }

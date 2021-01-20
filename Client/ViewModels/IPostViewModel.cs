@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 using BlazorCms.Shared.Mapping;
-using BlazorCms.Shared.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Syncfusion.Blazor.Inputs;
 
@@ -22,7 +18,8 @@ namespace BlazorCms.ViewModels
         public string PostUpdated { get; set; }
         public int PostAuthor { get; set; }
         public string PostAuthorName { get; set; }
-        public string Message { get; set; } 
+        public string Message { get; set; }
+        public string SearchTerm { get; set; } 
         public string Display { get; set; } 
         public List<PostResponse> Posts { get; set; }
 
@@ -33,12 +30,11 @@ namespace BlazorCms.ViewModels
         public Task GetOne(string param);
 
         public Task Update();
-
+        public Task Search(string term);
         public Task Remove(int Id);
         public void OnImageRemovedSuccess(SuccessEventArgs args);
         public void OnImageUploadedSuccess(SuccessEventArgs args);
-        public Task Search(KeyboardEventArgs args);
-
+        public void OnSearchTermChange(KeyboardEventArgs args);
         
     }
 }

@@ -187,7 +187,7 @@ using Syncfusion.Blazor.Cards;
 
     private async Task SignOut()
     {
-        await _Http.GetAsync(_navigationManager.BaseUri + "/user/signout");
+        await _Http.GetAsync(_navigationManager.BaseUri + "user/signout");
         _navigation.NavigateTo("/",true);
     }
 

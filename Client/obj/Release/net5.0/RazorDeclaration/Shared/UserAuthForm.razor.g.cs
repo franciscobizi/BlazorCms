@@ -180,28 +180,6 @@ using BlazorCms.ViewModels;
         {
         }
         #pragma warning restore 1998
-#nullable restore
-#line 39 "C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Client\Shared\UserAuthForm.razor"
-      
-
-    public async Task UserSignIn()
-    {
-        await _IAuthViewModel.signIn();
-        _navigationManager.NavigateTo("bz-admin/profile", true);
-    }
-    private void FacebookSignIn()
-    {
-        _navigationManager.NavigateTo(_navigationManager.BaseUri + "user/FacebookSignIn", true);
-    }
-
-    private void GoogleSignIn()
-    {
-        _navigationManager.NavigateTo(_navigationManager.BaseUri + "user/GoogleSignIn", true);
-    }
-
-#line default
-#line hidden
-#nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IAuthViewModel _IAuthViewModel { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navigationManager { get; set; }
     }

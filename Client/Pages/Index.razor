@@ -1,13 +1,11 @@
 ﻿@page "/"
 @using BlazorCms.ViewModels
 @inject IPostViewModel _postViewModel
-
 <div class="container">
         <div class="row">
             <div class="col-sm-9">
                 <div class="row">
-
-                @if(_postViewModel.Posts != null && _postViewModel.Posts.Count() > 0)
+                @if(@_postViewModel.Posts != null && @_postViewModel.Posts.Count() > 0)
                 {
                     foreach (var post in _postViewModel.Posts)
                     {
@@ -30,7 +28,7 @@
 
             </div>
             <div class="col-sm-3">
-                <SfTextBox Placeholder="Search" @onkeypress="_postViewModel.Search" Type="InputType.Search"></SfTextBox>
+                <SfTextBox Placeholder="Search" @bind-Value="_postViewModel.SearchTerm" @onkeyup="_postViewModel.OnSearchTermChange" Type="InputType.Search"></SfTextBox>
                 <hr>
                 <SfCalendar TValue="DateTime"></SfCalendar>
             </div>

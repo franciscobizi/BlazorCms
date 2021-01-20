@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
+using Server.CQSR.Queries;
 
 namespace BlazorCms.Server.Controllers
 {
@@ -97,6 +98,38 @@ namespace BlazorCms.Server.Controllers
             return NotFound();
         }
 
+        [HttpGet("search/{param}")]
+        public async Task<IActionResult> Search( string param)
+        {
+            var query = new SearchPostQuery(param);
+            var posts = await _imediator.Send(query);
+
+            if(posts != null)
+            {
+                List<PostResponse> Items = new List<PostResponse>();
+
+                foreach(var post in posts)
+                {
+                    var author = post.PostAuthorNavigation.UserFname + " " + post.PostAuthorNavigation.UserLname;
+                    Items.Add(new PostResponse()
+                    {
+                        PostId = post.PostId,
+                        PostTitle = post.PostTitle,
+                        PostPermalink = post.PostPermalink,
+                        PostContent = post.PostContent,
+                        PostThumbnail = post.PostThumbnail,
+                        PostAuthor =  post.PostAuthor,
+                        PostAuthorName =  author,
+                        PostCreated = post.PostCreated,
+                        PostUpdated = post.PostUpdated
+                    });
+                }
+                return (IActionResult) Ok(Items);
+            }
+            
+            return NotFound();
+        }
+
         [HttpPut("")]
         public async Task<IActionResult> UpdatePost([FromBody] UpdatePostCommand command)
         {
@@ -163,5 +196,6 @@ namespace BlazorCms.Server.Controllers
             return Ok(new { path });
             
         }
+        
     }
 }

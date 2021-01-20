@@ -11,6 +11,7 @@ namespace BlazorCms.Server.Services
         List<Post> GetPostsAsync();
         Task<Post> GetPostByParamAsync(string param);
         Task<Post> DeletePostAsync(int id);
+        List<Post> Search(string PostTitle);
         Task<Post> CreatePostAsync(
                                     string PostTitle, 
                                     string PostPermalink, 

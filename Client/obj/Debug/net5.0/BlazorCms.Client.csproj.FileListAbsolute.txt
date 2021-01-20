@@ -673,3 +673,5 @@ C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Client\obj\Debug\net5.0
 C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Client\obj\Debug\net5.0\build-gz\yhRu2E+k.gz
 C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Client\obj\Debug\net5.0\RazorDeclaration\Pages\Users.razor.g.cs
 C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Client\obj\Debug\net5.0\Razor\Pages\Users.razor.g.cs
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Client\obj\Debug\net5.0\RazorDeclaration\Pages\Search.razor.g.cs
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Client\obj\Debug\net5.0\Razor\Pages\Search.razor.g.cs

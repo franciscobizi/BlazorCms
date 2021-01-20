@@ -35,6 +35,11 @@ namespace BlazorCms.Server.Services
             await _context.SaveChangesAsync();
             return await Task.FromResult(post);
         }
+        
+        public List<Post> Search(string PostTitle)
+        {
+            return _context.Posts.Where(p => EF.Functions.Like(p.PostTitle, $"%{PostTitle}%")).Include(u => u.PostAuthorNavigation).ToList();
+        }
 
         public async Task<Post> GetPostByParamAsync(string param)
         {

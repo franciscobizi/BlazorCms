@@ -222,3 +222,13 @@ C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5
 C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\BlazorCms.Server.runtimeconfig.json
 C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\BlazorDebugProxy\BrowserDebugHost.runtimeconfig.json
 C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\wwwroot\_framework\blazor.boot.json
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\CodeCoverage\amd64\VanguardInstrumentationProfiler_x64.config
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\CodeCoverage\CodeCoverage.config
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\CodeCoverage\VanguardInstrumentationProfiler_x86.config
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\web.config
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\appsettings.Development.json
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\appsettings.json
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\BlazorCms.Server.deps.json
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\BlazorCms.Server.runtimeconfig.json
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\BlazorDebugProxy\BrowserDebugHost.runtimeconfig.json
+C:\Users\Francisco Bizi\Desktop\Blazor\MyAzure\BlazorCms\Server\bin\Release\net5.0\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\publish\wwwroot\_framework\blazor.boot.json

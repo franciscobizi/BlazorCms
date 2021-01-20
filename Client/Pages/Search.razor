@@ -1,0 +1,48 @@
+@page "/search/{term}"
+@using BlazorCms.ViewModels;
+@inject IPostViewModel _postViewModel;
+
+<div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="row">
+                @if(_postViewModel.Posts != null && _postViewModel.Posts.Count() > 0)
+                {
+                    <div class="col-sm-12" style="margin-bottom:20px;">
+                        <h3 class="text-center">@_postViewModel.Posts.Count() post(s) found as <b>@term</b></h3>
+                    </div>
+                    foreach (var post in _postViewModel.Posts)
+                    {
+                            <div class="col-sm-6" style="margin-bottom: 5px;">
+                                <a href="/blog/@post.PostPermalink" title="Read More">
+                                    <SfCard Orientation="CardOrientation.Vertical" ID="Trimmer">
+                                        <img class="card-thambnail" src="/uploads/images/@post.PostThumbnail">
+                                        <CardHeader Title="@post.PostTitle" />
+                                    </SfCard>
+                                </a>
+                            </div>
+                        
+                    }
+                    _postViewModel.Posts.Clear();
+                }
+                else
+                {
+                    <div class="col-sm-12">
+                        <h3 class="text-center">Found nothing as <b>@term</b>. Try with other key word!</h3>
+                    </div>
+                }
+                </div>
+
+            </div>
+            <div class="col-sm-3">
+                <SfTextBox Placeholder="Search" @bind-Value="_postViewModel.SearchTerm" @onkeyup="_postViewModel.OnSearchTermChange" Type="InputType.Search"></SfTextBox>
+                <hr>
+                <SfCalendar TValue="DateTime"></SfCalendar>
+            </div>
+        </div>
+</div>
+@code{
+    [Parameter]
+    public string term { get; set; }
+    protected async override Task OnInitializedAsync() => await _postViewModel.Search(term);
+}
