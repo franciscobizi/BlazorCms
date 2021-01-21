@@ -18,14 +18,14 @@ namespace BlazorCms.ViewModels
 {
     class PostViewModel : IPostViewModel
     {
-        public int PostId { get; set; }
+        public long PostId { get; set; }
         public string PostTitle { get; set; }
         public string PostPermalink { get; set; }
         public string PostContent { get; set; }
         public string PostThumbnail { get; set; }
         public string PostCreated { get; set; }
         public string PostUpdated { get; set; }
-        public int PostAuthor { get; set; }
+        public long PostAuthor { get; set; }
         public string PostAuthorName { get; set; }
         public string Message { get; set; }
         public string SearchTerm { get; set; }
@@ -108,7 +108,7 @@ namespace BlazorCms.ViewModels
             this.Display = "block";
         }
 
-        public async Task Remove(int Id)
+        public async Task Remove(long Id)
         {
             PostResponse post = this;
             post.PostId = Id;

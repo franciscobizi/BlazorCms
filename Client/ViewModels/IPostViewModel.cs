@@ -9,14 +9,14 @@ namespace BlazorCms.ViewModels
 {
     public interface IPostViewModel
     {
-        public int PostId { get; set; }
+        public long PostId { get; set; }
         public string PostTitle { get; set; }
         public string PostPermalink { get; set; }
         public string PostContent { get; set; }
         public string PostThumbnail { get; set; }
         public string PostCreated { get; set; }
         public string PostUpdated { get; set; }
-        public int PostAuthor { get; set; }
+        public long PostAuthor { get; set; }
         public string PostAuthorName { get; set; }
         public string Message { get; set; }
         public string SearchTerm { get; set; } 
@@ -31,7 +31,7 @@ namespace BlazorCms.ViewModels
 
         public Task Update();
         public Task Search(string term);
-        public Task Remove(int Id);
+        public Task Remove(long Id);
         public void OnImageRemovedSuccess(SuccessEventArgs args);
         public void OnImageUploadedSuccess(SuccessEventArgs args);
         public void OnSearchTermChange(KeyboardEventArgs args);

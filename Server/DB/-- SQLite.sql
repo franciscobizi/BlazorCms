@@ -1,10 +1,11 @@
 -- SQLite
 CREATE TABLE User
 (
-    user_id                INTEGER      PRIMARY KEY AUTOINCREMENT,
+    user_id                INTEGER     PRIMARY KEY AUTOINCREMENT,
     user_email             TEXT         NOT NULL,
     user_pass              TEXT         NOT NULL,
     user_source            TEXT,
+    user_roles             TEXT,
     user_fname             TEXT,
     user_lname             TEXT,
     user_avatar            TEXT,
@@ -13,10 +14,11 @@ CREATE TABLE User
 
 CREATE TABLE Post
 (
-    post_id                INTEGER      PRIMARY KEY AUTOINCREMENT,
+    post_id                INTEGER     PRIMARY KEY AUTOINCREMENT,
     post_title             TEXT         NOT NULL,
     post_permalink         TEXT         NOT NULL,
     post_content           TEXT,
+    post_category          TEXT,
     post_thumbnail         TEXT,
     post_author            INTEGER      NOT NULL,
     post_created           TEXT,
@@ -29,7 +31,7 @@ VALUES
 (1,"taylorsoft28@gmail.com","1111","local","Francisco","Bizi","me","2020-12-11"),
 (2,"test@gmail.com","1111","local","Test","Tester","me","2020-12-11");
 
-INSERT INTO Post(post_id,post_title,post_permalink,post_content,post_thumbnail,post_author,post_created,post_updated) 
+INSERT INTO Post(post_id,post_title,post_permalink,post_content,post_category,post_thumbnail,post_author,post_created,post_updated) 
 VALUES
-(1,"Coronavirus still between us","Coronavirus still between us","bldlfddfldfff","feature_image",1,"2020-12-11","2020-12-11"),
-(2,"Coronavirus goes from us","Coronavirus goes from us","bldlfddfldfff","feature_image",1,"2020-12-11","2020-12-11");
+(1,"Coronavirus still between us","Coronavirus still between us","bldlfddfldfff","Heath","feature_image",1,"2020-12-11","2020-12-11"),
+(2,"Coronavirus goes from us","Coronavirus goes from us","bldlfddfldfff","Heath","feature_image",1,"2020-12-11","2020-12-11");
