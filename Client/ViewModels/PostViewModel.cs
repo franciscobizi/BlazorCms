@@ -147,10 +147,11 @@ namespace BlazorCms.ViewModels
         
         public void OnImageUploadedSuccess(SuccessEventArgs args) 
         { 
-            
-            var customHeader = args.Response.Headers.Split(new Char[] { '\n' })[3];
-            var ImageId = customHeader.Split(new Char[] { ':' })[1].Trim();
-            this.PostThumbnail = ImageId;
+            var customHeader = args.Response.Headers.ToString();
+            string pattern = "https://([\\w+?\\.\\w+])+([a-zA-Z0-9\\~\\!\\@\\#\\$\\%\\^\\&amp;\\*\\(\\)_\\-\\=\\+\\\\\\/\\?\\.\\:\\;\\'\\,]*)?";
+            Regex regx = new Regex(pattern, RegexOptions.IgnoreCase);        
+            var url = regx.Matches(customHeader); 
+            this.PostThumbnail = url[0].Value;
         }
 
         public void OnImageRemovedSuccess(SuccessEventArgs args)

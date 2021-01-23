@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using BlazorCms.Shared;
 using MediatR;
 using BlazorCms.Server.CQRS.Queries;
 using BlazorCms.Server.CQRS.Commands;
@@ -15,6 +13,10 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 using Server.CQSR.Queries;
+using Azure.Storage.Blobs;
+using System.Text;
+using Azure.Storage.Blobs.Models;
+using BlazorCms.Server.CQSR.Commands;
 
 namespace BlazorCms.Server.Controllers
 {
@@ -23,13 +25,15 @@ namespace BlazorCms.Server.Controllers
     public class PostsController : ControllerBase
     {
         private readonly IMediator _imediator;
+        private readonly BlobServiceClient _BlobServiceClient;
         private readonly IWebHostEnvironment _IWebHostEnvironment;
         private string UploadFolder { get; set; } = @"/wwwroot/uploads/images/";
 
-        public PostsController(IMediator imediator, IWebHostEnvironment IWebHostEnvironment)
+        public PostsController(IMediator imediator, IWebHostEnvironment IWebHostEnvironment, BlobServiceClient BlobServiceClient)
         {
             _imediator = imediator;
             _IWebHostEnvironment = IWebHostEnvironment;
+            _BlobServiceClient = BlobServiceClient;
         }
 
         [HttpPost("")]
@@ -148,52 +152,30 @@ namespace BlazorCms.Server.Controllers
         [HttpPost("uploadimage")]
         public async Task<IActionResult> UploadImage(IFormFile UploadFiles)
         {
-            
-            if (UploadFiles == null || UploadFiles.Length == 0)
+            UploadOrDeleImageCommand command = new UploadOrDeleImageCommand()
             {
-                return BadRequest("Upload Image please!");
-            }
+                file = UploadFiles,
+                _action = "Upload"
+            };
 
-            var fileName = UploadFiles.FileName;
-
-            var extension = Path.GetExtension(fileName);
-
-            //fileName = $"{Guid.NewGuid()}{extension}";
-
-            var path = Path.Combine(_IWebHostEnvironment.ContentRootPath + this.UploadFolder, fileName);
-            path = Regex.Replace(path, "Server", "Client");
-            
-            using (var filestream = new FileStream(path, FileMode.Create, FileAccess.Write))
-            {
-                await UploadFiles.CopyToAsync(filestream);
-            }
-
-            Response.Headers.Add("ImageId", fileName);
-
-            return Ok(new { fileName });
+            var result = await _imediator.Send(command);
+            Response.Headers.Add("fileName", result);
+            return result != null ? (IActionResult) Ok(result) : NotFound();
             
         }
 
         [HttpPost("removeimage")]
         public async Task<IActionResult> DeleteImage(IFormFile UploadFiles)
         {
-            
-            if (UploadFiles == null || UploadFiles.Length == 0)
+            UploadOrDeleImageCommand command = new UploadOrDeleImageCommand()
             {
-                return BadRequest("Upload Image please!");
-            }
+                file = UploadFiles,
+                _action = "Delete"
+            };
 
-            var fileName = UploadFiles.FileName;
-
-            var path = Path.Combine(_IWebHostEnvironment.ContentRootPath + this.UploadFolder, fileName);
-            path = Regex.Replace(path, "Server", "Client");
-
-            if (System.IO.File.Exists(path))
-            {
-                System.IO.File.Delete(path);
-            }
-            
-            return Ok(new { path });
+            var result = await _imediator.Send(command);
+            Response.Headers.Add("fileName", result);
+            return result != null ? (IActionResult) Ok(result) : NotFound();
             
         }
         

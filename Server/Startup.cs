@@ -10,6 +10,7 @@ using MediatR;
 using BlazorCms.Server.Models;
 using BlazorCms.Server.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Azure.Storage.Blobs;
 
 namespace BlazorCms.Server
 {
@@ -36,15 +37,20 @@ namespace BlazorCms.Server
                 options.AddPolicy("PolicyName", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
+            // registe Blob storage
+            services.AddSingleton(x => new BlobServiceClient(Configuration.GetValue<string>("AzureBlobConnectionStrings")));
+
+            // registe MediatR library
             services.AddMediatR(typeof(Startup));
 
             // AddControllers options to increase maxdepth FB
             services.AddControllers().AddJsonOptions(option => { option.JsonSerializerOptions.PropertyNamingPolicy = null; option.JsonSerializerOptions.MaxDepth = 256; });
 
 
-            // registering services
+            // registering custom services
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<IPostServices, PostServices>();
+            services.AddTransient<IBlobServices, BlobServices>();
             
             // inject dbcontext
             services.AddEntityFrameworkSqlite().AddDbContext<BlazorCmsContext>();
