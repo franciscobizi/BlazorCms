@@ -9,7 +9,8 @@ CREATE TABLE User
     user_fname             TEXT,
     user_lname             TEXT,
     user_avatar            TEXT,
-    user_registered        TEXT
+    user_registered        TEXT,
+    user_logged            TEXT
 );
 
 CREATE TABLE Post

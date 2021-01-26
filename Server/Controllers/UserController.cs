@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using BlazorCms.Shared;
 using MediatR;
 using BlazorCms.Server.CQRS.Queries;
 using BlazorCms.Server.CQRS.Commands;
@@ -14,6 +12,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.Google;
+using BlazorCms.Server.Models;
 
 namespace BlazorCms.Server.Controllers
 {
@@ -29,15 +28,17 @@ namespace BlazorCms.Server.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
+        public async Task<IActionResult> CreateUser([FromBody] User user)
         {
+            CreateUserCommand command = new CreateUserCommand(){ user = user};
             var result = await _imediator.Send(command);
             return CreatedAtAction("GetUser", new {userId = result.UserId},result);
         }
 
         [HttpPut("")]
-        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command)
+        public async Task<IActionResult> UpdateUser([FromBody] User user)
         {
+            UpdateUserCommand command = new UpdateUserCommand(){ user = user};
             var result = await _imediator.Send(command);
             return CreatedAtAction("GetUser", new {userId = result.UserId},result);
         }
@@ -71,8 +72,10 @@ namespace BlazorCms.Server.Controllers
         }
 
         [HttpPost("signin")]
-        public async Task<IActionResult> SignInUser(SignInUserCommand command)
+        public async Task<IActionResult> SignInUser([FromBody] User user)
         {
+            SignInUserCommand command = new SignInUserCommand(){ user = user};
+
             var result = await _imediator.Send(command);
 
             if (result != null)

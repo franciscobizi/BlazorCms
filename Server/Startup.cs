@@ -11,6 +11,9 @@ using BlazorCms.Server.Models;
 using BlazorCms.Server.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Azure.Storage.Blobs;
+using AutoMapper;
+using BlazorCms.Server.AutoMapper;
+using BlazorCms.Shared.Mapping;
 
 namespace BlazorCms.Server
 {
@@ -45,7 +48,9 @@ namespace BlazorCms.Server
 
             // AddControllers options to increase maxdepth FB
             services.AddControllers().AddJsonOptions(option => { option.JsonSerializerOptions.PropertyNamingPolicy = null; option.JsonSerializerOptions.MaxDepth = 256; });
-
+            
+            // add automapper
+            services.AddAutoMapper(typeof(AutoMapperSetup));
 
             // registering custom services
             services.AddTransient<IUserServices, UserServices>();

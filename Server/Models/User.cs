@@ -21,6 +21,7 @@ namespace BlazorCms.Server.Models
         public string UserLname { get; set; }
         public string UserAvatar { get; set; }
         public string UserRegistered { get; set; }
+        public string UserLogged { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
     }

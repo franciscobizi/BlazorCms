@@ -78,6 +78,8 @@ namespace BlazorCms.Server.Models
 
                 entity.Property(e => e.UserLname).HasColumnName("user_lname");
 
+                entity.Property(e => e.UserLogged).HasColumnName("user_logged");
+
                 entity.Property(e => e.UserPass)
                     .IsRequired()
                     .HasColumnName("user_pass");

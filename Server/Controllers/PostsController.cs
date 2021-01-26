@@ -9,14 +9,10 @@ using BlazorCms.Server.CQRS.Commands;
 using BlazorCms.Shared.Mapping;
 using BlazorCms.Server.CQSR.Queries;
 using Microsoft.AspNetCore.Http;
-using System.IO;
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Hosting;
 using Server.CQSR.Queries;
-using Azure.Storage.Blobs;
-using System.Text;
-using Azure.Storage.Blobs.Models;
 using BlazorCms.Server.CQSR.Commands;
+using AutoMapper;
+using BlazorCms.Server.Models;
 
 namespace BlazorCms.Server.Controllers
 {
@@ -25,20 +21,17 @@ namespace BlazorCms.Server.Controllers
     public class PostsController : ControllerBase
     {
         private readonly IMediator _imediator;
-        private readonly BlobServiceClient _BlobServiceClient;
-        private readonly IWebHostEnvironment _IWebHostEnvironment;
-        private string UploadFolder { get; set; } = @"/wwwroot/uploads/images/";
-
-        public PostsController(IMediator imediator, IWebHostEnvironment IWebHostEnvironment, BlobServiceClient BlobServiceClient)
+        private readonly IMapper _imapper;
+        public PostsController(IMediator imediator, IMapper imapper)
         {
             _imediator = imediator;
-            _IWebHostEnvironment = IWebHostEnvironment;
-            _BlobServiceClient = BlobServiceClient;
+            _imapper = imapper;
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> CreatePost([FromBody] CreatePostCommand command)
+        public async Task<IActionResult> CreatePost([FromBody] Post post)
         {
+            CreatePostCommand command = new CreatePostCommand(){post = post};
             var result = await _imediator.Send(command);
             return CreatedAtAction("GetPost", new {PostId = result.PostId},result);
         }
@@ -51,24 +44,7 @@ namespace BlazorCms.Server.Controllers
 
             if(posts != null)
             {
-                List<PostResponse> Items = new List<PostResponse>();
-
-                foreach(var post in posts)
-                {
-                    var author = post.PostAuthorNavigation.UserFname + " " + post.PostAuthorNavigation.UserLname;
-                    Items.Add(new PostResponse()
-                    {
-                        PostId = post.PostId,
-                        PostTitle = post.PostTitle,
-                        PostPermalink = post.PostPermalink,
-                        PostContent = post.PostContent,
-                        PostThumbnail = post.PostThumbnail,
-                        PostAuthor =  post.PostAuthor,
-                        PostAuthorName =  author,
-                        PostCreated = post.PostCreated,
-                        PostUpdated = post.PostUpdated
-                    });
-                }
+                List<PostResponse> Items = _imapper.Map<List<Post>, List<PostResponse>>(posts);
                 var Count = Items.Count();
                 return Ok(new{Items, Count});
             }
@@ -84,18 +60,7 @@ namespace BlazorCms.Server.Controllers
 
             if(post != null)
             {
-                PostResponse Items = new PostResponse();
-
-                var author = post.PostAuthorNavigation.UserFname + " " + post.PostAuthorNavigation.UserLname;
-                Items.PostId = post.PostId;
-                Items.PostTitle = post.PostTitle;
-                Items.PostPermalink = post.PostPermalink;
-                Items.PostContent = post.PostContent;
-                Items.PostThumbnail = post.PostThumbnail;
-                Items.PostAuthor =  post.PostAuthor;
-                Items.PostAuthorName =  author;
-                Items.PostCreated = post.PostCreated;
-                Items.PostUpdated = post.PostUpdated;
+                var Items = _imapper.Map<PostResponse>(post);
                 return (IActionResult) Ok(Items);
             }
             
@@ -108,26 +73,9 @@ namespace BlazorCms.Server.Controllers
             var query = new SearchPostQuery(param);
             var posts = await _imediator.Send(query);
 
-            if(posts != null)
+            if(posts != null) 
             {
-                List<PostResponse> Items = new List<PostResponse>();
-
-                foreach(var post in posts)
-                {
-                    var author = post.PostAuthorNavigation.UserFname + " " + post.PostAuthorNavigation.UserLname;
-                    Items.Add(new PostResponse()
-                    {
-                        PostId = post.PostId,
-                        PostTitle = post.PostTitle,
-                        PostPermalink = post.PostPermalink,
-                        PostContent = post.PostContent,
-                        PostThumbnail = post.PostThumbnail,
-                        PostAuthor =  post.PostAuthor,
-                        PostAuthorName =  author,
-                        PostCreated = post.PostCreated,
-                        PostUpdated = post.PostUpdated
-                    });
-                }
+                List<PostResponse> Items = _imapper.Map<List<PostResponse>>(posts);
                 return (IActionResult) Ok(Items);
             }
             
@@ -135,8 +83,9 @@ namespace BlazorCms.Server.Controllers
         }
 
         [HttpPut("")]
-        public async Task<IActionResult> UpdatePost([FromBody] UpdatePostCommand command)
+        public async Task<IActionResult> UpdatePost([FromBody] Post post)
         {
+            UpdatePostCommand command = new UpdatePostCommand(){post = post};
             var result = await _imediator.Send(command);
             return CreatedAtAction("GetPost", new {PostId = result.PostId},result);
         }
