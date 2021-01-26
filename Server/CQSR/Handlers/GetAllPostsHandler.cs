@@ -7,6 +7,7 @@ using BlazorCms.Server.CQRS.Queries;
 using MediatR;
 using BlazorCms.Server.Services;
 using BlazorCms.Shared.Mapping;
+using AutoMapper;
 
 namespace BlazorCms.Server.CQRS.Handlers
 {

@@ -25,15 +25,7 @@ namespace BlazorCms.Server.CQRS.Handlers
 
         public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userServices.CreateUserAsync( 
-                                            request.UserEmail,
-                                            request.UserFname,
-                                            request.UserLname,
-                                            request.UserAvatar,
-                                            request.UserPass,
-                                            request.UserSource,
-                                            request.UserRegistered
-                                            );
+            var user = await _userServices.CreateUserAsync(request.user);
             _logger.LogInformation($"Created new user {user.UserId}");
             return user;
         }

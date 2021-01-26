@@ -25,11 +25,7 @@ namespace BlazorCms.Server.CQRS.Handlers
 
         public async Task<User> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userServices.UpdateUserAsync(
-                                            request.UserId,
-                                            request.UserFname,
-                                            request.UserLname
-                                            );
+            var user = await _userServices.UpdateUserAsync(request.user);
             _logger.LogInformation($"Updated new user {user.UserId}");
             return user;
         }

@@ -18,7 +18,7 @@ namespace Server.CQSR.Handlers
 
         public async Task<User> Handle(SignInUserCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userServices.SignInUser(request.UserEmail, request.UserPass);
+            var user = await _userServices.SignInUser(request.user);
             return user;
         }
     }

@@ -25,15 +25,7 @@ namespace BlazorCms.Server.CQRS.Handlers
 
         public async Task<Post> Handle(CreatePostCommand request, CancellationToken cancellationToken)
         {
-            var post = await _postServices.CreatePostAsync( 
-                                            request.PostTitle, 
-                                            request.PostPermalink, 
-                                            request.PostContent, 
-                                            request.PostThumbnail, 
-                                            request.PostAuthor, 
-                                            request.PostCreated, 
-                                            request.PostUpdated 
-                                            );
+            var post = await _postServices.CreatePostAsync(request.post);
             _logger.LogInformation($"Created new post {post.PostId}");
             return post;
         }
