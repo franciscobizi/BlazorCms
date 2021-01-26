@@ -19,35 +19,19 @@ namespace BlazorCms.Server.Services
             _context = context;
         }
 
-        public async Task<User> CreateUserAsync(string UserEmail,
-                                    string UserFname,
-                                    string UserLname,
-                                    string UserAvatar,
-                                    string UserPass,
-                                    string UserSource,
-                                    string UserRegistered
-                                )
+        public async Task<User> CreateUserAsync(User user)
         {
             DateTime today = DateTime.Now;
 
             User users = new User();
 
-            users.UserEmail = UserEmail;
-            users.UserFname = UserFname;
-            users.UserLname = UserLname;
-            users.UserPass = Utility.Encrypt(UserPass);
-
-            if(UserSource != null )
-            {
-                users.UserSource = UserSource;
-            }
-
-            if(UserAvatar != null )
-            {
-                users.UserAvatar = UserAvatar;
-            }
-
-            users.UserRegistered = today.ToString("yyyy-MM-dd"); 
+            users.UserEmail = user.UserEmail;
+            users.UserFname = user.UserFname;
+            users.UserLname = user.UserLname;
+            users.UserPass = Utility.Encrypt(user.UserPass);
+            users.UserSource = "Local";
+            users.UserRegistered = today.ToString("dd/MM/yyyy");
+            users.UserLogged = today.ToString(); 
 
             await _context.AddAsync(users);
             await _context.SaveChangesAsync();
@@ -55,11 +39,11 @@ namespace BlazorCms.Server.Services
             return await Task.FromResult(users);
         }
 
-        public async Task<User> UpdateUserAsync(int UserId, string UserFname, string UserLname)
+        public async Task<User> UpdateUserAsync(User user)
         {
-            User users = await _context.Users.Where(u => u.UserId == UserId).FirstOrDefaultAsync();
-            users.UserFname = UserFname;
-            users.UserLname = UserLname;
+            User users = await _context.Users.Where(u => u.UserId == user.UserId).FirstOrDefaultAsync();
+            users.UserFname = user.UserFname;
+            users.UserLname = user.UserLname;
             //users.UserPass = Utility.Encrypt("1111");
 
             await _context.SaveChangesAsync();
@@ -83,7 +67,8 @@ namespace BlazorCms.Server.Services
                     currentUser.UserEmail = UserEmail;
                     currentUser.UserPass = Utility.Encrypt(currentUser.UserEmail);
                     currentUser.UserSource = "EXTL";
-                    currentUser.UserRegistered = today.ToString("yyyy-MM-dd");
+                    currentUser.UserRegistered = today.ToString("dd/MM/yyyy");
+                    currentUser.UserLogged = DateTime.Now.ToString();
 
                     _context.Users.Add(currentUser);
                     await _context.SaveChangesAsync();
@@ -103,10 +88,12 @@ namespace BlazorCms.Server.Services
             return _context.Users.ToList();
         }
 
-        public async Task<User> SignInUser(string UserEmail, string UserPass)
+        public async Task<User> SignInUser(User user)
         {
-            UserPass = Utility.Encrypt(UserPass);
-            User loggedInUser = await _context.Users.Where(u => u.UserEmail == UserEmail && u.UserPass == UserPass).FirstOrDefaultAsync();
+            user.UserPass = Utility.Encrypt(user.UserPass);
+            User loggedInUser = await _context.Users.Where(u => u.UserEmail == user.UserEmail && u.UserPass == user.UserPass).FirstOrDefaultAsync();
+            loggedInUser.UserLogged = DateTime.Now.ToString();
+            await _context.SaveChangesAsync();
             return loggedInUser;
         }
     }

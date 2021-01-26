@@ -18,22 +18,20 @@ namespace BlazorCms.Server.Services
             _context = context;
         }
 
-        public async Task<Post> CreatePostAsync(string PostTitle, string PostPermalink, string PostContent, string PostThumbnail, int PostAuthor, string PostCreated, string PostUpdated)
+        public async Task<Post> CreatePostAsync(Post post)
         {
-            DateTime today = DateTime.Now;
+            Post _post = new Post();
+            _post.PostTitle = post.PostTitle;
+            _post.PostPermalink = Utility.ToUrlFriendly(post.PostTitle);
+            _post.PostContent = post.PostContent;
+            _post.PostThumbnail = post.PostThumbnail;
+            _post.PostAuthor = post.PostAuthor;
+            _post.PostCreated = post.PostCreated;
+            _post.PostUpdated = post.PostCreated;
 
-            Post post = new Post();
-            post.PostTitle = PostTitle;
-            post.PostPermalink = Utility.ToUrlFriendly(PostTitle);
-            post.PostContent = PostContent;
-            post.PostThumbnail = PostThumbnail;
-            post.PostAuthor = PostAuthor;
-            post.PostCreated = today.ToString("yyyy-MM-dd");
-            post.PostUpdated = today.ToString("yyyy-MM-dd");
-
-            await _context.AddAsync(post);
+            await _context.AddAsync(_post);
             await _context.SaveChangesAsync();
-            return await Task.FromResult(post);
+            return await Task.FromResult(_post);
         }
         
         public List<Post> Search(string PostTitle)
@@ -58,15 +56,16 @@ namespace BlazorCms.Server.Services
             return posts.ToList();
         }
 
-        public async Task<Post> UpdatePostAsync(int PostId, string PostTitle, string PostPermalink, string PostContent, string PostThumbnail, int PostAuthor, string PostCreated, string PostUpdated)
+        public async Task<Post> UpdatePostAsync(Post post)
         {
             DateTime today = DateTime.Now;
 
-            Post postToUpdate = await _context.Posts.Where(u => u.PostId == PostId).FirstOrDefaultAsync();
-            postToUpdate.PostTitle = PostTitle;
-            postToUpdate.PostContent = PostContent;
-            postToUpdate.PostThumbnail = PostThumbnail;
-            postToUpdate.PostUpdated = today.ToString("yyyy-MM-dd");
+            Post postToUpdate = await _context.Posts.Where(u => u.PostId == post.PostId).FirstOrDefaultAsync();
+            postToUpdate.PostTitle = post.PostTitle;
+            postToUpdate.PostContent = post.PostContent;
+            postToUpdate.PostThumbnail = post.PostThumbnail;
+            postToUpdate.PostCreated = post.PostCreated;
+            postToUpdate.PostUpdated = today.ToString("dd/MM/yyyy");
 
             await _context.SaveChangesAsync();
 

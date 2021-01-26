@@ -12,26 +12,9 @@ namespace BlazorCms.Server.Services
         Task<Post> GetPostByParamAsync(string param);
         Task<Post> DeletePostAsync(int id);
         List<Post> Search(string PostTitle);
-        Task<Post> CreatePostAsync(
-                                    string PostTitle, 
-                                    string PostPermalink, 
-                                    string PostContent, 
-                                    string PostThumbnail, 
-                                    int PostAuthor, 
-                                    string PostCreated, 
-                                    string PostUpdated
-                                );
+        Task<Post> CreatePostAsync(Post post);
         
-        Task<Post> UpdatePostAsync(
-                                    int PostId,
-                                    string PostTitle, 
-                                    string PostPermalink, 
-                                    string PostContent, 
-                                    string PostThumbnail, 
-                                    int PostAuthor, 
-                                    string PostCreated, 
-                                    string PostUpdated
-                                );
+        Task<Post> UpdatePostAsync(Post post);
 
     }
 }

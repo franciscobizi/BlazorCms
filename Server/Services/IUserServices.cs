@@ -10,18 +10,10 @@ namespace BlazorCms.Server.Services
     {
         List<User> GetUsersAsync();
         Task<User> GetUserAsync(int id);
-        Task<User> SignInUser(string UserEmail, string UserPass);
+        Task<User> SignInUser(User user);
         Task<User> GetCurrentUserAsync(bool IsAuthenticated, string UserEmai);
-        Task<User> UpdateUserAsync(int UserId, string UserFname, string UserLname);
-        Task<User> CreateUserAsync(
-                                    string UserEmail,
-                                    string UserFname,
-                                    string UserLname,
-                                    string UserAvatar,
-                                    string UserPass,
-                                    string UserSource,
-                                    string UserRegistered
-                                );
+        Task<User> UpdateUserAsync(User user);
+        Task<User> CreateUserAsync(User user);
 
 
     }
