@@ -1,5 +1,4 @@
 @page "/bz-admin/post/new"
-@using BlazorCms.Shared
 @using BlazorCms.ViewModels
 @using System.Security.Claims
 @inject IPostViewModel _postViewModel
@@ -14,19 +13,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
-                    <SfTextBox @bind-value="@_postViewModel.PostTitle" Placeholder='News title'></SfTextBox>
+                <div class="col-sm-9">
+                    <SfTextBox Placeholder='Post title' @bind-Value="@_postViewModel.PostTitle"></SfTextBox>
                     <br><br>
-                    <SfUploader ID="UploadFiles" AutoUpload="false">
-                        <UploaderEvents Success="_postViewModel.OnImageUploadedSuccess"></UploaderEvents>
-                        <UploaderAsyncSettings SaveUrl="posts/uploadimage" RemoveUrl="posts/removeimage"></UploaderAsyncSettings>
-                    </SfUploader>
-                    <br>
                     <SfRichTextEditor @bind-value="@_postViewModel.PostContent">
-                        <RichTextEditorToolbarSettings Items="@Tools" />
+                        <RichTextEditorToolbarSettings Items="@_postViewModel.Tools" />
                     </SfRichTextEditor>
-                    <br>
+                    <br><br>
                     <SfButton @onclick="_postViewModel.Create" CssClass="e-info">Create</SfButton>
+                </div>
+                <div class="col-sm-3">
+                    <h5>Thumbnail</h5>
+                    <div class="thumbnail">
+                        <img src="@_postViewModel.PostThumbnail" alt="@_postViewModel.PostTitle">
+                    </div>
+                        <SfUploader ID="UploadFiles" AutoUpload="false">
+                            <UploaderEvents Success="_postViewModel.OnImageUploadedSuccess"></UploaderEvents>
+                            <UploaderAsyncSettings SaveUrl="posts/uploadimage" RemoveUrl="posts/removeimage"></UploaderAsyncSettings>
+                        </SfUploader>
+                    <hr>
+                    <h5>Date</h5>
+                    <input style="width:100%" type="date" @bind-value="@_postViewModel.PostCreated">
                 </div>
             </div>
         </div>
@@ -40,45 +47,6 @@
 @code{
     [CascadingParameter]
     private Task<AuthenticationState> _authenticationState { get; set; }
-
-    private List<ToolbarItemModel> Tools = new List<ToolbarItemModel>()
-    {
-        new ToolbarItemModel() { Command = ToolbarCommand.Bold },
-        new ToolbarItemModel() { Command = ToolbarCommand.Italic },
-        new ToolbarItemModel() { Command = ToolbarCommand.Underline },
-        new ToolbarItemModel() { Command = ToolbarCommand.StrikeThrough },
-        new ToolbarItemModel() { Command = ToolbarCommand.FontName },
-        new ToolbarItemModel() { Command = ToolbarCommand.FontSize },
-        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
-        new ToolbarItemModel() { Command = ToolbarCommand.FontColor },
-        new ToolbarItemModel() { Command = ToolbarCommand.BackgroundColor },
-        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
-        new ToolbarItemModel() { Command = ToolbarCommand.Formats },
-        new ToolbarItemModel() { Command = ToolbarCommand.Alignments },
-        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
-        new ToolbarItemModel() { Command = ToolbarCommand.LowerCase },
-        new ToolbarItemModel() { Command = ToolbarCommand.UpperCase },
-        new ToolbarItemModel() { Command = ToolbarCommand.SuperScript },
-        new ToolbarItemModel() { Command = ToolbarCommand.SubScript },
-        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
-        new ToolbarItemModel() { Command = ToolbarCommand.OrderedList },
-        new ToolbarItemModel() { Command = ToolbarCommand.UnorderedList },
-        new ToolbarItemModel() { Command = ToolbarCommand.Outdent },
-        new ToolbarItemModel() { Command = ToolbarCommand.Indent },
-        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
-        new ToolbarItemModel() { Command = ToolbarCommand.CreateLink },
-        new ToolbarItemModel() { Command = ToolbarCommand.Image },
-        new ToolbarItemModel() { Command = ToolbarCommand.CreateTable },
-        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
-        new ToolbarItemModel() { Command = ToolbarCommand.ClearFormat },
-        new ToolbarItemModel() { Command = ToolbarCommand.Print },
-        new ToolbarItemModel() { Command = ToolbarCommand.SourceCode },
-        new ToolbarItemModel() { Command = ToolbarCommand.FullScreen },
-        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
-        new ToolbarItemModel() { Command = ToolbarCommand.Undo },
-        new ToolbarItemModel() { Command = ToolbarCommand.Redo }
-    };
-
     protected override async Task OnInitializedAsync()
     {
         var authState = await _authenticationState;
@@ -88,35 +56,10 @@
         {
             var claim = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
 
-            _postViewModel.PostAuthor = Convert.ToInt32(claim?.Value);
+            _postViewModel.PostAuthor = Convert.ToInt64(claim?.Value);
 
         }
     }    
 
 }
 
-<style>
-#DropArea {
-    padding: 50px 25px;
-    margin: 30px auto;
-    border: 1px solid #c3c3c3;
-    text-align: center;
-    width: 20%;
-    display: inline-flex;
-}
-
-.e-file-select,
-.e-file-drop {
-    display: none;
-}
-
-body .e-upload-drag-hover {
-    outline: 2px dashed brown;
-}
-
-#uploadfile {
-    width: 60%;
-    display: inline-flex;
-    margin-left: 5%;
-}
-</style>

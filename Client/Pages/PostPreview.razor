@@ -25,13 +25,5 @@
 
     [Parameter]
     public string postPermalink { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        await _postViewModel.GetOne(this.postPermalink);
-    }
+    protected override async Task OnInitializedAsync() => await _postViewModel.GetOne(this.postPermalink);
 }
-
-<style>
-    .card-thambnail{width:100%}
-</style>

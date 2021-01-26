@@ -1,6 +1,5 @@
 @page "/bz-admin/profile"
 @using BlazorCms.ViewModels
-@using BlazorCms.Shared.Models
 @using System.Security.Claims
 @inject IProfileViewModel _profileVM
 
@@ -45,7 +44,7 @@
         {
             var claim = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
 
-            _profileVM.UserId = Convert.ToInt32(claim?.Value);
+            _profileVM.UserId = Convert.ToInt64(claim?.Value);
 
             await _profileVM.getProfile();
 

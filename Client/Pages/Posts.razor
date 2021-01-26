@@ -11,22 +11,22 @@
                 <div class="col-sm-12">
                     <h1>Posts</h1>
                     <MessageNotify Alert="success" Title="@_postViewModel.Message" Display="@_postViewModel.Display" />
-                    <SfButton @onclick="AddNewPost" class="btn-create">Add new post</SfButton>
+                    <SfButton @onclick="_postViewModel.AddNewPost" class="btn-create">Add new post</SfButton>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
                     <SfGrid TValue="PostResponse" AllowPaging="true">
-                        <GridEvents CommandClicked="OnCommandClicked" TValue="PostResponse"></GridEvents>
+                        <GridEvents CommandClicked="_postViewModel.OnTheCommandClicked" TValue="PostResponse"></GridEvents>
                         <SfDataManager Url="/posts" Adaptor="Adaptors.WebApiAdaptor"></SfDataManager>
                         <GridPageSettings PageSize="2"></GridPageSettings>
                         <GridEditSettings AllowEditing="true" AllowDeleting="true" Mode="EditMode.Normal"></GridEditSettings>
                         <GridColumns>
-                            <GridColumn Field="@nameof(post.PostId)" IsPrimaryKey="true" HeaderText="ID" TextAlign="TextAlign.Left" Width="50"></GridColumn>
-                            <GridColumn Field="@nameof(post.PostTitle)" HeaderText="Title" TextAlign="TextAlign.Left" Width="120"></GridColumn>
-                            <GridColumn Field="@nameof(post.PostAuthorName)" HeaderText="Author" Width="150"></GridColumn>
-                            <GridColumn Field="@nameof(post.PostCreated)" HeaderText="Created" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Left" Width="130"></GridColumn>
-                            <GridColumn Field="@nameof(post.PostUpdated)" HeaderText="Updated" TextAlign="TextAlign.Left" Width="120"></GridColumn>
+                            <GridColumn Field="@nameof(_postViewModel.PostId)" IsPrimaryKey="true" HeaderText="ID" TextAlign="TextAlign.Left" Width="50"></GridColumn>
+                            <GridColumn Field="@nameof(_postViewModel.PostTitle)" HeaderText="Title" TextAlign="TextAlign.Left" Width="120"></GridColumn>
+                            @* <GridColumn Field="@nameof(_postViewModel.PostAuthorName)" HeaderText="Author" Width="150"></GridColumn> *@
+                            <GridColumn Field="@nameof(_postViewModel.PostCreated)" HeaderText="Created" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Left" Width="130"></GridColumn>
+                            <GridColumn Field="@nameof(_postViewModel.PostUpdated)" HeaderText="Updated" TextAlign="TextAlign.Left" Width="120"></GridColumn>
                             <GridColumn HeaderText="Manage Records" Width="150">
                                 <GridCommandColumns>
                                     <GridCommandColumn Title="View" Type="CommandButtonType.None" ButtonOption="@(new CommandButtonOptions() { IconCss = "fa fa-eye", CssClass = "e-flat" })"></GridCommandColumn>
@@ -47,50 +47,5 @@
     </NotAuthorized>
 </AuthorizeView>
 @code{
-    private List<string> ToolbarItems = new List<string>(){ "Add","Edit","Delete","Update","Cancel"};
-
-    private void OnCommandClicked(CommandClickEventArgs<PostResponse> args)
-    {
-        var clicked = args.CommandColumn.Title;
-        //_postViewModel.ToUrlFriendly(args.RowData.PostTitle)
-        switch (clicked)
-        {
-            case "View":
-               _navigate.NavigateTo("/blog/" + args.RowData.PostPermalink);
-               break;
-            case "Edit":
-               _navigate.NavigateTo("/bz-admin/post/edit/" + args.RowData.PostId);
-               break;
-            case "Delete":
-               this._postViewModel.Remove(args.RowData.PostId);
-               break;
-            default:
-               break;
-        }
-
-    }
-    PostResponse post = new PostResponse();
-    public void AddNewPost()
-    {
-        _navigate.NavigateTo("/bz-admin/post/new/");
-    }
-    protected override async Task OnInitializedAsync()
-    {
-
-        await _postViewModel.GetAll();
-    }
-
+    protected override async Task OnInitializedAsync() => await _postViewModel.GetAll();
 }
-
-<style>
-    .post-actions a{
-        margin: 0 5px;
-    }
-    .fa-trash{
-        cursor: pointer;
-        color: red;
-    }
-    .btn-create{
-        margin: 5px 0;
-    }
-</style>
