@@ -8,7 +8,7 @@ namespace BlazorCms.ViewModels
 {
     public interface IUserViewModel
     {
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public string UserEmail { get; set; }
         public string UserPass { get; set; }
         public string UserSource { get; set; }
@@ -16,6 +16,7 @@ namespace BlazorCms.ViewModels
         public string UserLname { get; set; }
         public string UserAvatar { get; set; }
         public string UserRegistered { get; set; }
+        public string UserLogged { get; set; }
         public List<User> users { get ; set; }
         public Task UpdateProfile();
         public Task GetUser();

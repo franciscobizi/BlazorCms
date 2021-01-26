@@ -10,7 +10,7 @@ namespace BlazorCms.ViewModels
 {
     class AuthViewModel : IAuthViewModel
     {
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public string UserEmail { get; set; }
         public string UserPass { get; set; }
         public string Message { get; set; } 

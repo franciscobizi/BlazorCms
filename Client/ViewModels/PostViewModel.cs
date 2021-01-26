@@ -1,18 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Reflection;
 using System.Threading.Tasks;
-using BlazorCms.Shared.Models;
 using Syncfusion.Blazor.Inputs;
 using System.Text.RegularExpressions;
-using BlazorCms.Shared.Mapping;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Shared.Mapping;
 using Newtonsoft.Json;
+using Syncfusion.Blazor.RichTextEditor;
+using BlazorCms.Shared.Mapping;
+using Syncfusion.Blazor.Grids;
 
 namespace BlazorCms.ViewModels
 {
@@ -23,7 +22,7 @@ namespace BlazorCms.ViewModels
         public string PostPermalink { get; set; }
         public string PostContent { get; set; }
         public string PostThumbnail { get; set; }
-        public string PostCreated { get; set; }
+        public DateTime PostCreated { get; set; }
         public string PostUpdated { get; set; }
         public long PostAuthor { get; set; }
         public string PostAuthorName { get; set; }
@@ -31,6 +30,7 @@ namespace BlazorCms.ViewModels
         public string SearchTerm { get; set; }
         public string Display  { get; set; } = "none";
         public List<PostResponse> Posts { get; set; }
+        public List<ToolbarItemModel> Tools { get; set; }
         private string items { get; set; }
         private List<PostItems> list = new List<PostItems>();
         private readonly HttpClient _Http;
@@ -44,6 +44,44 @@ namespace BlazorCms.ViewModels
         {
             _Http = httpClient;
             _navigationManager = navigationManager;
+
+            Tools = new List<ToolbarItemModel>()
+                    {
+                        new ToolbarItemModel() { Command = ToolbarCommand.Bold },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Italic },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Underline },
+                        new ToolbarItemModel() { Command = ToolbarCommand.StrikeThrough },
+                        new ToolbarItemModel() { Command = ToolbarCommand.FontName },
+                        new ToolbarItemModel() { Command = ToolbarCommand.FontSize },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+                        new ToolbarItemModel() { Command = ToolbarCommand.FontColor },
+                        new ToolbarItemModel() { Command = ToolbarCommand.BackgroundColor },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Formats },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Alignments },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+                        new ToolbarItemModel() { Command = ToolbarCommand.LowerCase },
+                        new ToolbarItemModel() { Command = ToolbarCommand.UpperCase },
+                        new ToolbarItemModel() { Command = ToolbarCommand.SuperScript },
+                        new ToolbarItemModel() { Command = ToolbarCommand.SubScript },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+                        new ToolbarItemModel() { Command = ToolbarCommand.OrderedList },
+                        new ToolbarItemModel() { Command = ToolbarCommand.UnorderedList },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Outdent },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Indent },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+                        new ToolbarItemModel() { Command = ToolbarCommand.CreateLink },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Image },
+                        new ToolbarItemModel() { Command = ToolbarCommand.CreateTable },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+                        new ToolbarItemModel() { Command = ToolbarCommand.ClearFormat },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Print },
+                        new ToolbarItemModel() { Command = ToolbarCommand.SourceCode },
+                        new ToolbarItemModel() { Command = ToolbarCommand.FullScreen },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Undo },
+                        new ToolbarItemModel() { Command = ToolbarCommand.Redo }
+                    };
         }
         
         public async Task Create()
@@ -127,7 +165,7 @@ namespace BlazorCms.ViewModels
                 PostContent = postViewModel.PostContent,
                 PostThumbnail = postViewModel.PostThumbnail,
                 PostAuthor = postViewModel.PostAuthor,
-                PostCreated = postViewModel.PostCreated
+                PostCreated = DateTime.Parse(postViewModel.PostCreated)
             };
         }
 
@@ -141,7 +179,7 @@ namespace BlazorCms.ViewModels
                 PostContent = postViewModel.PostContent,
                 PostThumbnail = postViewModel.PostThumbnail,
                 PostAuthor = postViewModel.PostAuthor,
-                PostCreated = postViewModel.PostCreated
+                PostCreated = postViewModel.PostCreated.ToString()
             };
         }
         
@@ -178,5 +216,28 @@ namespace BlazorCms.ViewModels
             }
         }
 
+        public void AddNewPost()
+        {
+            _navigationManager.NavigateTo("/bz-admin/post/new/");
+        }
+
+        public async Task OnTheCommandClicked(CommandClickEventArgs<PostResponse> args)
+        {
+            var clicked = args.CommandColumn.Title;
+            switch (clicked)
+            {
+                case "View":
+                _navigationManager.NavigateTo("/blog/" + args.RowData.PostPermalink);
+                break;
+                case "Edit":
+                _navigationManager.NavigateTo("/bz-admin/post/edit/" + args.RowData.PostId);
+                break;
+                case "Delete":
+                await Remove(args.RowData.PostId);
+                break;
+                default:
+                break;
+            }
+        }
     }
 }

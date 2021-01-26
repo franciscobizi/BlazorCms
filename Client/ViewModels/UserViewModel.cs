@@ -10,7 +10,7 @@ namespace BlazorCms.ViewModels
 {
     class UserViewModel : IUserViewModel
     {
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public string UserEmail { get; set; }
         public string UserPass { get; set; }
         public string UserSource { get; set; }
@@ -18,6 +18,7 @@ namespace BlazorCms.ViewModels
         public string UserLname { get; set; }
         public string UserAvatar { get; set; }
         public string UserRegistered { get; set; }
+        public string UserLogged { get; set; }
         public string Message { get; set; } 
 
         public string Display { get; set; } = "none";
@@ -45,6 +46,7 @@ namespace BlazorCms.ViewModels
             this.UserLname = UserViewModel.UserLname;
             this.UserSource = UserViewModel.UserSource;
             this.UserRegistered = UserViewModel.UserRegistered;
+            this.UserLogged = UserViewModel.UserLogged;
             //add more fields
         }
 
@@ -82,7 +84,8 @@ namespace BlazorCms.ViewModels
                 UserFname = UserViewModel.UserFname,
                 UserLname = UserViewModel.UserLname,
                 UserSource = UserViewModel.UserSource,
-                UserRegistered = UserViewModel.UserRegistered
+                UserRegistered = UserViewModel.UserRegistered,
+                UserLogged = UserViewModel.UserLogged
             };
         }
 
@@ -96,7 +99,8 @@ namespace BlazorCms.ViewModels
                 UserFname = UserViewModel.UserFname,
                 UserLname = UserViewModel.UserLname,
                 UserSource = UserViewModel.UserSource,
-                UserRegistered = UserViewModel.UserRegistered
+                UserRegistered = UserViewModel.UserRegistered,
+                UserLogged = UserViewModel.UserLogged
             };
         }
 
