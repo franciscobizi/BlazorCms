@@ -33,7 +33,8 @@ namespace BlazorCms.Server.Controllers
         {
             CreatePostCommand command = new CreatePostCommand(){post = post};
             var result = await _imediator.Send(command);
-            return CreatedAtAction("GetPost", new {PostId = result.PostId},result);
+            var Items = _imapper.Map<PostResponse>(result);
+            return (IActionResult) Ok(Items);
         }
 
         [HttpGet]
@@ -87,7 +88,8 @@ namespace BlazorCms.Server.Controllers
         {
             UpdatePostCommand command = new UpdatePostCommand(){post = post};
             var result = await _imediator.Send(command);
-            return CreatedAtAction("GetPost", new {PostId = result.PostId},result);
+            var Items = _imapper.Map<PostResponse>(result);
+            return (IActionResult) Ok(Items);
         }
 
         [HttpDelete]
