@@ -8,6 +8,11 @@
                     {
                         var posts = _postViewModel.Posts.Take(Items);
                         <div class="row mt-2">
+                            <div class="col-12">
+                                <h2 class="text-center">Find news for your preference using search tool!</h2>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
                         @foreach (var post in posts)
                         {
                                 <div class="col-sm-4 mt-3">
