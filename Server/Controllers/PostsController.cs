@@ -100,35 +100,7 @@ namespace BlazorCms.Server.Controllers
             return result != null ? (IActionResult) Ok(result) : NotFound();
         }
 
-        [HttpPost("uploadimage")]
-        public async Task<IActionResult> UploadImage(IFormFile UploadFiles)
-        {
-            UploadOrDeleImageCommand command = new UploadOrDeleImageCommand()
-            {
-                file = UploadFiles,
-                _action = "Upload"
-            };
-
-            var result = await _imediator.Send(command);
-            Response.Headers.Add("fileName", result);
-            return result != null ? (IActionResult) Ok(result) : NotFound();
-            
-        }
-
-        [HttpPost("removeimage")]
-        public async Task<IActionResult> DeleteImage(IFormFile UploadFiles)
-        {
-            UploadOrDeleImageCommand command = new UploadOrDeleImageCommand()
-            {
-                file = UploadFiles,
-                _action = "Delete"
-            };
-
-            var result = await _imediator.Send(command);
-            Response.Headers.Add("fileName", result);
-            return result != null ? (IActionResult) Ok(result) : NotFound();
-            
-        }
+        
         
     }
 }
