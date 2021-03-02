@@ -58,7 +58,7 @@ namespace BlazorCms.Server
             services.AddTransient<IBlobServices, BlobServices>();
             
             // inject dbcontext
-            services.AddEntityFrameworkSqlite().AddDbContext<BlazorCmsContext>();
+            services.AddEntityFrameworkSqlServer().AddDbContext<blazorcmsContext>();
 
             // authentications
 

@@ -13,6 +13,7 @@ using Server.CQSR.Queries;
 using BlazorCms.Server.CQSR.Commands;
 using AutoMapper;
 using BlazorCms.Server.Models;
+using System.Security.Claims;
 
 namespace BlazorCms.Server.Controllers
 {
@@ -31,6 +32,9 @@ namespace BlazorCms.Server.Controllers
         [HttpPost("")]
         public async Task<IActionResult> CreatePost([FromBody] Post post)
         {
+            //var userId = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
+            //post.PostAuthor = Convert.ToInt64(userId?.Value);
+            //Console.WriteLine("UserId: " + post.PostAuthor);
             CreatePostCommand command = new CreatePostCommand(){post = post};
             var result = await _imediator.Send(command);
             var Items = _imapper.Map<PostResponse>(result);

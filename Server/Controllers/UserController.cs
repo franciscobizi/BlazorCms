@@ -80,8 +80,9 @@ namespace BlazorCms.Server.Controllers
             {
                 //create a claim
                 var claim = new Claim(ClaimTypes.Email, result.UserEmail);
+                var claimNameIdentifier = new Claim(ClaimTypes.NameIdentifier, Convert.ToString(result.UserId));
                 //create claimsIdentity
-                var claimsIdentity = new ClaimsIdentity(new[] { claim }, "serverAuth");
+                var claimsIdentity = new ClaimsIdentity(new[] { claim, claimNameIdentifier}, "serverAuth");
                 //create claimsPrincipal
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 //Sign In User
