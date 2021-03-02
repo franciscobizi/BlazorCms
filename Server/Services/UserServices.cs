@@ -4,17 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlazorCms.Server.Helpers;
 using BlazorCms.Server.Models;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorCms.Server.Services
 {
     public class UserServices : IUserServices
     {
-        private readonly BlazorCmsContext _context;
+        private readonly blazorcmsContext _context;
 
-        public UserServices(BlazorCmsContext context)
+        public UserServices(blazorcmsContext context)
         {
             _context = context;
         }
@@ -30,6 +28,7 @@ namespace BlazorCms.Server.Services
             users.UserLname = user.UserLname;
             users.UserPass = Utility.Encrypt(user.UserPass);
             users.UserSource = "Local";
+            users.UserStatus = "allowed";
             users.UserRegistered = today.ToString("dd/MM/yyyy");
             users.UserLogged = today.ToString(); 
 
@@ -67,6 +66,7 @@ namespace BlazorCms.Server.Services
                     currentUser.UserEmail = UserEmail;
                     currentUser.UserPass = Utility.Encrypt(currentUser.UserEmail);
                     currentUser.UserSource = "EXTL";
+                    currentUser.UserStatus = "allowed";
                     currentUser.UserRegistered = today.ToString("dd/MM/yyyy");
                     currentUser.UserLogged = DateTime.Now.ToString();
 

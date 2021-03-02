@@ -11,9 +11,9 @@ namespace BlazorCms.Server.Services
 {
     public class PostServices : IPostServices
     {
-        private readonly BlazorCmsContext _context;
+        private readonly blazorcmsContext _context;
 
-        public PostServices(BlazorCmsContext context)
+        public PostServices(blazorcmsContext context)
         {
             _context = context;
         }
