@@ -13,7 +13,7 @@ namespace BlazorCms.Server.Models
         public string PostContent { get; set; }
         public string PostCategory { get; set; }
         public string PostThumbnail { get; set; }
-        public long PostAuthor { get; set; }
+        public long? PostAuthor { get; set; }
         public string PostCreated { get; set; }
         public string PostUpdated { get; set; }
 

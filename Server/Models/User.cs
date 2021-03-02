@@ -20,6 +20,7 @@ namespace BlazorCms.Server.Models
         public string UserFname { get; set; }
         public string UserLname { get; set; }
         public string UserAvatar { get; set; }
+        public string UserStatus { get; set; }
         public string UserRegistered { get; set; }
         public string UserLogged { get; set; }
 

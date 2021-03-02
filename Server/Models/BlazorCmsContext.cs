@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BlazorCms.Server.Models
 {
-    public partial class BlazorCmsContext : DbContext
+    public partial class blazorcmsContext : DbContext
     {
-        public BlazorCmsContext()
+        public blazorcmsContext()
         {
         }
 
-        public BlazorCmsContext(DbContextOptions<BlazorCmsContext> options)
+        public blazorcmsContext(DbContextOptions<blazorcmsContext> options)
             : base(options)
         {
         }
@@ -117,6 +117,10 @@ namespace BlazorCms.Server.Models
                 entity.Property(e => e.UserSource)
                     .HasMaxLength(50)
                     .HasColumnName("user_source");
+
+                entity.Property(e => e.UserStatus)
+                    .HasMaxLength(50)
+                    .HasColumnName("user_status");
             });
 
             OnModelCreatingPartial(modelBuilder);
