@@ -13,6 +13,7 @@ namespace BlazorCms.Shared.Mapping
         public string UserFname { get; set; }
         public string UserLname { get; set; }
         public string UserAvatar { get; set; }
+        public string UserStatus { get; set; }
         public string UserRegistered { get; set; }
 
     }
