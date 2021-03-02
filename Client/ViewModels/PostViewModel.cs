@@ -29,6 +29,7 @@ namespace BlazorCms.ViewModels
         public string Message { get; set; }
         public string SearchTerm { get; set; }
         public string Display  { get; set; } = "none";
+        public int PostsPerPage { get; set; } = 3;
         public List<PostResponse> Posts { get; set; }
         public List<ToolbarItemModel> Tools { get; set; }
         private string items { get; set; }
@@ -84,9 +85,12 @@ namespace BlazorCms.ViewModels
                     };
         }
         
+        
+        public void LoadMoreItems() => this.PostsPerPage += 3;
         public async Task Create()
         {
             PostResponse post = this;
+            post.PostAuthor = 1;
             await _Http.PostAsJsonAsync(this._navigationManager.BaseUri + "posts", post);
             this.Message = "Post created successful!";
             this.Display = "block";

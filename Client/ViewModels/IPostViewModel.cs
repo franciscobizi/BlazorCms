@@ -22,7 +22,8 @@ namespace BlazorCms.ViewModels
         public string PostAuthorName { get; set; }
         public string Message { get; set; }
         public string SearchTerm { get; set; } 
-        public string Display { get; set; } 
+        public string Display { get; set; }
+        public int PostsPerPage { get; set; } 
         public List<PostResponse> Posts { get; set; }
         public List<ToolbarItemModel> Tools { get; set;}
         public Task Create();
@@ -33,7 +34,7 @@ namespace BlazorCms.ViewModels
 
         public Task Update();
         public Task Search(string term);
-        //public Task Remove(long Id);
+        public void LoadMoreItems();
         public void OnImageRemovedSuccess(SuccessEventArgs args);
         public void OnImageUploadedSuccess(SuccessEventArgs args);
         public void OnSearchTermChange(KeyboardEventArgs args);

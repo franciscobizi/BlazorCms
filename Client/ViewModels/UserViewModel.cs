@@ -17,6 +17,7 @@ namespace BlazorCms.ViewModels
         public string UserFname { get; set; }
         public string UserLname { get; set; }
         public string UserAvatar { get; set; }
+        public string UserStatus { get; set; }
         public string UserRegistered { get; set; }
         public string UserLogged { get; set; }
         public string Message { get; set; } 
@@ -47,6 +48,7 @@ namespace BlazorCms.ViewModels
             this.UserSource = UserViewModel.UserSource;
             this.UserRegistered = UserViewModel.UserRegistered;
             this.UserLogged = UserViewModel.UserLogged;
+            this.UserStatus = UserViewModel.UserStatus;
             //add more fields
         }
 
@@ -85,7 +87,8 @@ namespace BlazorCms.ViewModels
                 UserLname = UserViewModel.UserLname,
                 UserSource = UserViewModel.UserSource,
                 UserRegistered = UserViewModel.UserRegistered,
-                UserLogged = UserViewModel.UserLogged
+                UserLogged = UserViewModel.UserLogged,
+                UserStatus = UserViewModel.UserStatus
             };
         }
 
@@ -100,7 +103,8 @@ namespace BlazorCms.ViewModels
                 UserLname = UserViewModel.UserLname,
                 UserSource = UserViewModel.UserSource,
                 UserRegistered = UserViewModel.UserRegistered,
-                UserLogged = UserViewModel.UserLogged
+                UserLogged = UserViewModel.UserLogged,
+                UserStatus = UserViewModel.UserStatus
             };
         }
 
