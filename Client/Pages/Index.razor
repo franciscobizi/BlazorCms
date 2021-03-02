@@ -6,7 +6,7 @@
             <div class="col-sm-9">
                     @if(@_postViewModel.Posts != null && @_postViewModel.Posts.Count() > 0)
                     {
-                        var posts = _postViewModel.Posts.Take(Items);
+                        var posts = _postViewModel.Posts.Take(_postViewModel.PostsPerPage);
                         <div class="row mt-2">
                             <div class="col-12">
                                 <h2 class="text-center">Find news for your preference using search tool!</h2>
@@ -29,9 +29,9 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col-sm-12 text-center">
-                                @if(@Items < @_postViewModel.Posts.Count())
+                                @if(@_postViewModel.PostsPerPage < @_postViewModel.Posts.Count())
                                 {
-                                    <button class="btn btn-primary" @onclick="LoadMoreItems">Load more</button>
+                                    <button class="btn btn-primary" @onclick="_postViewModel.LoadMoreItems">Load more</button>
                                 }
                             </div>
                         </div>
@@ -53,7 +53,5 @@
         </div>
 </div>
 @code{
-    protected int Items { get; set; } = 3;
     protected override async Task OnInitializedAsync() => await _postViewModel.GetAll();
-    private void LoadMoreItems() => Items += 3;
 }
