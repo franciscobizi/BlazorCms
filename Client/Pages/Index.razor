@@ -1,6 +1,4 @@
 ﻿@page "/"
-@using BlazorCms.ViewModels
-@inject IPostViewModel _postViewModel
 <div class="container">
         <div class="row">
             <div class="col-sm-9">
@@ -52,6 +50,3 @@
             </div>
         </div>
 </div>
-@code{
-    protected override async Task OnInitializedAsync() => await _postViewModel.GetAll();
-}
