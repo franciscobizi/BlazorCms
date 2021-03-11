@@ -1,8 +1,5 @@
 ﻿@page "/bz-admin/posts"
-@using BlazorCms.Shared.Mapping
-@using BlazorCms.ViewModels
-@inject IPostViewModel _postViewModel
-@inject NavigationManager _navigate
+@using BlazorCms.Shared.Mapping;
 
 <AuthorizeView>
     <Authorized>
@@ -46,6 +43,3 @@
         <UserAuthForm></UserAuthForm>
     </NotAuthorized>
 </AuthorizeView>
-@code{
-    protected override async Task OnInitializedAsync() => await _postViewModel.GetAll();
-}
