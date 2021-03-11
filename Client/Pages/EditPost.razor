@@ -1,7 +1,4 @@
 @page "/bz-admin/post/edit/{postId}"
-@using BlazorCms.ViewModels
-@inject IPostViewModel _postViewModel
-
 <AuthorizeView>
     <Authorized>
         <div class="container">
@@ -45,9 +42,3 @@
         <UserAuthForm></UserAuthForm>
     </NotAuthorized>
 </AuthorizeView>
-
-@code {
-    [Parameter]
-    public string postId { get; set; }
-    protected override async Task OnInitializedAsync() => await _postViewModel.GetOne(this.postId);   
-}
