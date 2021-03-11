@@ -1,6 +1,4 @@
 @page "/search/{term}"
-@using BlazorCms.ViewModels;
-@inject IPostViewModel _postViewModel;
 
 <div class="container">
         <div class="row">
@@ -42,8 +40,3 @@
             </div>
         </div>
 </div>
-@code{
-    [Parameter]
-    public string term { get; set; }
-    protected async override Task OnInitializedAsync() => await _postViewModel.Search(term);
-}
