@@ -1,6 +1,4 @@
 @page "/bz-admin/users"
-@using BlazorCms.ViewModels
-@inject IUserViewModel _users
 
 <AuthorizeView>
     <Authorized>
@@ -42,6 +40,3 @@
         <UserAuthForm></UserAuthForm>
     </NotAuthorized>
 </AuthorizeView>
-@code{
-    protected override async Task OnInitializedAsync() => await _users.GetUsers();
-}

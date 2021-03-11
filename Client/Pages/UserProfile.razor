@@ -1,7 +1,4 @@
 @page "/bz-admin/profile"
-@using BlazorCms.ViewModels
-@using System.Security.Claims
-@inject IProfileViewModel _profileVM
 
 <AuthorizeView>
     <Authorized>
@@ -31,24 +28,3 @@
         <UserAuthForm></UserAuthForm>
     </NotAuthorized>
 </AuthorizeView>
-@code{
-    [CascadingParameter]
-    private Task<AuthenticationState> _authenticationState { get; set; }
-    // loading user profile data
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await _authenticationState;
-        var user = authState.User;
-
-        if(user.Identity.IsAuthenticated)
-        {
-            var claim = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
-
-            _profileVM.UserId = Convert.ToInt64(claim?.Value);
-
-            await _profileVM.getProfile();
-
-        }
-    } 
-
-}

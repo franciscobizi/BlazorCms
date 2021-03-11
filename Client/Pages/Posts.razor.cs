@@ -11,7 +11,6 @@ namespace BlazorCms.Client.Pages
     {
         
         [Inject] IPostViewModel _postViewModel { get; set; }
-        private readonly NavigationManager _navigate;
         //protected List<PostResponse> postResponse = new List<PostResponse>();
 
         protected override async Task OnInitializedAsync() => await _postViewModel.GetAll();
