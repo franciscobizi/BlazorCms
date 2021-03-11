@@ -1,7 +1,4 @@
 ﻿@page "/blog/{postPermalink}"
-@using BlazorCms.ViewModels
-@inject IJSRuntime jsRuntime
-@inject IPostViewModel _postViewModel
 
 @if(postPermalink != null)
 {
@@ -19,11 +16,4 @@
             </div>
         </div>
     </div>
-}
-
-@code{
-
-    [Parameter]
-    public string postPermalink { get; set; }
-    protected override async Task OnInitializedAsync() => await _postViewModel.GetOne(this.postPermalink);
 }
