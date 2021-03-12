@@ -41,8 +41,12 @@ namespace BlazorCms.Server.Services
         public async Task<User> UpdateUserAsync(User user)
         {
             User users = await _context.Users.Where(u => u.UserId == user.UserId).FirstOrDefaultAsync();
-            users.UserFname = user.UserFname;
-            users.UserLname = user.UserLname;
+            users.UserFname = Utility.Ucfirst(user.UserFname);
+            users.UserLname = Utility.Ucfirst(user.UserLname);
+            if(user.UserRoles.Length > 0)
+            {
+                users.UserRoles = user.UserRoles;
+            }
             //users.UserPass = Utility.Encrypt("1111");
 
             await _context.SaveChangesAsync();
@@ -62,7 +66,8 @@ namespace BlazorCms.Server.Services
                 {
                     DateTime today = DateTime.Now;
                     currentUser = new User();
-                    //currentUser.UserId = _context.Users.Max(user => user.UserId) + 1;
+                    currentUser.UserFname = Utility.Ucfirst(UserEmail.Split('@')[0]);
+                    currentUser.UserLname = currentUser.UserFname;
                     currentUser.UserEmail = UserEmail;
                     currentUser.UserPass = Utility.Encrypt(currentUser.UserEmail);
                     currentUser.UserSource = "EXTL";
