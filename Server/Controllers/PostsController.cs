@@ -32,9 +32,6 @@ namespace BlazorCms.Server.Controllers
         [HttpPost("")]
         public async Task<IActionResult> CreatePost([FromBody] Post post)
         {
-            //var userId = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
-            //post.PostAuthor = Convert.ToInt64(userId?.Value);
-            //Console.WriteLine("UserId: " + post.PostAuthor);
             CreatePostCommand command = new CreatePostCommand(){post = post};
             var result = await _imediator.Send(command);
             var Items = _imapper.Map<PostResponse>(result);
@@ -104,7 +101,5 @@ namespace BlazorCms.Server.Controllers
             return result != null ? (IActionResult) Ok(result) : NotFound();
         }
 
-        
-        
     }
 }

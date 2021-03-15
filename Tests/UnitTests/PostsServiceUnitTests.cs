@@ -29,43 +29,37 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Tests.UnitTests
 {
-    public class PostsControllerUnitTests
+    public class PostsServiceUnitTests
     {
-        private readonly PostsController _sut;
-        private readonly Mock<IPostServices> _services = new Mock<IPostServices>();
-        private readonly Mock<IMediator> _mediator = new Mock<IMediator>();
-        private readonly Mock<IMapper> _imapper = new Mock<IMapper>();
-        public PostsControllerUnitTests()
+        private readonly PostServices _sut;
+        private readonly Mock<blazorcmsContext> mockContext = new Mock<blazorcmsContext>();
+        public PostsServiceUnitTests()
         {
-            _sut = new PostsController(_mediator.Object, _imapper.Object);
+            _sut = new PostServices(mockContext.Object);
+            
         }
         
         [Fact]
         public async Task GetAllPosts_WithPosts_ShouldReturn_Posts()
         {
             // Arrange
-            _mediator.Setup(x => x.Send(It.IsAny<GetAllPostsQuery>(),new CancellationToken()));
-
+            mockContext.Setup(x => x.Posts).Verifiable();
             // Act
-            var result = await _sut.GetAllPosts();
-            
+            var posts = await _sut.GetPostsAsync();
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(5, posts.Count);
         }
         
         [Fact]
         public async Task GetPostByParam_ShouldReturn_Post()
         {
-            // Arrange
+           // Arrange
             var param = "1";
-
-            _mediator.Setup(x => x.Send(It.IsAny<GetPostByParamQuery>(),new CancellationToken()));
-
+            mockContext.Setup(x => x.Posts).Verifiable();
             // Act
-            var result = await _sut.GetPost(param);
-
+            var post = await _sut.GetPostByParamAsync(param);
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(1, post.Count);
 
         }
 
@@ -78,14 +72,11 @@ namespace Tests.UnitTests
                 PostContent = "This is test post content",
                 PostAuthor = 1
             };
-
-            _mediator.Setup(x => x.Send(It.IsAny<CreatePostCommand>(),new CancellationToken()));
-
+            mockContext.Setup(x => x.Posts).Verifiable();
             // Act
-            var result = await _sut.CreatePost(post);
-
+            var result = await _sut.CreatePostAsync(post);
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(post.PostTitle, result.PostTitle);
 
         }
 
@@ -98,13 +89,11 @@ namespace Tests.UnitTests
                 PostContent = "This is test post content"
             };
 
-            _mediator.Setup(x => x.Send(It.IsAny<UpdatePostCommand>(),new CancellationToken()));
-
+            mockContext.Setup(x => x.Posts).Verifiable();
             // Act
-            var result = await _sut.UpdatePost(post);
-
+            var result = await _sut.UpdatePostAsync(post);
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(post.PostTitle, result.PostTitle);
 
         }
 
@@ -114,13 +103,13 @@ namespace Tests.UnitTests
             // Arrange
             var id = 1;
 
-            _mediator.Setup(x => x.Send(It.IsAny<DeletePostQuery>(),new CancellationToken()));
+            mockContext.Setup(x => x.Posts).Verifiable();
 
             // Act
-            var result = await _sut.DeletePost(id);
+            var post = await _sut.DeletePostAsync(id);
 
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(1, post.Count);
 
         }
     }

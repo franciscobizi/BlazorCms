@@ -28,27 +28,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Tests.UnitTests
 {
-    public class UserControllerUnitTests
+    public class UserServiceUnitTests
     {
-        private readonly UserController _sut;
-        private readonly Mock<IUserServices> _services = new Mock<IUserServices>();
-        private readonly Mock<IMediator> _mediator = new Mock<IMediator>();
-        public UserControllerUnitTests()
+        private readonly UserServices _sut;
+        private readonly Mock<blazorcmsContext> mockContext = new Mock<blazorcmsContext>();
+        public PostsServiceUnitTests()
         {
-            _sut = new UserController(_mediator.Object);
+            _sut = new UserServices(mockContext.Object);
+            
         }
         
         [Fact]
         public async Task GetAllUsers_WithUsers_ShouldReturn_Users()
         {
             // Arrange
-            _mediator.Setup(x => x.Send(It.IsAny<GetAllUsersQuery>(),new CancellationToken()));
-
+            mockContext.Setup(x => x.Users).Verifiable();
             // Act
-            var result = await _sut.GetAllUsers();
-            
+            var users = await _sut.GetUsersAsync();
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(1, users.Count);
         }
         
         [Fact]
@@ -56,14 +54,13 @@ namespace Tests.UnitTests
         {
             // Arrange
             var id = 1;
-
-            _mediator.Setup(x => x.Send(It.IsAny<GetUserByIdQuery>(),new CancellationToken()));
+            mockContext.Setup(x => x.Users).Verifiable();
 
             // Act
-            var result = await _sut.GetUser(id);
+            var result = await _sut.GetCurrentUserAsync(id);
 
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(1, result.UserId);
 
         }
 
@@ -75,14 +72,13 @@ namespace Tests.UnitTests
                 UserEmail = "test@test.com",
                 UserPass = "1111"
             };
-
-            _mediator.Setup(x => x.Send(It.IsAny<CreateUserCommand>(),new CancellationToken()));
+            mockContext.Setup(x => x.Users).Verifiable();
 
             // Act
-            var result = await _sut.CreateUser(user);
+            var creaated_user = await _sut.CreateUserAsync(user);
 
             // Assert
-            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(user.UserEmail, creaated_user.UserEmail);
 
         }
 
@@ -96,15 +92,14 @@ namespace Tests.UnitTests
                 UserPass = "1111"
             };
 
-            _mediator.Setup(x => x.Send(It.IsAny<UpdateUserCommand>(),new CancellationToken()));
+            mockContext.Setup(x => x.Users).Verifiable();
 
             // Act
-            var result = await _sut.UpdateUser(user);
+            var updated_user = await _sut.UpdateUserAsync(user);
 
             // Assert
-            Assert.IsType<OkObjectResult>(result);
-
+            Assert.Equal(user.UserId, updated_user.UserId);
         }
 
     }
-}
+} 
