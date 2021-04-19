@@ -21,8 +21,7 @@ namespace BlazorCms.Server.CQSR.Handlers
 
         public async Task<List<User>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = _userServices.GetUsersAsync();
-            return await Task.FromResult(users);
+            return await _userServices.GetUsersAsync();
         }
     }
 }

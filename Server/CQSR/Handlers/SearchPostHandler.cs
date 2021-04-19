@@ -18,8 +18,7 @@ namespace Server.CQSR.Handlers
 
         public async Task<List<Post>> Handle(SearchPostQuery request, CancellationToken cancellationToken)
         {
-            var posts = _postServices.Search(request.PostTitle);
-            return await Task.FromResult(posts);
+            return await _postServices.Search(request.PostTitle);
         }
     }
 }

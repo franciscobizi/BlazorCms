@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,6 +42,7 @@ namespace BlazorCms.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllPosts()
         {
+            var queryString = Request.QueryString.Value.ToString();
             var query = new GetAllPostsQuery();
             var posts = await _imediator.Send(query);
 
@@ -48,7 +50,7 @@ namespace BlazorCms.Server.Controllers
             {
                 List<PostResponse> Items = _imapper.Map<List<Post>, List<PostResponse>>(posts);
                 var Count = Items.Count();
-                return Ok(new{Items, Count});
+                return queryString.Contains("$inlinecount") ? Ok(new{Items, Count}) : Ok(Items);
             }
 
             return Ok(posts);

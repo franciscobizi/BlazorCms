@@ -21,8 +21,7 @@ namespace BlazorCms.Server.CQRS.Handlers
 
         public async Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userServices.GetUserAsync(request.userId);
-            return user == null ? null : user;
+            return await _userServices.GetUserAsync(request.userId);
         }
     }
 }

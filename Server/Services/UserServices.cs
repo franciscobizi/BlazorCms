@@ -88,9 +88,10 @@ namespace BlazorCms.Server.Services
             return await Task.FromResult(user);
         }
 
-        public List<User> GetUsersAsync()
+        public async Task<List<User>> GetUsersAsync()
         {
-            return _context.Users.ToList();
+            var users = _context.Users.ToList();
+            return await Task.FromResult(users);
         }
 
         public async Task<User> SignInUser(User user)

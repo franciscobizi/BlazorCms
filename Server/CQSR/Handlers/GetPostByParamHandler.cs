@@ -20,8 +20,7 @@ namespace BlazorCms.Server.CQRS.Handlers
 
         public async Task<Post> Handle(GetPostByParamQuery request, CancellationToken cancellationToken)
         {
-            var post = await _postServices.GetPostByParamAsync(request.param);
-            return post == null ? null : post;
+            return await _postServices.GetPostByParamAsync(request.param);
         }
     }
 }

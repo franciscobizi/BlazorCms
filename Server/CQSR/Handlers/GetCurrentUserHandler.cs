@@ -18,8 +18,7 @@ namespace BlazorCms.Server.CQSR.Handlers
 
         public async Task<User> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userServices.GetCurrentUserAsync(request._IsAuthenticated, request._UserEmail);
-            return user;
+            return await _userServices.GetCurrentUserAsync(request._IsAuthenticated, request._UserEmail);
         }
     }
 }

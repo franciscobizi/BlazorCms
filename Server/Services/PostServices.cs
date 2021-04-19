@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlazorCms.Server.Helpers;
 using BlazorCms.Server.Models;
-using BlazorCms.Shared.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorCms.Server.Services
@@ -20,23 +19,17 @@ namespace BlazorCms.Server.Services
 
         public async Task<Post> CreatePostAsync(Post post)
         {
-            Post _post = new Post();
-            _post.PostTitle = post.PostTitle;
-            _post.PostPermalink = Utility.ToUrlFriendly(post.PostTitle);
-            _post.PostContent = post.PostContent;
-            _post.PostThumbnail = post.PostThumbnail;
-            _post.PostAuthor = post.PostAuthor;
-            _post.PostCreated = post.PostCreated;
-            _post.PostUpdated = post.PostCreated;
-
-            await _context.AddAsync(_post);
+            post.PostPermalink = Utility.ToUrlFriendly(post.PostTitle);
+            post.PostUpdated = post.PostCreated;
+            await _context.AddAsync(post);
             await _context.SaveChangesAsync();
-            return await Task.FromResult(_post);
+            return post;
         }
         
-        public List<Post> Search(string PostTitle)
+        public async Task<List<Post>> Search(string PostTitle)
         {
-            return _context.Posts.Where(p => EF.Functions.Like(p.PostTitle, $"%{PostTitle}%")).Include(u => u.PostAuthorNavigation).ToList();
+            var posts =_context.Posts.Where(p => EF.Functions.Like(p.PostTitle, $"%{PostTitle}%")).Include(u => u.PostAuthorNavigation).ToList();
+            return await Task.FromResult(posts);
         }
 
         public async Task<Post> GetPostByParamAsync(string param)
@@ -50,10 +43,10 @@ namespace BlazorCms.Server.Services
             return await _context.Posts.Where(p => p.PostPermalink == param).Include(u => u.PostAuthorNavigation).FirstOrDefaultAsync();
         }
 
-        public List<Post> GetPostsAsync()
+        public async Task<List<Post>> GetPostsAsync()
         {
-            var posts = _context.Posts.Include(u => u.PostAuthorNavigation);
-            return posts.ToList();
+            var posts = _context.Posts.Include(u => u.PostAuthorNavigation).ToList();
+            return await Task.FromResult(posts);
         }
 
         public async Task<Post> UpdatePostAsync(Post post)

@@ -19,8 +19,7 @@ namespace BlazorCms.Server.CQSR.Handlers
 
         public async Task<Post> Handle(DeletePostQuery request, CancellationToken cancellationToken)
         {
-            var post = await _postServices.DeletePostAsync(request.PostId);
-            return post; 
+            return await _postServices.DeletePostAsync(request.PostId); 
         }
     }
 }

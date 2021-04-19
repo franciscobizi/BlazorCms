@@ -22,8 +22,7 @@ namespace BlazorCms.Server.CQRS.Handlers
 
         public async Task<List<Post>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
         {
-            var posts =  await Task.FromResult(_postServices.GetPostsAsync());
-            return posts;
+            return await _postServices.GetPostsAsync();
         }
 
     }
