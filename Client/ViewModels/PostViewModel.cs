@@ -7,8 +7,6 @@ using Syncfusion.Blazor.Inputs;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Shared.Mapping;
-using Newtonsoft.Json;
 using Syncfusion.Blazor.RichTextEditor;
 using BlazorCms.Shared.Mapping;
 using Syncfusion.Blazor.Grids;
@@ -32,8 +30,6 @@ namespace BlazorCms.ViewModels
         public int PostsPerPage { get; set; } = 3;
         public List<PostResponse> Posts { get; set; }
         public List<ToolbarItemModel> Tools { get; set; }
-        private string items { get; set; }
-        private List<PostItems> list = new List<PostItems>();
         private readonly HttpClient _Http;
         private readonly NavigationManager _navigationManager;
         public PostViewModel()
@@ -97,11 +93,8 @@ namespace BlazorCms.ViewModels
 
         public async Task GetAll()
         {
-            items = await _Http.GetStringAsync(_navigationManager.BaseUri + "posts");
-            items = "["+items+"]";
-            list = JsonConvert.DeserializeObject<List<PostItems>>(items);
-            LoadCurrentObject(list[0].Items);
-
+            var items = await _Http.GetFromJsonAsync<List<PostResponse>>(_navigationManager.BaseUri + "posts");
+            LoadCurrentObject(items);
         }
 
         public void Delete(int id)
