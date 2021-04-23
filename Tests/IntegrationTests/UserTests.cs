@@ -28,9 +28,9 @@ namespace Tests.IntegrationTests
             var resp = await testClient.GetAsync(BaseUrl + "user/");
             //Assert
             resp.StatusCode.Should().Be(HttpStatusCode.OK);
-            (await resp.Content.ReadAsAsync<List<User>>()).Should().BeEmpty();
+            (await resp.Content.ReadAsAsync<List<User>>()).Should().BeEmpty(); // Should fail if there are users
 
-        }
+        } 
 
         [Fact]
         public async Task GetAllPosts_WithPosts_ReturnsListOfUserss()

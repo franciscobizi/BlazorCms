@@ -1,65 +1,69 @@
 using System;
-using System.Threading;
-using System.Net;
-using System.Collections.Generic;
-using System.Linq;
 using BlazorCms.Server.Models;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
 using System.Threading.Tasks;
-using BlazorCms.Server;
-using Microsoft.AspNetCore.Mvc.Testing;
-using FluentAssertions;
 using Xunit;
-using Newtonsoft.Json;
-using BlazorCms.Shared.Mapping;
-using System.Net.Http.Json;
-using Moq;
-using MediatR;
-using AutoMapper;
 using BlazorCms.Server.Services;
-using BlazorCms.Server.CQRS.Handlers;
-using BlazorCms.Server.CQRS.Queries;
-using BlazorCms.Server.CQSR.Queries;
-using BlazorCms.Server.CQRS.Commands;
-using BlazorCms.Server.Controllers;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Tests.UnitTests
 {
     public class PostsServiceUnitTests
     {
-        private readonly PostServices _sut;
-        private readonly Mock<blazorcmsContext> mockContext = new Mock<blazorcmsContext>();
-        public PostsServiceUnitTests()
+    
+        private async Task<blazorcmsContext> SetGetDatabaseContext()
         {
-            _sut = new PostServices(mockContext.Object);
-            
+            var options = new DbContextOptionsBuilder<blazorcmsContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            var databaseContext = new blazorcmsContext(options);
+            databaseContext.Database.EnsureCreated();
+            if (await databaseContext.Users.CountAsync() <= 0)
+            {
+                for (int i = 1; i <= 6; i++)
+                {
+                    databaseContext.Posts.Add(new Post()
+                    {
+                        PostId = i,
+                        PostTitle = $"Title {i} test",
+                        PostPermalink = $"title-{i}-test",
+                        PostContent = "Post test content",
+                        PostCategory = "Test category", 
+                        PostThumbnail = "thumbnail.svg",
+                        PostAuthor  = 1,
+                        PostCreated = DateTime.UtcNow.ToString(),
+                        PostUpdated = DateTime.UtcNow.ToString()
+                    });
+                    await databaseContext.SaveChangesAsync();
+                }
+            }
+            return databaseContext;
         }
         
         [Fact]
         public async Task GetAllPosts_WithPosts_ShouldReturn_Posts()
         {
             // Arrange
-            mockContext.Setup(x => x.Posts).Verifiable();
+            var dbContext = await SetGetDatabaseContext();
+            var _sut = new PostServices(dbContext);
+
             // Act
             var posts = await _sut.GetPostsAsync();
+
             // Assert
-            Assert.Equal(5, posts.Count);
+            Assert.Equal(6, posts.Count); // will fail if enter number greater or less that 6
         }
         
         [Fact]
         public async Task GetPostByParam_ShouldReturn_Post()
         {
            // Arrange
-            var param = "1";
-            mockContext.Setup(x => x.Posts).Verifiable();
+            var param = "2";
+            var dbContext = await SetGetDatabaseContext();
+            var _sut = new PostServices(dbContext);
             // Act
             var post = await _sut.GetPostByParamAsync(param);
             // Assert
-            Assert.Equal(1, post.Count);
+            Assert.Equal(2, post.PostId);
 
         }
 
@@ -68,12 +72,13 @@ namespace Tests.UnitTests
         {
             // Arrange
             var post = new Post(){
-                PostTitle = "Testing post test",
+                PostTitle = "Testing post test unit tests",
                 PostContent = "This is test post content",
                 PostAuthor = 1
             };
-            mockContext.Setup(x => x.Posts).Verifiable();
             // Act
+            var dbContext = await SetGetDatabaseContext();
+            var _sut = new PostServices(dbContext);
             var result = await _sut.CreatePostAsync(post);
             // Assert
             Assert.Equal(post.PostTitle, result.PostTitle);
@@ -85,13 +90,16 @@ namespace Tests.UnitTests
         {
             // Arrange
             var post = new Post(){
+                PostId = 4,
                 PostTitle = "Testing post test",
                 PostContent = "This is test post content"
             };
 
-            mockContext.Setup(x => x.Posts).Verifiable();
             // Act
+            var dbContext = await SetGetDatabaseContext();
+            var _sut = new PostServices(dbContext);
             var result = await _sut.UpdatePostAsync(post);
+
             // Assert
             Assert.Equal(post.PostTitle, result.PostTitle);
 
@@ -101,15 +109,15 @@ namespace Tests.UnitTests
         public async Task DeletePost_ShouldReturn_DeletedPost()
         {
             // Arrange
-            var id = 1;
-
-            mockContext.Setup(x => x.Posts).Verifiable();
+            var id = 4;
 
             // Act
+            var dbContext = await SetGetDatabaseContext();
+            var _sut = new PostServices(dbContext);
             var post = await _sut.DeletePostAsync(id);
 
             // Assert
-            Assert.Equal(1, post.Count);
+            Assert.Equal(4, post.PostId);
 
         }
     }
