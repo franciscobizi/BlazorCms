@@ -53,7 +53,7 @@ namespace BlazorCms.Server.Services
         {
             DateTime today = DateTime.Now;
 
-            Post postToUpdate = await _context.Posts.Where(u => u.PostId == post.PostId).FirstOrDefaultAsync();
+            var postToUpdate = await _context.Posts.Where(u => u.PostId == post.PostId).FirstOrDefaultAsync();
             postToUpdate.PostTitle = post.PostTitle;
             postToUpdate.PostContent = post.PostContent;
             postToUpdate.PostThumbnail = post.PostThumbnail;
