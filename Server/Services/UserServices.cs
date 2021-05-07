@@ -38,7 +38,7 @@ namespace BlazorCms.Server.Services
             var users = await _context.Users.Where(u => u.UserId == user.UserId).FirstOrDefaultAsync();
             users.UserFname = Utility.Ucfirst(user.UserFname);
             users.UserLname = Utility.Ucfirst(user.UserLname);
-            if(user.UserRoles.Length > 0)
+            if(!string.IsNullOrEmpty(user.UserRoles))
             {
                 users.UserRoles = user.UserRoles;
             }
@@ -63,7 +63,7 @@ namespace BlazorCms.Server.Services
                     currentUser.UserFname = Utility.Ucfirst(UserEmail.Split('@')[0]);
                     currentUser.UserLname = currentUser.UserFname;
                     currentUser.UserEmail = UserEmail;
-                    currentUser.UserPass = Utility.Encrypt(currentUser.UserEmail);
+                    currentUser.UserPass = Utility.Encrypt(currentUser.UserFname);
                     currentUser.UserSource = "EXTL";
                     currentUser.UserStatus = "allowed";
                     currentUser.UserRegistered = today.ToString("dd/MM/yyyy");
