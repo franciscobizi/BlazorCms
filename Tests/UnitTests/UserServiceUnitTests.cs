@@ -1,35 +1,15 @@
 using System;
-using System.Threading;
-using System.Net;
-using System.Collections.Generic;
-using System.Linq;
 using BlazorCms.Server.Models;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
 using System.Threading.Tasks;
-using BlazorCms.Server;
-using Microsoft.AspNetCore.Mvc.Testing;
-using FluentAssertions;
 using Xunit;
-using Newtonsoft.Json;
-using BlazorCms.Shared.Mapping;
-using System.Net.Http.Json;
-using Moq;
-using MediatR;
-using AutoMapper;
 using BlazorCms.Server.Services;
-using BlazorCms.Server.CQRS.Handlers;
-using BlazorCms.Server.CQRS.Queries;
-using BlazorCms.Server.CQRS.Commands;
-using BlazorCms.Server.Controllers;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Tests.UnitTests
 {
     public class UserServiceUnitTests
     {
+        public const string _user = "user";
         private async Task<blazorcmsContext> SetGetDatabaseContext()
         {
             var options = new DbContextOptionsBuilder<blazorcmsContext>()
@@ -44,12 +24,12 @@ namespace Tests.UnitTests
                     databaseContext.Users.Add(new User()
                     {
                         UserId = i,
-                        UserEmail = $"user{i}@example.com",
-                        UserPass = $"user{i}",
+                        UserEmail = $"{_user}{i}@example.com",
+                        UserPass = $"{_user}{i}",
                         UserSource = "LOCALTEST",
                         UserRoles = "Editors",
-                        UserFname = $"user{i}first",
-                        UserLname = $"user{i}last",
+                        UserFname = $"{_user}{i}first",
+                        UserLname = $"{_user}{i}last",
                         UserAvatar = "NO",
                         UserStatus = "Active",
                         UserRegistered = DateTime.UtcNow.ToString(),
@@ -82,8 +62,8 @@ namespace Tests.UnitTests
             var id = 2;
             var user = new User(){
                 UserId = id,
-                UserFname = "User2first",
-                UserLname = "User2first"
+                UserFname = $"{_user}2first",
+                UserLname = $"{_user}2first"
             };
             
             var dbContext = await SetGetDatabaseContext();
@@ -105,12 +85,12 @@ namespace Tests.UnitTests
             var user = new User()
             {
                         UserId = 7,
-                        UserEmail = "user7@example.com",
-                        UserPass = "user7",
+                        UserEmail = $"{_user}7@example.com",
+                        UserPass = $"{_user}7",
                         UserSource = "LOCALTEST",
                         UserRoles = "Editors",
-                        UserFname = "User7first",
-                        UserLname = "User7last",
+                        UserFname = $"{_user}7first",
+                        UserLname = $"{_user}7last",
                         UserAvatar = "NO",
                         UserStatus = "Active",
                         UserRegistered = DateTime.UtcNow.ToString(),

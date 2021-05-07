@@ -12,17 +12,6 @@ namespace Tests.IntegrationTests
     public class PostsTests : BaseTests
     {
         [Fact]
-        public async Task GetAllPosts_WithoutAnyPosts_ReturnsEmpty()
-        {
-            //Act
-            var resp = await testClient.GetAsync(BaseUrl + "posts/");
-            //Assert
-            resp.StatusCode.Should().Be(HttpStatusCode.OK);
-            (await resp.Content.ReadAsAsync<List<Post>>()).Should().BeEmpty(); // should fail if there are posts
-
-        }
-
-        [Fact]
         public async Task GetAllPosts_WithPosts_ReturnsListOfPosts()
         {
             //Act
