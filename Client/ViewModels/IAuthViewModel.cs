@@ -12,6 +12,7 @@ namespace BlazorCms.ViewModels
         public string UserPass { get; set; }
         public string Message { get; set; } 
         public string Display { get; set; }
+        public User TheUser { get; set; }
 
         public Task getCurrentUser();
         public Task signIn();

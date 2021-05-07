@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Syncfusion.Blazor.RichTextEditor;
 using BlazorCms.Shared.Mapping;
 using Syncfusion.Blazor.Grids;
+using AutoMapper;
 
 namespace BlazorCms.ViewModels
 {
@@ -29,19 +30,22 @@ namespace BlazorCms.ViewModels
         public string Display  { get; set; } = "none";
         public int PostsPerPage { get; set; } = 3;
         public List<PostResponse> Posts { get; set; }
+        public PostResponse ThePost {get; set;}
         public List<ToolbarItemModel> Tools { get; set; }
         private readonly HttpClient _Http;
         private readonly NavigationManager _navigationManager;
+        private readonly IMapper _mapper;
         public PostViewModel()
         {
 
         }
 
-        public PostViewModel(HttpClient httpClient, NavigationManager navigationManager)
+        public PostViewModel(HttpClient httpClient, NavigationManager navigationManager, IMapper autoMapper)
         {
             _Http = httpClient;
             _navigationManager = navigationManager;
-
+            _mapper = autoMapper;
+            this.ThePost = new PostResponse();
             Tools = new List<ToolbarItemModel>()
                     {
                         new ToolbarItemModel() { Command = ToolbarCommand.Bold },
@@ -85,7 +89,7 @@ namespace BlazorCms.ViewModels
         public void LoadMoreItems() => this.PostsPerPage += 3;
         public async Task Create()
         {
-            PostResponse post = this;
+            var post = _mapper.Map<PostResponse>(this.ThePost);
             await _Http.PostAsJsonAsync(this._navigationManager.BaseUri + "posts", post);
             this.Message = "Post created successful!";
             this.Display = "block";
@@ -113,30 +117,19 @@ namespace BlazorCms.ViewModels
             }
         }
 
-        private void LoadCurrentSingleObject(PostViewModel postViewModel)
-        {
-            this.PostId = postViewModel.PostId;
-            this.PostTitle = postViewModel.PostTitle;
-            this.PostPermalink = postViewModel.PostPermalink;
-            this.PostContent = postViewModel.PostContent;
-            this.PostAuthor = postViewModel.PostAuthor;
-            this.PostAuthorName = postViewModel.PostAuthorName;
-            this.PostCreated = postViewModel.PostCreated;
-            this.PostThumbnail = postViewModel.PostThumbnail;
-            //add more fields
-        }
-
         public async Task GetOne(string param)
         {
-            PostResponse post = await _Http.GetFromJsonAsync<PostResponse>(this._navigationManager.BaseUri +
+            var post = await _Http.GetFromJsonAsync<PostResponse>(this._navigationManager.BaseUri +
             "posts/" + param);
-            LoadCurrentSingleObject(post);
+            this.ThePost = post;
+            this.PostCreated = !string.IsNullOrEmpty(this.ThePost.PostCreated) ? DateTime.Parse(this.ThePost.PostCreated) : this.PostCreated;
         }
 
         public async Task Update()
         {
 
-            PostResponse post = this;
+            var post = _mapper.Map<PostResponse>(this.ThePost);
+            post.PostCreated = this.PostCreated.ToString();
             await _Http.PutAsJsonAsync(this._navigationManager.BaseUri + "posts", post);
             this.Message = "Post updated successful!";
             this.Display = "block";
@@ -144,54 +137,26 @@ namespace BlazorCms.ViewModels
 
         public async Task Remove(long Id)
         {
-            PostResponse post = this;
+            var post = _mapper.Map<PostResponse>(this.ThePost);
             post.PostId = Id;
             await _Http.DeleteAsync(this._navigationManager.BaseUri +"posts?id="+Id);
             this.Message = "Post removed successful!";
             this.Display = "block";
         }
 
-        // convert model to viewmodel
-        public static implicit operator PostViewModel(PostResponse postViewModel)
-        {
-            return new PostViewModel()
-            {
-                PostId = postViewModel.PostId,
-                PostTitle = postViewModel.PostTitle,
-                PostContent = postViewModel.PostContent,
-                PostThumbnail = postViewModel.PostThumbnail,
-                PostAuthor = postViewModel.PostAuthor,
-                PostCreated = DateTime.Parse(postViewModel.PostCreated)
-            };
-        }
-
-        // convert viewmodel to model
-        public static implicit operator PostResponse(PostViewModel postViewModel)
-        {
-            return new PostResponse()
-            {
-                PostId = postViewModel.PostId,
-                PostTitle = postViewModel.PostTitle,
-                PostContent = postViewModel.PostContent,
-                PostThumbnail = postViewModel.PostThumbnail,
-                PostAuthor = postViewModel.PostAuthor,
-                PostCreated = postViewModel.PostCreated.ToString()
-            };
-        }
-        
         public void OnImageUploadedSuccess(SuccessEventArgs args) 
         { 
             var customHeader = args.Response.Headers.ToString();
             string pattern = "https://([\\w+?\\.\\w+])+([a-zA-Z0-9\\~\\!\\@\\#\\$\\%\\^\\&amp;\\*\\(\\)_\\-\\=\\+\\\\\\/\\?\\.\\:\\;\\'\\,]*)?";
             Regex regx = new Regex(pattern, RegexOptions.IgnoreCase);        
             var url = regx.Matches(customHeader); 
-            this.PostThumbnail = url[0].Value;
+            this.ThePost.PostThumbnail = url[0].Value;
         }
 
         public void OnImageRemovedSuccess(SuccessEventArgs args)
         {
-            PostResponse post = this;
-            this.PostThumbnail = post.PostThumbnail;
+            var post = _mapper.Map<PostResponse>(this.ThePost);
+            this.ThePost.PostThumbnail = post.PostThumbnail;
         }
 
 

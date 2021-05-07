@@ -19,6 +19,7 @@ namespace BlazorCms.ViewModels
         public string UserRegistered { get; set; }
         public string UserLogged { get; set; }
         public List<User> users { get ; set; }
+        public User TheUser { get ; set; }
         public Task UpdateProfile();
         public Task GetUser();
         public Task GetUsers();

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using AutoMapper;
 using BlazorCms.Shared.Models;
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
@@ -24,37 +25,28 @@ namespace BlazorCms.ViewModels
 
         public string Display { get; set; } = "none";
         public List<User> users { get ; set; }
+        public User TheUser { get ; set; }
 
         private readonly HttpClient _Http;
         private readonly NavigationManager _navigationManager;
+        private readonly IMapper _mapper;
 
         public UserViewModel()
         {
 
         }
         // injecting httpClient 
-        public UserViewModel(HttpClient httpClient, NavigationManager navigationManager)
+        public UserViewModel(HttpClient httpClient, NavigationManager navigationManager, IMapper mapper)
         {
             _Http = httpClient;
             _navigationManager = navigationManager;
-        }
-
-        private void LoadCurrentObject(UserViewModel UserViewModel)
-        {
-            this.UserId = UserViewModel.UserId;
-            this.UserEmail = UserViewModel.UserEmail;
-            this.UserFname = UserViewModel.UserFname;
-            this.UserLname = UserViewModel.UserLname;
-            this.UserSource = UserViewModel.UserSource;
-            this.UserRegistered = UserViewModel.UserRegistered;
-            this.UserLogged = UserViewModel.UserLogged;
-            this.UserStatus = UserViewModel.UserStatus;
-            //add more fields
+            _mapper = mapper;
+            this.TheUser = new User();
         }
 
         public async Task UpdateProfile()
         {
-            User user = this;
+            var user = _mapper.Map<User>(this.TheUser);
             await _Http.PutAsJsonAsync(this._navigationManager.BaseUri + "user", user);
             this.Message = "User updated successful!";
             this.Display = "block";
@@ -67,45 +59,13 @@ namespace BlazorCms.ViewModels
 
         public async Task GetUsers()
         {
-            var items = await _Http.GetStringAsync(_navigationManager.BaseUri + "user");
-            this.users = JsonConvert.DeserializeObject<List<User>>(items);
+            var items = await _Http.GetFromJsonAsync<List<User>>(_navigationManager.BaseUri + "user");
+            this.users = items;
         }
 
         public Task DeleteUser()
         {
             throw new System.NotImplementedException();
-        }
-
-        // convert model to viewmodel
-        public static implicit operator UserViewModel(User UserViewModel)
-        {
-            return new UserViewModel()
-            {
-                UserId = UserViewModel.UserId,
-                UserEmail = UserViewModel.UserEmail,
-                UserFname = UserViewModel.UserFname,
-                UserLname = UserViewModel.UserLname,
-                UserSource = UserViewModel.UserSource,
-                UserRegistered = UserViewModel.UserRegistered,
-                UserLogged = UserViewModel.UserLogged,
-                UserStatus = UserViewModel.UserStatus
-            };
-        }
-
-        // convert viewmodel to model
-        public static implicit operator User(UserViewModel UserViewModel)
-        {
-            return new User()
-            {
-                UserId = UserViewModel.UserId,
-                UserEmail = UserViewModel.UserEmail,
-                UserFname = UserViewModel.UserFname,
-                UserLname = UserViewModel.UserLname,
-                UserSource = UserViewModel.UserSource,
-                UserRegistered = UserViewModel.UserRegistered,
-                UserLogged = UserViewModel.UserLogged,
-                UserStatus = UserViewModel.UserStatus
-            };
         }
 
     }

@@ -12,9 +12,9 @@
     <div class="row justify-content-md-center">
         <div class="col-4">
             <MessageNotify Alert="danger" Title="@_IAuthViewModel.Message" Display="@_IAuthViewModel.Display" />
-            <SfTextBox Placeholder="Your login" Type="InputType.Text" @bind-Value="@_IAuthViewModel.UserEmail" FloatLabelType='@FloatLabelType.Auto'></SfTextBox>
+            <SfTextBox Placeholder="Your login" Type="InputType.Text" @bind-Value="@_IAuthViewModel.TheUser.UserEmail" FloatLabelType='@FloatLabelType.Auto'></SfTextBox>
             <br><br>
-            <SfTextBox Placeholder="Your password" Type="InputType.Password" @bind-Value="@_IAuthViewModel.UserPass" FloatLabelType='@FloatLabelType.Auto'></SfTextBox>
+            <SfTextBox Placeholder="Your password" Type="InputType.Password" @bind-Value="@_IAuthViewModel.TheUser.UserPass" FloatLabelType='@FloatLabelType.Auto'></SfTextBox>
             <br><br>
             <SfButton @onclick="_IAuthViewModel.signIn">Sign In</SfButton>
             <hr>

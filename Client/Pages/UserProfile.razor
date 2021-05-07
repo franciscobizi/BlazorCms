@@ -11,11 +11,11 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <SfTextBox @bind-Value="_profileVM.UserFname" Placeholder="First name"></SfTextBox>
+                    <SfTextBox @bind-Value="_profileVM.TheUser.UserFname" Placeholder="First name"></SfTextBox>
                     <br><br>
-                    <SfTextBox @bind-Value="_profileVM.UserLname" Placeholder="Last name"></SfTextBox>
+                    <SfTextBox @bind-Value="_profileVM.TheUser.UserLname" Placeholder="Last name"></SfTextBox>
                     <br><br>
-                    <SfTextBox  @bind-Value="_profileVM.UserEmail" Placeholder="E-mail" Readonly></SfTextBox>
+                    <SfTextBox  @bind-Value="_profileVM.TheUser.UserEmail" Placeholder="E-mail" Readonly></SfTextBox>
                     <br><br>
                     @* <SfTextBox @bind-Value="_profileVM.UserPass" Type="InputType.Password" Placeholder="Password"></SfTextBox> *@
                     <br><br>

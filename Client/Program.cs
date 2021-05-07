@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Components.Authorization;
 using BlazorCms.ViewModels;
 using Syncfusion.Blazor;
+using Client.AutoMapper;
 
 namespace BlazorCms.Client
 {
@@ -23,6 +24,8 @@ namespace BlazorCms.Client
             // add authentication
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();
+
+            builder.Services.AddAutoMapper(typeof(AutoMapperSetup));
 
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

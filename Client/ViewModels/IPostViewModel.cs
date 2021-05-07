@@ -25,6 +25,7 @@ namespace BlazorCms.ViewModels
         public string Display { get; set; }
         public int PostsPerPage { get; set; } 
         public List<PostResponse> Posts { get; set; }
+        public PostResponse ThePost { get; set; }
         public List<ToolbarItemModel> Tools { get; set;}
         public Task Create();
 

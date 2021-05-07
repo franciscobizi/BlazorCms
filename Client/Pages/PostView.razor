@@ -5,9 +5,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9">
-                <img class="card-thambnail" src="@_postViewModel.PostThumbnail" alt="@_postViewModel.PostTitle">
+                <img class="card-thambnail" src="@_postViewModel.ThePost.PostThumbnail" alt="@_postViewModel.ThePost.PostTitle">
                 <h1>@_postViewModel.PostTitle</h1>
-                <div>@((MarkupString)@_postViewModel.PostContent)</div>
+                <div>@((MarkupString)@_postViewModel.ThePost.PostContent)</div>
             </div>
             <div class="col-sm-3">
                 <SfTextBox Placeholder="Search" Type="InputType.Search"></SfTextBox>
