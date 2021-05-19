@@ -35,17 +35,10 @@ namespace BlazorCms.Server.Services
 
         public async Task<User> UpdateUserAsync(User user)
         {
-            var users = await _context.Users.Where(u => u.UserId == user.UserId).FirstOrDefaultAsync();
-            users.UserFname = Utility.Ucfirst(user.UserFname);
-            users.UserLname = Utility.Ucfirst(user.UserLname);
-            if(!string.IsNullOrEmpty(user.UserRoles))
-            {
-                users.UserRoles = user.UserRoles;
-            }
-
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            return users;
+            return user;
         }
 
         public async Task<User> GetCurrentUserAsync(bool IsAuthenticated, string UserEmail)
@@ -53,13 +46,12 @@ namespace BlazorCms.Server.Services
             var currentUser = new User();
             if (IsAuthenticated)
             {
-                currentUser.UserEmail = UserEmail;
-                currentUser = await _context.Users.Where(u => u.UserEmail == currentUser.UserEmail).FirstOrDefaultAsync();
+                currentUser = await _context.Users.Where(u => u.UserEmail == UserEmail).FirstOrDefaultAsync();
 
                 if (currentUser == null)
                 {
                     DateTime today = DateTime.Now;
-                    currentUser = new User();
+                    
                     currentUser.UserFname = Utility.Ucfirst(UserEmail.Split('@')[0]);
                     currentUser.UserLname = currentUser.UserFname;
                     currentUser.UserEmail = UserEmail;
@@ -92,7 +84,9 @@ namespace BlazorCms.Server.Services
         {
             user.UserPass = Utility.Encrypt(user.UserPass);
             var loggedInUser = await _context.Users.Where(u => u.UserEmail == user.UserEmail && u.UserPass == user.UserPass).FirstOrDefaultAsync();
-            loggedInUser.UserLogged = DateTime.Now.ToString();
+            if(loggedInUser != null){
+                loggedInUser.UserLogged = DateTime.Now.ToString();
+            }
             await _context.SaveChangesAsync();
             return loggedInUser;
         }

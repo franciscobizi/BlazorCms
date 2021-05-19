@@ -52,17 +52,11 @@ namespace BlazorCms.Server.Services
         public async Task<Post> UpdatePostAsync(Post post)
         {
             DateTime today = DateTime.Now;
-
-            var postToUpdate = await _context.Posts.Where(u => u.PostId == post.PostId).FirstOrDefaultAsync();
-            postToUpdate.PostTitle = post.PostTitle;
-            postToUpdate.PostContent = post.PostContent;
-            postToUpdate.PostThumbnail = post.PostThumbnail;
-            postToUpdate.PostCreated = post.PostCreated;
-            postToUpdate.PostUpdated = today.ToString("dd/MM/yyyy");
-
+            post.PostUpdated = today.ToString("dd/MM/yyyy");
+            _context.Posts.Update(post);
             await _context.SaveChangesAsync();
 
-            return postToUpdate;
+            return post;
         }
 
         public async Task<Post> DeletePostAsync(int PostId)
