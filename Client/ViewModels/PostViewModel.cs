@@ -90,6 +90,7 @@ namespace BlazorCms.ViewModels
         public async Task Create()
         {
             var post = _mapper.Map<PostResponse>(this.ThePost);
+            post.PostCreated = this.PostCreated.ToString();
             await _Http.PostAsJsonAsync(this._navigationManager.BaseUri + "posts", post);
             this.Message = "Post created successful!";
             this.Display = "block";
