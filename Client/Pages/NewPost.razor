@@ -10,9 +10,9 @@
             </div>
             <div class="row">
                 <div class="col-sm-9">
-                    <SfTextBox Placeholder='Post title' @bind-Value="@_postViewModel.PostTitle"></SfTextBox>
+                    <SfTextBox Placeholder='Post title' @bind-Value="@_postViewModel.ThePost.PostTitle"></SfTextBox>
                     <br><br>
-                    <SfRichTextEditor @bind-value="@_postViewModel.PostContent">
+                    <SfRichTextEditor @bind-value="@_postViewModel.ThePost.PostContent">
                         <RichTextEditorToolbarSettings Items="@_postViewModel.Tools" />
                     </SfRichTextEditor>
                     <br><br>
@@ -21,7 +21,7 @@
                 <div class="col-sm-3">
                     <h5>Thumbnail</h5>
                     <div class="thumbnail">
-                        <img src="@_postViewModel.PostThumbnail" alt="@_postViewModel.PostTitle">
+                        <img src="@_postViewModel.ThePost.PostThumbnail" alt="@_postViewModel.ThePost.PostTitle">
                     </div>
                         <SfUploader ID="UploadFiles" AutoUpload="false">
                             <UploaderEvents Success="_postViewModel.OnImageUploadedSuccess"></UploaderEvents>

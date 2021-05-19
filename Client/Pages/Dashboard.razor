@@ -1,0 +1,106 @@
+@page "/bz-admin/dashboard"
+<AuthorizeView>
+    <Authorized>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Dashboard</h1>
+                    <SfDashboardLayout Columns="6" CellSpacing="@(new double[]{10 ,10 })">
+                        <DashboardLayoutPanels>
+                            <DashboardLayoutPanel Id="Panel1" SizeX="4" SizeY="2">
+                                <HeaderTemplate><div class='header'> Customers Count </div></HeaderTemplate>
+                                <ContentTemplate>
+                                    <div style="height:100%; width:100%;">
+                                        <SfChart ID="linechart" @ref="linechartObj">
+                                            <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.DateTime">
+                                            </ChartPrimaryXAxis>
+                                            <ChartSeriesCollection>
+                                                <ChartSeries DataSource="@DataSource" XName="XValue" YName="YValue" Type="ChartSeriesType.Line">
+                                                    <ChartMarker Visible="true">
+                                                        <ChartDataLabel Visible="true">
+                                                        </ChartDataLabel>
+                                                    </ChartMarker>
+                                                </ChartSeries>
+                                            </ChartSeriesCollection>
+                                        </SfChart>
+                                    </div>
+                                </ContentTemplate>
+                            </DashboardLayoutPanel>
+                            <DashboardLayoutPanel Id="Panel2" SizeX="2" SizeY="2" Col="4">
+                                <HeaderTemplate><div class='header'> Product sales in Years </div></HeaderTemplate>
+                                <ContentTemplate>
+                                    <div style="height:100%; width:100%;">
+                                        <SfRangeNavigator ID="range" @ref="rangeObj" Value="@Value" ValueType="Syncfusion.Blazor.Charts.RangeValueType.DateTime" IntervalType="RangeIntervalType.Years" LabelFormat="yyyy">
+                                            <RangeNavigatorSeriesCollection>
+                                                <RangeNavigatorSeries DataSource="@DataSource" XName="XValue" Type="RangeNavigatorType.Area" YName="YValue"></RangeNavigatorSeries>
+                                            </RangeNavigatorSeriesCollection>
+                                        </SfRangeNavigator>
+                                    </div>
+                                </ContentTemplate>
+                            </DashboardLayoutPanel>
+                            <DashboardLayoutPanel Id="Panel3" SizeX="3" SizeY="2" Row=2 Col=3>
+                                <HeaderTemplate><div class='header'> Sales Ratio in Countries </div></HeaderTemplate>
+                                <ContentTemplate>
+                                    <div style="height:100%; width:100%;">
+                                        <SfChart ID="chart" @ref="barchartObj">
+                                            <ChartPrimaryXAxis Title="Country" EnableTrim="true" ValueType="Syncfusion.Blazor.Charts.ValueType.Category">
+                                                <ChartAxisMajorGridLines Width="0"></ChartAxisMajorGridLines>
+                                            </ChartPrimaryXAxis>
+                                            <ChartSeriesCollection>
+                                                <ChartSeries DataSource="@DataSource" XName="X" YName="Y" Type="ChartSeriesType.Bar">
+                                                </ChartSeries>
+                                            </ChartSeriesCollection>
+                                        </SfChart>
+                                    </div>
+                                </ContentTemplate>
+                            </DashboardLayoutPanel>
+                            <DashboardLayoutPanel Id="Panel4" SizeX=3 SizeY=2 Row=2 Col=0>
+                                <HeaderTemplate><div class='header'> Sales Comparison in Products  </div></HeaderTemplate>
+                                <ContentTemplate>
+                                    <div style="height:100%; width:100%;">
+                                        <SfChart ID="chart1" @ref="chartObj" Width="100%" Height="100%">
+                                            <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
+                                            <ChartSeriesCollection>
+                                                <ChartSeries DataSource="@DataSource" Name="Editors" XName="X1" YName="YValue" Type="ChartSeriesType.StackingColumn">
+                                                </ChartSeries>
+                                                <ChartSeries DataSource="@DataSource" Name="Layouts" XName="X1" YName="YValue" Type="ChartSeriesType.StackingColumn">
+                                                </ChartSeries>
+                                                <ChartSeries DataSource="@DataSource" Name="Grids" XName="X1" YName="YValue" Type="ChartSeriesType.StackingColumn">
+                                                </ChartSeries>
+                                            </ChartSeriesCollection>
+                                        </SfChart>
+                                    </div>
+                                </ContentTemplate>
+                            </DashboardLayoutPanel>
+                            <DashboardLayoutPanel Id="Panel5" SizeX=6 SizeY=2 Col=6 Row=4>
+                                <HeaderTemplate><div class='header'> Top Customers Details</div></HeaderTemplate>
+                                <ContentTemplate>
+                                    <div style="height:100%; width:100%;">
+                                        <SfGrid ID="grid" DataSource="@Orders">
+                                            <GridPageSettings></GridPageSettings>
+                                            <GridColumns>
+                                                <GridColumn Field=@nameof(Order.OrderID) HeaderText="Order ID" TextAlign="TextAlign.Right" Width="120"></GridColumn>
+                                                <GridColumn Field=@nameof(Order.CustomerID) HeaderText="Customer Name" Width="130"></GridColumn>
+                                                <GridColumn Field=@nameof(Order.OrderDate) HeaderText=" Order Date" Format="yMd" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="150"></GridColumn>
+                                                <GridColumn Field=@nameof(Order.Freight) HeaderText="Freight" Format="C2" TextAlign="TextAlign.Right" Width="120"></GridColumn>
+                                            </GridColumns>
+                                        </SfGrid>
+                                    </div>
+                                </ContentTemplate>
+                            </DashboardLayoutPanel>
+                        </DashboardLayoutPanels>
+                    </SfDashboardLayout>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <UserAuthForm></UserAuthForm>
+    </NotAuthorized>
+</AuthorizeView>
+<style>
+    #linechart, #grid, #chart1, #chart, #range {
+        height: 100% !important;
+        width: 100% !important;
+    }
+</style>
